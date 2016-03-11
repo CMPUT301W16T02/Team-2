@@ -1,5 +1,6 @@
 package com.example.arshadhusain.weshare;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     Button logInButton;
     Button signUpButton;
     EditText usernameText;
-    SaveIt saveLoad;
+    SaveIt saveIt;
 
 
     @Override
@@ -55,7 +56,16 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    /* taken from:
+     * http://stackoverflow.com/questions/16896513/avoiding-call-to-oncreate-of-background-activity-by-pressing-back-of-finish-from */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }
