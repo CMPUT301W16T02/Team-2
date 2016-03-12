@@ -23,7 +23,7 @@
             android:id="@+id/editText"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
-            android:text="Enter keywords..."
+            android:hint="Enter keywords..."
             android:layout_toStartOf="@+id/searchButton" />
 
         <Button

@@ -2,16 +2,13 @@ package com.example.arshadhusain.weshare;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class WelcomeActivity extends AppCompatActivity {
 
     private static String FILENAME;
 
@@ -20,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         System.out.println("Hello World\n");
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_welcome);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
         Button signInButton = (Button) findViewById(R.id.sign_in);
@@ -29,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         signInButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent (MainActivity.this, SignInActivity.class);
+                Intent intent = new Intent (WelcomeActivity.this, SignInActivity.class);
                 startActivity(intent);
             }
         });
@@ -37,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         mainCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CreateProfileActivity.class);
+                Intent intent = new Intent(WelcomeActivity.this, CreateProfileActivity.class);
                 startActivity(intent);
             }
         });

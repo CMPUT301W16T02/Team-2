@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:scrollbars="horizontal"
         android:inputType="text"
-        android:text="Item Name" />
+        android:hint="Item Name" />
 
     <EditText
         android:id="@+id/itemDesc"
@@ -18,7 +18,7 @@
         android:layout_height="200dp"
         android:scrollbars="horizontal"
         android:inputType="text"
-        android:text="Item Description" />
+        android:hint="Item Description" />
 
     <RelativeLayout
         android:layout_width="match_parent"

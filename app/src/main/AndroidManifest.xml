@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".MainItemListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -18,15 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SignInActivity"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="WelcomeActivity" />
+        <activity android:name=".SignInActivity" />
         <activity android:name=".CreateProfileActivity" />
         <activity android:name=".AddItemActivity" />
         <activity android:name=".EditItemActivity" />
-        <activity android:name=".MainItemListActivity" />
-        <activity android:name=".MyItemsActivity"></activity>
+        <activity android:name=".MyItemsActivity" />
     </application>
 
 </manifest>
