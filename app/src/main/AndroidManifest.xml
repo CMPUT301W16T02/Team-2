@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".MainItemListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -26,6 +26,11 @@
             android:name=".CreateProfileActivity" />
         <activity
             android:name=".BorrowingActivity" />
+
+        <activity android:name=".WelcomeActivity" />
+        <activity android:name=".AddItemActivity" />
+        <activity android:name=".EditItemActivity" />
+        <activity android:name=".MyItemsActivity" />
     </application>
 
 </manifest>

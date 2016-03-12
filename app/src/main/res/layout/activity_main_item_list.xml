@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="49dp">
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="241dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:hint="Enter keywords..."
+            android:layout_toStartOf="@+id/searchButton" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            android:id="@+id/searchButton"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/allItemsTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="All Items" />
+
+    <ListView
+        android:id="@+id/allItemsList"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.00"
+        android:scrollbars="vertical" >
+
+    </ListView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Item"
+            android:id="@+id/addItemButton"
+            android:layout_gravity="right"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Item"
+            android:id="@+id/editItemButton"
+            android:layout_gravity="right"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/addItemButton" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -107,7 +107,7 @@ public class CreateProfileActivity extends Activity{
                 }
                 System.out.println("After save\n");
 
-                Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent myIntent = new Intent(getApplicationContext(), WelcomeActivity.class);
 
                 startActivityForResult(myIntent, 0);
                 //}
