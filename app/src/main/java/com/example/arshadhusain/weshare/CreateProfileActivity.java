@@ -8,10 +8,12 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -67,17 +69,38 @@ public class CreateProfileActivity extends Activity{
                 System.out.println("Before save\n");
 
                 try {
-                    FileOutputStream fos = openFileOutput(UserName, 0);
-                    BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
-                    Gson gson = new Gson();
-                    gson.toJson(Accounts, out);
-                    //fos.write(new String(text6 + " | " + text + " | " + text1 + " | " + text2 + " | " + text3 + " | " + text4 + " | " + text5 + " \n ")
-                    // .getBytes());
-                    out.flush();
-                    fos.close();
+
+                    File file = getFileStreamPath(UserName);
+
+
+
+                    boolean fileExists = file.exists();
+                    if(file.exists())
+                    {
+                        Toast.makeText(getApplicationContext(), "Username already exists", Toast.LENGTH_LONG).show();
+
+                    }
+
+
+                    if(!file.exists()) {
+                        FileOutputStream fos = openFileOutput(UserName, 0);
+
+
+                        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+                        Gson gson = new Gson();
+                        gson.toJson(Accounts, out);
+                        //fos.write(new String(text6 + " | " + text + " | " + text1 + " | " + text2 + " | " + text3 + " | " + text4 + " | " + text5 + " \n ")
+                        // .getBytes());
+                        out.flush();
+                        fos.close();
+                        Toast.makeText(getApplicationContext(), "User Account Created!", Toast.LENGTH_LONG).show();
+
+                    }
                 } catch (FileNotFoundException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Username not found", Toast.LENGTH_LONG).show();
+
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();

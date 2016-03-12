@@ -24,6 +24,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CreateProfileActivity" />
+        <activity
+            android:name=".BorrowingActivity" />
     </application>
 
 </manifest>

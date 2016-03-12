@@ -38,13 +38,6 @@ public class SignInActivity extends AppCompatActivity {
     public void onCreateSetup() {
         setContentView(R.layout.sign_in_activity);
         username = (EditText) findViewById(R.id.SignInInput1);
-
-
-
-
-
-
-
     }
 
     public void onCreateListeners() {
@@ -94,7 +87,7 @@ public class SignInActivity extends AppCompatActivity {
                     //e.printStackTrace();
                     throw new RuntimeException();
                 }
-                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                Intent intent = new Intent(SignInActivity.this, BorrowingActivity.class);
                 startActivity(intent);
 
             }
