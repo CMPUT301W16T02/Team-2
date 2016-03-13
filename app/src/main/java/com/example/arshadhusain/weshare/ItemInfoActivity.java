@@ -66,6 +66,7 @@ public class ItemInfoActivity extends AppCompatActivity {
             }
         });
 
+        /*
         Button back = (Button)findViewById(R.id.backButton);
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +75,7 @@ public class ItemInfoActivity extends AppCompatActivity {
                 back(v);
             }
         });
+        */
     }
 
     public void back(View view) {

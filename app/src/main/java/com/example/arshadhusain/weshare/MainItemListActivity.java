@@ -70,27 +70,18 @@ public class MainItemListActivity extends AppCompatActivity {
                 addItem();
             }
         });
-
-        Button viewItemButton = (Button)findViewById(R.id.viewItemButton);
-
-        viewItemButton.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                Item selectedItem =
-                        MainItemListActivity.allItems.get(MainItemListActivity.selectedItemPos);
-                if (selectedItem.getOwner().equals(activeUser)){
-                    editItem();
-                } else {
-                    viewItemInfo();
-                }
-            }
-        });
     }
 
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             selectedItemPos = position;
+            if (MainItemListActivity.allItems.get(MainItemListActivity.selectedItemPos).getOwner().equals(activeUser)){
+                editItem();
+            } else {
+                viewItemInfo();
+            }
+
         }
     };
 
