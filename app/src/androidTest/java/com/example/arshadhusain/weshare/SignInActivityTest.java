@@ -4,37 +4,61 @@ import android.app.Activity;
 import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
+import android.widget.Button;
 import android.widget.EditText;
 
 /**
  * Created by hasan on 2016-03-12.
  */
 public class SignInActivityTest extends ActivityInstrumentationTestCase2 {
-    Instrumentation instrumentation;
-    Activity activity;
-    EditText loginUsername;
+    private Button signinButton;
 
     public SignInActivityTest(){
-        super(SignInActivity.class);
+        super(com.example.arshadhusain.weshare.SignInActivity.class);
     }
 
-    protected void setUp() throws Exception{
-        super.setUp();
-        instrumentation = getInstrumentation();
-        activity = getActivity();
-        loginUsername = (EditText)activity.findViewById(R.id.loginUsername);
+    public void testStart() throws Exception {
+        Activity activity = getActivity();
     }
 
-    private void login(String username){
-        assertNotNull(activity.findViewById(R.id.loginUsername));
-        loginUsername.setText(username);
+    MainActivity activity = (MainActivity)getActivity();
 
-        activity.findViewById(R.id.loginUsername).performClick();
-    }
+    signinButton = activity.getSignInButton();
 
-    @UiThreadTest
-    public void testLogin(){
-        login("HasanBadran");
-        assertEquals("HasanBadran", Account.getUsername());
-    }
+    username = activity.getEditText();
+
+    activity.runOnUiThread(new Runnable() {
+        public void run() {
+            username.setText("HasanBadran");
+        }
+    });
+    getInstrumentation().waitForIdleSync();
+
+    Instrumentation.ActivityMonitor receiverActivityMonitor =
+            getInstrumentation().addMonitor(HomeScreen.class.getName(), null, false);
+
+
+    activity.runOnUiThread(new Runnable() {
+
+        public void run() {
+            loginbutton.performClick();
+        }
+    });
+    getInstrumentation().waitForIdleSync();
+
+    // Validate that ReceiverActivity is started
+    HomeScreen receiverActivity = (HomeScreen)
+            receiverActivityMonitor.waitForActivityWithTimeout(1000);
+    assertNotNull("ReceiverActivity is null", receiverActivity);
+    assertEquals("Monitor for ReceiverActivity has not been called",
+                         1, receiverActivityMonitor.getHits());
+    assertEquals("Activity is of wrong type",
+                 HomeScreen.class, receiverActivity.getClass());
+
+    // Remove the ActivityMonitor
+    getInstrumentation().removeMonitor(receiverActivityMonitor);
+
+    receiverActivity.finish();
+
+}
 }
