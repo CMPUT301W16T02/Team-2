@@ -16,5 +16,6 @@ public class MakeBidActivityTest extends ActivityInstrumentationTestCase2 {
         super.setUp();
     }
 
+    
 
 }

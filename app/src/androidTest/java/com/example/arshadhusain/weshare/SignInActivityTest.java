@@ -22,7 +22,6 @@ public class SignInActivityTest extends ActivityInstrumentationTestCase2 {
     }
 
     MainActivity activity = (MainActivity)getActivity();
-
     signinButton = activity.getSignInButton();
 
     username = activity.getEditText();

@@ -28,8 +28,8 @@ public class EditItemActivity extends AppCompatActivity {
         description = (EditText) findViewById(R.id.itemDesc);
         bidsList = (ListView) findViewById(R.id.bidsList);
 
-        name.setText(itemToEdit.getName());
-        description.setText(itemToEdit.getDescription());
+        name.setText((CharSequence) itemToEdit.getName());
+        description.setText((CharSequence) itemToEdit.getDescription());
 
 
 

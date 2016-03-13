@@ -1,5 +1,7 @@
 package com.example.arshadhusain.weshare;
 
+import android.widget.EditText;
+
 /**
  * Created by hasan on 2016-03-10.
  */
@@ -8,8 +10,7 @@ public class Account {
     private String email;
     private String city;
 
-    public Account(String username, String email, String city) {
-
+    public Account(EditText username, EditText email, EditText city) {
     }
 
     public void setUsername(String username) throws TooLongException, NoSpacesException {
