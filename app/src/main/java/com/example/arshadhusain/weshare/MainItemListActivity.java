@@ -27,7 +27,7 @@ import com.google.gson.reflect.TypeToken;
 
 public class MainItemListActivity extends AppCompatActivity {
 
-    private static final String FILENAME = "file.sav";
+    private static final String FILENAME = "items.sav";
     private ListView allItemsList;
 
     public static ArrayList<Item> allItems = new ArrayList<Item>();
@@ -64,12 +64,18 @@ public class MainItemListActivity extends AppCompatActivity {
             }
         });
 
-        Button editItemButton = (Button)findViewById(R.id.editItemButton);
+        Button viewItemButton = (Button)findViewById(R.id.viewItemButton);
 
-        editItemButton.setOnClickListener(new View.OnClickListener() {
+        viewItemButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                editItem();
+                Item selectedItem =
+                        MainItemListActivity.allItems.get(MainItemListActivity.selectedItemPos);
+                if (selectedItem.getOwner().equals("Username")){
+                    editItem();
+                } else {
+                    viewItemInfo();
+                }
             }
         });
     }
@@ -89,6 +95,11 @@ public class MainItemListActivity extends AppCompatActivity {
 
     public void editItem() {
         Intent intent = new Intent(this, EditItemActivity.class);
+        startActivityForResult(intent, CHANGE_MADE);
+    }
+
+    public void viewItemInfo(){
+        Intent intent = new Intent(this, ItemInfoActivity.class);
         startActivityForResult(intent, CHANGE_MADE);
     }
 

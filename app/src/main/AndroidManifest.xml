@@ -24,6 +24,7 @@
         <activity android:name=".AddItemActivity" />
         <activity android:name=".EditItemActivity" />
         <activity android:name=".MyItemsActivity" />
+        <activity android:name=".ItemInfoActivity"></activity>
     </application>
 
 </manifest>
