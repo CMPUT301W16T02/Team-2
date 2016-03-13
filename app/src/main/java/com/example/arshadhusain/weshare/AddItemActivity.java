@@ -12,7 +12,7 @@ public class AddItemActivity extends AppCompatActivity {
 
     private EditText name;
     private EditText description;
-    private String owner = "Username";
+    private String owner = "Username2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
