@@ -44,49 +44,57 @@ public class SignInActivity extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setResult(RESULT_OK);
 
-                try {
-                    String UserName = username.getText().toString();
+            setResult(RESULT_OK);
 
-                    System.out.printf("Username 2: %s\n", UserName);
-                    FileInputStream inputFile = openFileInput(UserName);
-                    BufferedReader input = new BufferedReader(new InputStreamReader(inputFile));
-                    System.out.println("File Loaded\n");
+            try {
+                String UserName = username.getText().toString();
 
-                    //String line = input.readLine();
-                    Gson gson = new Gson();
-                    //Type listType = new TypeToken<ArrayList<FuelLog>>() {}.getType();
+                System.out.printf("Username 2: %s\n", UserName);
+                FileInputStream inputFile = openFileInput(UserName);
+                BufferedReader input = new BufferedReader(new InputStreamReader(inputFile));
+                System.out.println("File Loaded\n");
 
-                    Type listType = new TypeToken<ArrayList<Account>>() {
-                    }.getType();
+                //String line = input.readLine();
+                Gson gson = new Gson();
+                //Type listType = new TypeToken<ArrayList<FuelLog>>() {}.getType();
 
-
-                    Accounts = gson.fromJson(input, listType);
+                Type listType = new TypeToken<ArrayList<Account>>() {
+                }.getType();
 
 
-                    //Account account = new Account();
+                Accounts = gson.fromJson(input, listType);
 
-                /*while (line != null) {
-                    fuelList.add(line);
-                    line = input.readLine();
-                }*/
 
-                } catch (FileNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    //e.printStackTrace();
-                    Accounts = new ArrayList<Account>();
-                    System.out.println("Username not found\n");
-                    Toast.makeText(getApplicationContext(), "Username not found", Toast.LENGTH_LONG).show();
+                //Account account = new Account();
 
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    //e.printStackTrace();
-                    throw new RuntimeException();
-                }
+            /*while (line != null) {
+                fuelList.add(line);
+                line = input.readLine();
+            }*/
 
-                Intent intent = new Intent(SignInActivity.this, WelcomeActivity.class);
-                startActivity(intent);
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                //e.printStackTrace();
+                Accounts = new ArrayList<Account>();
+                System.out.println("Username not found\n");
+                Toast.makeText(getApplicationContext(), "Username not found", Toast.LENGTH_LONG).show();
+
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                //e.printStackTrace();
+                throw new RuntimeException();
+            }
+
+
+            Intent intent = new Intent(SignInActivity.this, NavigationMainActivity.class);
+            //startActivity(intent);
+            startActivityForResult(intent, 1);
+
+            setResult(RESULT_OK);
+            finish();
+
+
 
             }
 
