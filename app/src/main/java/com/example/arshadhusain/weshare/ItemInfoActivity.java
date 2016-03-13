@@ -31,7 +31,7 @@ public class ItemInfoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        if(intent.hasExtra("itemPos")) {
+        if (intent.hasExtra("itemPos")) {
             itemPos = intent.getIntExtra("itemPos", itemPos);
         }
 
@@ -62,7 +62,7 @@ public class ItemInfoActivity extends AppCompatActivity {
             }
         });
 
-        Button submitBid = (Button)findViewById(R.id.submitBidButton);
+        Button submitBid = (Button) findViewById(R.id.submitBidButton);
 
         submitBid.setOnClickListener(new View.OnClickListener() {
 
@@ -80,16 +80,13 @@ public class ItemInfoActivity extends AppCompatActivity {
                 back(v);
             }
         });
-<<<<<<< HEAD
-        */
-=======
 
-
->>>>>>> 13a236cc115a5c33e03a04693816c96672126399
     }
 
     public void back(View view) {
         setResult(RESULT_CANCELED);
         finish();
+        }
+        */
     }
 }
