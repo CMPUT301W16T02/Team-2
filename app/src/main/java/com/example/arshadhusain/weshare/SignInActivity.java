@@ -3,6 +3,7 @@ package com.example.arshadhusain.weshare;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.LoginFilter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,8 +48,8 @@ public class SignInActivity extends AppCompatActivity {
 
             setResult(RESULT_OK);
 
+            String UserName = username.getText().toString();
             try {
-                String UserName = username.getText().toString();
 
                 System.out.printf("Username 2: %s\n", UserName);
                 FileInputStream inputFile = openFileInput(UserName);
@@ -89,6 +90,7 @@ public class SignInActivity extends AppCompatActivity {
 
             Intent intent = new Intent(SignInActivity.this, NavigationMainActivity.class);
             //startActivity(intent);
+            intent.putExtra("Username", UserName);
             startActivityForResult(intent, 1);
 
             setResult(RESULT_OK);

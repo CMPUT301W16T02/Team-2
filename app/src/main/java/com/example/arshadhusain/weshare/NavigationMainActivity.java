@@ -11,9 +11,18 @@ import android.widget.Button;
  */
 public class NavigationMainActivity extends AppCompatActivity {
 
+    private String MyUsername;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+
+        if(intent.hasExtra("Username")) {
+            MyUsername = intent.getStringExtra("Username");
+        }
+
         this.onCreateSetup();
         this.onCreateListeners();
 
@@ -26,16 +35,17 @@ public class NavigationMainActivity extends AppCompatActivity {
     }
 
     public void onCreateListeners() {
-        Button AccountInfo = (Button)findViewById(R.id.AccountInfo);
+        Button EditProfile = (Button)findViewById(R.id.EditProfile);
         Button MyItems = (Button)findViewById(R.id.MyItems);
         Button MyBorrows = (Button)findViewById(R.id.MyBorrows);
 
-        AccountInfo.setOnClickListener(new View.OnClickListener() {
+        EditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setResult(RESULT_OK);
 
-                Intent intent = new Intent(NavigationMainActivity.this, MainItemListActivity.class); //YOU NEED HANSON'S EDIT AND VIEW PROFILE FUCNTIONALITY
+                Intent intent = new Intent(NavigationMainActivity.this, EditProfileActivity.class); //YOU NEED HANSON'S EDIT AND VIEW PROFILE FUCNTIONALITY
+                intent.putExtra("Username", MyUsername);
                 startActivity(intent);
 
             }
