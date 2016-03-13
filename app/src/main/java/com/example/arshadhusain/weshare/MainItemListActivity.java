@@ -108,7 +108,8 @@ public class MainItemListActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             adapter.notifyDataSetChanged();
-            NavigationMainActivity.saveInFile();
+            setResult(RESULT_OK);
+            //NavigationMainActivity.saveInFile();
         }
     }
 

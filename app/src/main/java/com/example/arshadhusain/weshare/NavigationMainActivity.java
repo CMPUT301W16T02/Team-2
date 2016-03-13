@@ -113,7 +113,7 @@ public class NavigationMainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(NavigationMainActivity.this, MainItemListActivity.class); //YOU NEED CHRIS' BORROWING FUNCTIONALITY
                 intent.putExtra("Username", MyUsername);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
 
             }
         });
@@ -173,9 +173,14 @@ public class NavigationMainActivity extends AppCompatActivity {
             // TODO Auto-generated catch block
             throw new RuntimeException();
         }
+
     }
 
 
-
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            saveInFile();
+        }
+    }
 }
