@@ -7,7 +7,7 @@ import android.content.Intent;
  */
 
 //Bid controller class
-public class MakeBid {
+/*public class MakeBid {
 
     //http://www.101apps.co.za/index.php/articles/passing-data-between-activities.html 2016-03-12
     Intent intentBid = getIntent();
@@ -60,4 +60,4 @@ public class MakeBid {
         
     }
 
-}
+}*/

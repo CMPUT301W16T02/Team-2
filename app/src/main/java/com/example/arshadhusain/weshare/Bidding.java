@@ -6,7 +6,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 //Bidding view activity
-public class Bidding extends AppCompatActivity {
+/*public class Bidding extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,3 +30,4 @@ public class Bidding extends AppCompatActivity {
 
     }
 }
+*/

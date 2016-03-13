@@ -76,7 +76,7 @@ public class MainItemListActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             selectedItemPos = position;
-            if (MainItemListActivity.allItems.get(MainItemListActivity.selectedItemPos).getOwner().equals(activeUser)){
+            if (NavigationMainActivity.allItems.get(selectedItemPos).getOwner().equals(activeUser)){
                 editItem();
             } else {
                 viewItemInfo();
@@ -108,16 +108,17 @@ public class MainItemListActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             adapter.notifyDataSetChanged();
-            saveInFile();
+            NavigationMainActivity.saveInFile();
         }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        loadFromFile();
+        //loadFromFile();
+        //allItems = NavigationMainActivity.allItems;
         adapter = new ArrayAdapter<Item>(this,
-                R.layout.list_item, allItems);
+                R.layout.list_item, NavigationMainActivity.allItems);
         allItemsList.setAdapter(adapter);
     }
 

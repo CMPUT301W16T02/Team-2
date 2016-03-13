@@ -31,7 +31,7 @@ public class EditItemActivity extends AppCompatActivity {
             itemPos = intent.getIntExtra("itemPos", itemPos);
         }
 
-        itemToEdit = MainItemListActivity.allItems.get(itemPos);
+        itemToEdit = NavigationMainActivity.allItems.get(itemPos);
 
         name = (EditText) findViewById(R.id.itemName);
         description = (EditText) findViewById(R.id.itemDesc);
@@ -92,7 +92,7 @@ public class EditItemActivity extends AppCompatActivity {
     }
 
     public void deleteItem(View view){
-        MainItemListActivity.allItems.remove(itemToEdit);
+        NavigationMainActivity.allItems.remove(itemToEdit);
 
         setResult(RESULT_OK);
         finish();

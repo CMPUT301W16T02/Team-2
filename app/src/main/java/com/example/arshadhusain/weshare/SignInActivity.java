@@ -66,13 +66,7 @@ public class SignInActivity extends AppCompatActivity {
 
                 Accounts = gson.fromJson(input, listType);
 
-                Intent intent = new Intent(SignInActivity.this, NavigationMainActivity.class);
-                //startActivity(intent);
-                intent.putExtra("Username", UserName);
-                startActivityForResult(intent, 1);
 
-                setResult(RESULT_OK);
-                finish();
 
 
                 //Account account = new Account();
@@ -96,10 +90,17 @@ public class SignInActivity extends AppCompatActivity {
             }
 
 
-            Intent intent = new Intent(SignInActivity.this, WelcomeActivity.class);
+            //Intent intent = new Intent(SignInActivity.this, WelcomeActivity.class);
 
-            startActivityForResult(intent, 1);
+            //startActivityForResult(intent, 1);
 
+                Intent intent = new Intent(SignInActivity.this, NavigationMainActivity.class);
+                //startActivity(intent);
+                intent.putExtra("Username", UserName);
+                startActivityForResult(intent, 1);
+
+                setResult(RESULT_OK);
+                finish();
 
 
             }

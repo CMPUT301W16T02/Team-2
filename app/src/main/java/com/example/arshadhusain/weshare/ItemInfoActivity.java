@@ -35,7 +35,7 @@ public class ItemInfoActivity extends AppCompatActivity {
             itemPos = intent.getIntExtra("itemPos", itemPos);
         }
 
-        itemToView = MainItemListActivity.allItems.get(itemPos);
+        itemToView = NavigationMainActivity.allItems.get(itemPos);
 
         name = (TextView) findViewById(R.id.itemName);
         name.setText(itemToView.getName());
@@ -71,22 +71,6 @@ public class ItemInfoActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        Button back = (Button)findViewById(R.id.backButton);
 
-        back.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                back(v);
-            }
-        });
-
-    }
-
-    public void back(View view) {
-        setResult(RESULT_CANCELED);
-        finish();
-        }
-        */
     }
 }

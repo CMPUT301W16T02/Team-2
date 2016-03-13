@@ -54,7 +54,7 @@ public class AddItemActivity extends AppCompatActivity {
 
         Item newItem = new Item(itemName, itemDesc, owner);
 
-        MainItemListActivity.allItems.add(newItem);
+        NavigationMainActivity.allItems.add(newItem);
 
         setResult(RESULT_OK);
         finish();
