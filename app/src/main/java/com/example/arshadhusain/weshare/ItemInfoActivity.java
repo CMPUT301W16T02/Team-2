@@ -56,8 +56,9 @@ public class ItemInfoActivity extends AppCompatActivity {
                 Intent intent = new Intent(ItemInfoActivity.this, ViewProfileActivity.class);
                 //startActivity(intent);
                 String UserName = owner.getText().toString();
+                System.out.println(UserName);
                 intent.putExtra("Username", UserName);
-                startActivityForResult(intent, 1);
+                startActivity(intent);
             }
         });
 
