@@ -53,7 +53,12 @@ public class ItemInfoActivity extends AppCompatActivity {
         viewOwner.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                //viewOwner(v);
+                Intent intent = new Intent(ItemInfoActivity.this, ViewProfileActivity.class);
+                //startActivity(intent);
+                String UserName = owner.getText().toString();
+                System.out.println(UserName);
+                intent.putExtra("Username", UserName);
+                startActivity(intent);
             }
         });
 
@@ -75,7 +80,12 @@ public class ItemInfoActivity extends AppCompatActivity {
                 back(v);
             }
         });
+<<<<<<< HEAD
         */
+=======
+
+
+>>>>>>> 13a236cc115a5c33e03a04693816c96672126399
     }
 
     public void back(View view) {
