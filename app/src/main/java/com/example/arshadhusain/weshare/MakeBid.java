@@ -56,4 +56,8 @@ public class MakeBid {
         model.getItem();
     }
 
+    public void addBid() {
+        
+    }
+
 }
