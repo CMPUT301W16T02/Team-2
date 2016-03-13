@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+//Bidding view activity
 public class Bidding extends AppCompatActivity {
 
     @Override
@@ -12,6 +13,7 @@ public class Bidding extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bidding);
 
+        //Array coontaining all of user's bids
         Bid[] bidArray = {};
 
         //http://www.i-programmer.info/programming/android/7849-android-adventures-listview-and-adapters.html 2016-03-12
