@@ -19,6 +19,12 @@ public class AddItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
 
+        Intent intent = getIntent();
+
+        if(intent.hasExtra("activeUser")) {
+            owner = intent.getStringExtra("activeUser");
+        }
+
         name = (EditText) findViewById(R.id.itemName);
         description = (EditText) findViewById(R.id.itemDesc);
 
