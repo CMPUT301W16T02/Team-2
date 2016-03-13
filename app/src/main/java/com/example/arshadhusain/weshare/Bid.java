@@ -7,6 +7,9 @@ public class Bid {
     private String bidder;
     private Double amount;
 
+    public Bid(String bidder, Double amount) {
+    }
+
     public void setBidder(String bidder) {
         this.bidder = bidder;
     }
