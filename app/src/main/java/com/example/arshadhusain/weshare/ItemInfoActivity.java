@@ -1,6 +1,7 @@
 package com.example.arshadhusain.weshare;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -44,7 +45,11 @@ public class ItemInfoActivity extends AppCompatActivity {
         viewOwner.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                //viewOwner(v);
+                Intent intent = new Intent(ItemInfoActivity.this, ViewProfileActivity.class);
+                //startActivity(intent);
+                String UserName = owner.getText().toString();
+                intent.putExtra("Username", UserName);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -65,6 +70,8 @@ public class ItemInfoActivity extends AppCompatActivity {
                 back(v);
             }
         });
+
+
     }
 
     public void back(View view) {
