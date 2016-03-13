@@ -1,6 +1,7 @@
 package com.example.arshadhusain.weshare;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,12 +18,20 @@ public class EditItemActivity extends AppCompatActivity {
     private EditText description;
     private ListView bidsList;
 
-    private Item itemToEdit =
-            MainItemListActivity.allItems.get(MainItemListActivity.selectedItemPos);
+    private int itemPos;
+    private Item itemToEdit;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_item);
+
+        Intent intent = getIntent();
+
+        if(intent.hasExtra("itemPos")) {
+            itemPos = intent.getIntExtra("itemPos", itemPos);
+        }
+
+        itemToEdit = MainItemListActivity.allItems.get(itemPos);
 
         name = (EditText) findViewById(R.id.itemName);
         description = (EditText) findViewById(R.id.itemDesc);

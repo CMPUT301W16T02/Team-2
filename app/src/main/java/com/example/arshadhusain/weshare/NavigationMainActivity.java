@@ -38,6 +38,7 @@ public class NavigationMainActivity extends AppCompatActivity {
         Button EditProfile = (Button)findViewById(R.id.EditProfile);
         Button MyItems = (Button)findViewById(R.id.MyItems);
         Button MyBorrows = (Button)findViewById(R.id.MyBorrows);
+        Button ItemMarketplace = (Button)findViewById(R.id.ShowAllItems);
 
         EditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,10 +56,10 @@ public class NavigationMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setResult(RESULT_OK);
-
+                /*
                 Intent intent = new Intent(NavigationMainActivity.this, MainItemListActivity.class); //YOU NEED CHRIS' LIST ITEM FUNCTIONALITY
                 startActivity(intent);
-
+                */
             }
         });
 
@@ -66,8 +67,20 @@ public class NavigationMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setResult(RESULT_OK);
+                /*
+                Intent intent = new Intent(NavigationMainActivity.this, MainItemListActivity.class); //YOU NEED CHRIS' BORROWING FUNCTIONALITY
+                startActivity(intent);
+                */
+            }
+        });
+
+        ItemMarketplace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_OK);
 
                 Intent intent = new Intent(NavigationMainActivity.this, MainItemListActivity.class); //YOU NEED CHRIS' BORROWING FUNCTIONALITY
+                intent.putExtra("Username", MyUsername);
                 startActivity(intent);
 
             }

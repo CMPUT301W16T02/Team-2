@@ -35,12 +35,19 @@ public class MainItemListActivity extends AppCompatActivity {
 
     static final int CHANGE_MADE = 1;
 
-    public static int selectedItemPos;
+    private String activeUser;
+    private static int selectedItemPos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_item_list);
+
+        Intent intent = getIntent();
+
+        if(intent.hasExtra("Username")) {
+            activeUser = intent.getStringExtra("Username");
+        }
 
         allItemsList = (ListView) findViewById(R.id.allItemsList);
 
@@ -71,7 +78,7 @@ public class MainItemListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Item selectedItem =
                         MainItemListActivity.allItems.get(MainItemListActivity.selectedItemPos);
-                if (selectedItem.getOwner().equals("Username")){
+                if (selectedItem.getOwner().equals(activeUser)){
                     editItem();
                 } else {
                     viewItemInfo();
@@ -90,16 +97,19 @@ public class MainItemListActivity extends AppCompatActivity {
 
     public void addItem() {
         Intent intent = new Intent(this, AddItemActivity.class);
+        intent.putExtra("activeUser", activeUser);
         startActivityForResult(intent, CHANGE_MADE);
     }
 
     public void editItem() {
         Intent intent = new Intent(this, EditItemActivity.class);
+        intent.putExtra("itemPos", selectedItemPos);
         startActivityForResult(intent, CHANGE_MADE);
     }
 
     public void viewItemInfo(){
         Intent intent = new Intent(this, ItemInfoActivity.class);
+        intent.putExtra("itemPos", selectedItemPos);
         startActivityForResult(intent, CHANGE_MADE);
     }
 
