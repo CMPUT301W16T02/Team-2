@@ -66,8 +66,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit Item"
-            android:id="@+id/editItemButton"
+            android:text="View Item"
+            android:id="@+id/viewItemButton"
             android:layout_gravity="right"
             android:layout_alignParentTop="true"
             android:layout_toStartOf="@+id/addItemButton" />

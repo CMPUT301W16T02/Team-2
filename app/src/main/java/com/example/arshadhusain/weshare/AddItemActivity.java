@@ -1,6 +1,7 @@
 package com.example.arshadhusain.weshare;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,13 +33,13 @@ public class AddItemActivity extends AppCompatActivity {
 
         final Button cancel = (Button)findViewById(R.id.cancelButton);
 
-        addItem.setOnClickListener(new View.OnClickListener() {
+    cancel.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View v) {
-                cancel(v);
-            }
-        });
-    }
+        public void onClick(View v) {
+            cancel(v);
+        }
+    });
+}
 
     public void addItem(View view, String owner){
 
@@ -54,6 +55,7 @@ public class AddItemActivity extends AppCompatActivity {
     }
 
     public void cancel(View view) {
+
         setResult(RESULT_CANCELED);
         finish();
     }

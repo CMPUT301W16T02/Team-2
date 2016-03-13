@@ -33,6 +33,7 @@
         <activity android:name=".MyItemsActivity" />
         <activity android:name=".NavigationMainActivity" />
 
+        <activity android:name=".ItemInfoActivity"></activity>
     </application>
 
 </manifest>

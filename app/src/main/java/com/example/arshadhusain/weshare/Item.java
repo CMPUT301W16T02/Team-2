@@ -47,10 +47,13 @@ public class Item {
         switch (this.status) {
             case 0:
                 statusString = "Available";
+                break;
             case 1:
                 statusString = "Bidded";
+                break;
             case 2:
                 statusString = "Borrowed by " + this.borrower;
+                break;
         }
         return statusString;
     }
@@ -94,6 +97,6 @@ public class Item {
     @Override
     public String toString(){
 
-        return name + " | " + statusToString();
+        return name + "\n" + statusToString();
     }
 }
