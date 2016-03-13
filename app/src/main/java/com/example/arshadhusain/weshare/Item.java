@@ -24,7 +24,7 @@ public class Item {
         this.borrower = "";
     }
 
-    public void setName(String name) {
+    public void setName(EditText name) {
         this.name = name;
     }
 
