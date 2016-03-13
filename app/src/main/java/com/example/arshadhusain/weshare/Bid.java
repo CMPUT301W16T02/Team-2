@@ -22,4 +22,9 @@ public class Bid {
     public Double getAmount() {
         return amount;
     }
+
+    @Override
+    public String toString() {
+        return bidder + " | " + amount.toString() + "/h";
+    }
 }

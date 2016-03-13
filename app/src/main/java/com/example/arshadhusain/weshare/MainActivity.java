@@ -2,40 +2,76 @@ package com.example.arshadhusain.weshare;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     Button logInButton;
     Button signUpButton;
     EditText usernameText;
-    SaveIt saveIt;
 
+
+    //final ConnectionCheck connection = new ConnectionCheck();
+
+    public Button getSignUpButton(){
+        return signUpButton;
+    }
+    public Button getLogInButton(){
+        return signUpButton;
+    }
+    public EditText getEditText(){
+        return usernameText;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        System.out.println("Hello World\n");
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        logInButton = (Button)findViewById(R.id.logInButton);
+        signUpButton = (Button)findViewById(R.id.signUpButton);
+        usernameText = (EditText)findViewById(R.id.usernameText);
+
+        logInButton.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View view){
+                usernameText = (EditText)findViewById(R.id.usernameText);
+                final String username = usernameText.getText().toString();
+
+                try{
+                    SearchThread thread = new SearchThread(username);
+                    thread.start();
+                }
+                catch(BlankFieldException e){
+                    Toast.makeText(getApplicationContext(), "Not Valid", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
+        //TODO: Integrate connection prompt
+        signUpButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent setIntent = new Intent(MainActivity.this, SignUpActivity.class);
+                startActivity(setIntent);
+            }
+        });
+
+    }
+
+    class SearchThread extends Thread{
+        private String search;
+
+        public SearchThread(String search) throws BlankFieldException{
+            if(search.equals("")) throw new BlankFieldException();
+            else this.search = search;
+        }
     }
 
     @Override
@@ -58,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     /* taken from:
      * http://stackoverflow.com/questions/16896513/avoiding-call-to-oncreate-of-background-activity-by-pressing-back-of-finish-from */

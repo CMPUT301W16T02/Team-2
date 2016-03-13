@@ -4,9 +4,13 @@ package com.example.arshadhusain.weshare;
  * Created by hasan on 2016-03-10.
  */
 public class Account {
-    private String username;
+    private static String username;
     private String email;
     private String city;
+
+    public Account(String username, String email, String city) {
+
+    }
 
     public void setUsername(String username) throws TooLongException, NoSpacesException {
         if(!username.isEmpty()){
@@ -25,7 +29,7 @@ public class Account {
         }
     }
 
-    public String getUsername() {
+    public static String getUsername() {
         return username;
     }
 

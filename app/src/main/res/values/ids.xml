@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="logInButton" type="id" />
+    <item name="signUpButton" type="id" />
+    <item name="usernameText" type="id" />
+    <item name="loginUsername" type="id" />
+    <item name="signupUsername" type="id" />
+    <item name="signupCity" type="id" />
+    <item name="signupEmail" type="id" />
+    <item name="itemDesc" type="id" />
+    <item name="itemName" type="id" />
+    <item name="sign_in" type="id" />
+    <item name="main_create_account" type="id" />
+    <item name="CreateProfileInput1" type="id" />
+    <item name="CreateProfileInput2" type="id" />
+    <item name="CreateProfileInput3" type="id" />
+    <item name="button" type="id" />
+    <item name="bidsList" type="id" />
+    <item name="saveButton" type="id" />
+    <item name="deleteButton" type="id" />
+    <item name="cancelButton" type="id" />
+    <item name="allItemsList" type="id" />
+    <item name="searchButton" type="id" />
+    <item name="addItemButton" type="id" />
+    <item name="editItemButton" type="id" />
+    <item name="SignInButton" type="id" />
+    <item name="SignInInput1" type="id" />
+    <item name="username" type="id" />
+    <item name="email" type="id" />
+    <item name="address" type="id" />
+    <item name="itemQuant" type="id" />
+    <item name="itemQual" type="id" />
+    <item name="comment" type="id" />
+    <item name="itemComment" type="id" />
+    <item name="AccountInfo" type="id" />
+    <item name="MyItems" type="id" />
+    <item name="MyBorrows" type="id" />
+    <item name="city" type="id" />
+    <item name="listView" type="id" />
+    <item name="EditProfileEmail" type="id" />
+    <item name="EditProfileCity" type="id" />
+    <item name="SaveButton" type="id" />
+</resources>
