@@ -18,9 +18,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SignInActivity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CreateProfileActivity" />
+        <activity
+            android:name=".BorrowingActivity" />
+
         <activity android:name=".WelcomeActivity" />
-        <activity android:name=".SignInActivity" />
-        <activity android:name=".CreateProfileActivity" />
         <activity android:name=".AddItemActivity" />
         <activity android:name=".EditItemActivity" />
         <activity android:name=".MyItemsActivity" />
