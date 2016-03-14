@@ -13,6 +13,14 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+/**
+ * Allows user to edit item name and description.
+ * Passes intent of item to edit.
+ *
+ * @Author: Chris
+ * @Version: 1.0
+ */
+
 public class EditItemActivity extends AppCompatActivity {
 
     private EditText name;
@@ -76,6 +84,9 @@ public class EditItemActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * onStart create adapter for bidlist
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -85,6 +96,11 @@ public class EditItemActivity extends AppCompatActivity {
         bidsList.setAdapter(adapter);
     }
 
+    /**
+     * Setup view for edit item
+     *
+     * @param view
+     */
     public void editItem(View view){
 
         String newName = name.getText().toString();
@@ -99,6 +115,13 @@ public class EditItemActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Remove item
+     * Remove item for allItems
+     *
+     * @See MainItemListActivity
+     * @param view
+     */
     public void deleteItem(View view){
         NavigationMainActivity.allItems.remove(itemToEdit);
 
@@ -109,6 +132,11 @@ public class EditItemActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Stop item edit
+     *
+     * @param view
+     */
     public void cancel(View view) {
         setResult(RESULT_CANCELED);
         finish();

@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 
 /**
- * Created by arshadhusain on 16-03-11.
- */
+* @deprecated
+ * */
 public class BorrowingActivity extends AppCompatActivity {
 
     @Override

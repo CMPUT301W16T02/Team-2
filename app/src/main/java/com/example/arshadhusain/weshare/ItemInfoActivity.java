@@ -15,6 +15,13 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * Shows the information regarding specific item.
+ * Passes intent user and item.
+ * @Author: Chris, Arshad
+ * @Version: 1.0
+ */
+
 public class ItemInfoActivity extends AppCompatActivity {
 
     private TextView name;
@@ -91,6 +98,13 @@ public class ItemInfoActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Allows user to place bid on items.
+     * Add bid to allBids.
+     * Notifies user of bid
+     *
+     * @see NavigationMainActivity
+     */
     public void addBid() {
 
         //Item newItem = new Item(itemName, itemDesc, owner);
