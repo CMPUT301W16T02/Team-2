@@ -10,6 +10,15 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+/**
+ *  Activity shows a list of items that belong to the active user.
+ *
+ *  Started from NavigationMainActivity
+ *  Can start EditItemActivity
+ *
+ *  @author Badran
+ *  @version  1.0
+ */
 public class MyItemsActivity extends AppCompatActivity {
 
     public static ArrayList<Item> myItems = new ArrayList<Item>();
@@ -70,6 +79,10 @@ public class MyItemsActivity extends AppCompatActivity {
                 R.layout.list_item, myItems);
         myItemsList.setAdapter(adapter);
     }
+
+    /**
+     * Method sets up functionality for when an item in a list is clicked.
+     */
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -78,6 +91,9 @@ public class MyItemsActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * Method starts the EditItemActivity to edit an item
+     */
     public void editItem() {
         Intent intent = new Intent(this, EditItemActivity.class);
         intent.putExtra("itemPos", selectedItemPos);
