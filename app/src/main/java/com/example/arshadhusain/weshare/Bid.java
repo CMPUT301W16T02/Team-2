@@ -2,10 +2,12 @@
 package com.example.arshadhusain.weshare;
 
 /**
- * Created by Hanson on 2016-03-05.
+ * Bid Model class defines setters and getters for the "bid" item
+ *
+ * @author: Hanson, Philip, Arshad
+ * @version: 1.0
  */
 
-//Bid model class
 public class Bid {
     private String bidder;  //User placing the bid
     private Double amount;  //Bid amount
