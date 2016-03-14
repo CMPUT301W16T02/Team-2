@@ -102,4 +102,13 @@ public class MyItemsActivity extends AppCompatActivity {
         startActivityForResult(intent, 1);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            adapter.notifyDataSetChanged();
+            setResult(RESULT_OK);
+            //NavigationMainActivity.saveInFile();
+        }
+    }
+
 }
