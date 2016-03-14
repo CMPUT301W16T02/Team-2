@@ -10,6 +10,13 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+/**
+ * <p>Allows user to search for specific item. Passes intent
+ * user. </p>
+ *
+ * @Author: Chris
+ * @Version: 1.0
+ */
 public class SearchResultsActivity extends AppCompatActivity {
 
     private String keyword;
@@ -69,6 +76,9 @@ public class SearchResultsActivity extends AppCompatActivity {
         return searchResults;
     }
 
+    /**
+     * Sets adapter of list item
+     */
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -84,6 +94,9 @@ public class SearchResultsActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * @deprecated
+     */
     public void editItem() {
         Intent intent = new Intent(this, EditItemActivity.class);
         intent.putExtra("itemPos", origItemPos);
@@ -91,6 +104,9 @@ public class SearchResultsActivity extends AppCompatActivity {
         startActivityForResult(intent, CHANGE_MADE);
     }
 
+    /**
+     * User sees item from search
+     */
     public void viewItemInfo(){
         Intent intent = new Intent(this, ItemInfoActivity.class);
         intent.putExtra("itemPos", origItemPos);
