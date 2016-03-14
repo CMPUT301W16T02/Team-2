@@ -24,12 +24,22 @@ import java.util.ArrayList;
 
 public class ItemInfoActivity extends AppCompatActivity {
 
+    public EditText getBidAmount() {
+        return bidAmount;
+    }
+
+    public Button getViewOwner() {
+        return viewOwner;
+    }
+
     private TextView name;
     private TextView owner;
-    private TextView description;
     private TextView status;
+    private TextView description;
 
     private EditText bidAmount;
+
+    private Button viewOwner;
 
     private int itemPos;
     private Item itemToView;
@@ -68,7 +78,7 @@ public class ItemInfoActivity extends AppCompatActivity {
 
         bidAmount = (EditText) findViewById(R.id.bidAmount);
 
-        Button viewOwner = (Button) findViewById(R.id.viewOwnerButton);
+        viewOwner = (Button) findViewById(R.id.viewOwnerButton);
 
         viewOwner.setOnClickListener(new View.OnClickListener() {
 
@@ -111,20 +121,24 @@ public class ItemInfoActivity extends AppCompatActivity {
         String ItemName = name.getText().toString();
         String ItemOwner = owner.getText().toString();
         String ItemDescription = description.getText().toString();
+        int ItemStatus = itemToView.getStatus();
+
+        if(ItemStatus == 2){
+            Toast.makeText(getApplicationContext(), "Item is being borrowed. Cannot place bid!", Toast.LENGTH_LONG).show();
+        } else {
+            Bid newBid = new Bid(UserName, doubleUserName, ItemName, ItemOwner, ItemDescription);
+            //NavigationMainActivity.allItems.add(newItem);
+            NavigationMainActivity.allBids.add(newBid);
+            NavigationMainActivity.saveBidsToFile(context2);
+
+            itemToView.setStatus(1);
+
+            NavigationMainActivity.saveInFile(context2);
 
 
-        Bid newBid = new Bid(UserName, doubleUserName, ItemName, ItemOwner, ItemDescription);
-        //NavigationMainActivity.allItems.add(newItem);
-        NavigationMainActivity.allBids.add(newBid);
-        NavigationMainActivity.saveBidsToFile(context2);
-
-        itemToView.setStatus(1);
-
-        NavigationMainActivity.saveInFile(context2);
-
-
-        Toast.makeText(getApplicationContext(), "Bid added!", Toast.LENGTH_LONG).show();
-        bidAmount.setText("");
+            Toast.makeText(getApplicationContext(), "Bid added!", Toast.LENGTH_LONG).show();
+            bidAmount.setText("");
+        }
     }
 
 }

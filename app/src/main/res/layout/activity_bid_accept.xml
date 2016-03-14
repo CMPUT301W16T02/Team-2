@@ -30,5 +30,13 @@
             android:id="@+id/acceptButton"
             android:layout_alignTop="@+id/viewBidderButton"
             android:layout_alignParentEnd="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Decline Bid"
+            android:id="@+id/declineButton"
+            android:layout_below="@+id/acceptButton"
+            android:layout_alignEnd="@+id/acceptButton" />
     </RelativeLayout>
 </LinearLayout>

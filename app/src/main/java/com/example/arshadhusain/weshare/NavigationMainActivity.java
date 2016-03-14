@@ -142,7 +142,7 @@ public class NavigationMainActivity extends AppCompatActivity {
 
             }
         });
-/*
+
         MyBids.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,7 +168,7 @@ public class NavigationMainActivity extends AppCompatActivity {
 
             }
         });
-*/
+
 
 
         MyBorrows.setOnClickListener(new View.OnClickListener() {
@@ -181,6 +181,19 @@ public class NavigationMainActivity extends AppCompatActivity {
                 */
             }
         });
+
+/*
+        MyBorrows.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_OK);
+
+                Intent intent = new Intent(NavigationMainActivity.this, MyBorrowsActivity.class); //YOU NEED CHRIS' BORROWING FUNCTIONALITY
+                startActivity(intent);
+
+            }
+        });
+        */
 
         ItemMarketplace.setOnClickListener(new View.OnClickListener() {
             @Override

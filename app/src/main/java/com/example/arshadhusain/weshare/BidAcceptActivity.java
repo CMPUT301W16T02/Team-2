@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class BidAcceptActivity extends AppCompatActivity {
 
     TextView bidText;
@@ -15,6 +17,8 @@ public class BidAcceptActivity extends AppCompatActivity {
     String itemName;
     String itemOwner;
     public Context context1;
+    public Context context2;
+
 
 
     @Override
@@ -23,6 +27,7 @@ public class BidAcceptActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bid_accept);
 
         context1 = NavigationMainActivity.getContext();
+        context2 = NavigationMainActivity.getContext();
 
 
         Intent intent = getIntent();
@@ -55,6 +60,14 @@ public class BidAcceptActivity extends AppCompatActivity {
             }
         });
 
+        Button declineButton = (Button)findViewById(R.id.declineButton);
+
+        declineButton.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                declineBid();
+            }
+        });
 
 
     }
@@ -86,10 +99,37 @@ public class BidAcceptActivity extends AppCompatActivity {
                     currentItem.getOwner().equals(itemOwner)) {
                 currentItem.setStatus(2);
                 currentItem.setBorrower(itemBidder);
+                NavigationMainActivity.saveInFile(context1);
             }
         }
 
-        NavigationMainActivity.saveInFile(context1);
+        ArrayList<Bid> bidsToRemove = new ArrayList<Bid>();
+
+        for(int i=0; i<NavigationMainActivity.allBids.size(); i++) {
+            Bid currentBid = NavigationMainActivity.allBids.get(i);
+            if (currentBid.getItem().equals(itemName) &&
+                    currentBid.getItemOwner().equals(itemOwner)){
+                NavigationMainActivity.allBids.remove(i);
+            }
+        }
+
+        NavigationMainActivity.saveBidsToFile(context2);
+
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    public void declineBid(){
+        for(int i=0; i<NavigationMainActivity.allBids.size(); i++) {
+            Bid currentBid = NavigationMainActivity.allBids.get(i);
+            if (currentBid.getItem().equals(itemName) &&
+                    currentBid.getItemOwner().equals(itemOwner) &&
+                    currentBid.getBidder().equals(itemBidder)){
+                NavigationMainActivity.allBids.remove(i);
+            }
+        }
+
+        NavigationMainActivity.saveBidsToFile(context2);
 
         setResult(RESULT_OK);
         finish();
