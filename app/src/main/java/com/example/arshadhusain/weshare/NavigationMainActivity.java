@@ -71,6 +71,8 @@ public class NavigationMainActivity extends AppCompatActivity {
         Button MyItems = (Button)findViewById(R.id.MyItems);
         Button MyBorrows = (Button)findViewById(R.id.MyBorrows);
         Button ItemMarketplace = (Button)findViewById(R.id.ShowAllItems);
+        Button MyBids = (Button)findViewById(R.id.MyBids);
+
 
         EditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +97,19 @@ public class NavigationMainActivity extends AppCompatActivity {
             }
         });
 
+        MyBids.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_OK);
+
+                Intent intent = new Intent(NavigationMainActivity.this, MyBiddingActivity.class); //YOU NEED CHRIS' LIST ITEM FUNCTIONALITY
+                startActivity(intent);
+
+            }
+        });
+
+
+
         MyBorrows.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,7 +128,7 @@ public class NavigationMainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(NavigationMainActivity.this, MainItemListActivity.class); //YOU NEED CHRIS' BORROWING FUNCTIONALITY
                 intent.putExtra("Username", MyUsername);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
 
             }
         });
@@ -173,9 +188,14 @@ public class NavigationMainActivity extends AppCompatActivity {
             // TODO Auto-generated catch block
             throw new RuntimeException();
         }
+
     }
 
 
-
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            saveInFile();
+        }
+    }
 }

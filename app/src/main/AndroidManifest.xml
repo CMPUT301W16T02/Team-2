@@ -34,6 +34,8 @@
         <activity android:name=".NavigationMainActivity" />
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".ViewProfileActivity" />
+        <activity android:name=".MyBiddingActivity" />
+
 
 
 
