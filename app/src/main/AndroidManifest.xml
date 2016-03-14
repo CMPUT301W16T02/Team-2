@@ -33,7 +33,8 @@
         <activity android:name=".MyBiddingActivity" />
         <activity android:name=".MyItemListWithBids" />
         <activity android:name=".ItemInfoActivity" />
-        <activity android:name=".SearchResultsActivity"></activity>
+        <activity android:name=".SearchResultsActivity" />
+        <activity android:name=".BidAcceptActivity"></activity>
     </application>
 
 </manifest>
