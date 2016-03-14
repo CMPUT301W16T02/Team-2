@@ -88,7 +88,15 @@ public class EditItemActivity extends AppCompatActivity {
                 cancel(v);
             }
         });
-    }
+
+        Button returnButton = (Button)findViewById(R.id.returnButton);
+
+        returnButton.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                returnItem(v);
+            }
+        });    }
 
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
@@ -114,6 +122,7 @@ public class EditItemActivity extends AppCompatActivity {
         ArrayAdapter<Bid> adapter = new ArrayAdapter<Bid>(this,
                 R.layout.list_item, bids);
         bidsList.setAdapter(adapter);
+        bidsList.setOnItemClickListener(onItemClickListener);
     }
 
     public void editItem(View view){
@@ -142,6 +151,17 @@ public class EditItemActivity extends AppCompatActivity {
 
     public void cancel(View view) {
         setResult(RESULT_CANCELED);
+        finish();
+    }
+
+    public void returnItem(View view) {
+        itemToEdit.setStatus(0);
+        itemToEdit.setBorrower("");
+
+        NavigationMainActivity.saveInFile(context1);
+        System.out.printf("%d\n", NavigationMainActivity.allItems.size());
+
+        setResult(RESULT_OK);
         finish();
     }
 

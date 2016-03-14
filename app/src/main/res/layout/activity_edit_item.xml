@@ -61,6 +61,14 @@
             android:layout_alignParentTop="true"
             android:layout_toStartOf="@+id/saveButton" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Return Item"
+            android:id="@+id/returnButton"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/cancelButton" />
+
     </RelativeLayout>
 
 </LinearLayout>
