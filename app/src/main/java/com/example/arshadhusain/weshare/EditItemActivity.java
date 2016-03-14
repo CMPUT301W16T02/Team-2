@@ -183,6 +183,7 @@ public class EditItemActivity extends AppCompatActivity {
     }
 
     public void returnItem(View view) {
+
         itemToEdit.setStatus(0);
         itemToEdit.setBorrower("");
 
