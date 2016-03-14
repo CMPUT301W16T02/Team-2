@@ -71,6 +71,8 @@ public class NavigationMainActivity extends AppCompatActivity {
         Button MyItems = (Button)findViewById(R.id.MyItems);
         Button MyBorrows = (Button)findViewById(R.id.MyBorrows);
         Button ItemMarketplace = (Button)findViewById(R.id.ShowAllItems);
+        Button MyBids = (Button)findViewById(R.id.MyBids);
+
 
         EditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +96,19 @@ public class NavigationMainActivity extends AppCompatActivity {
                 */
             }
         });
+
+        MyBids.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_OK);
+
+                Intent intent = new Intent(NavigationMainActivity.this, MyBiddingActivity.class); //YOU NEED CHRIS' LIST ITEM FUNCTIONALITY
+                startActivity(intent);
+
+            }
+        });
+
+
 
         MyBorrows.setOnClickListener(new View.OnClickListener() {
             @Override

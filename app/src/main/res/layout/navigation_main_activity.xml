@@ -20,6 +20,12 @@
         android:layout_height="wrap_content"
         android:text="My Borrowings" />
 
+    <Button
+        android:id="@+id/MyBids"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Bids" />
+
 
     <Button
         android:id="@+id/ShowAllItems"
