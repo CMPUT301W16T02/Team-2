@@ -3,6 +3,8 @@ package com.example.arshadhusain.weshare;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -15,6 +17,8 @@ public class MyItemsActivity extends AppCompatActivity {
     private String MyUsername;
 
     private ListView myItemsList;
+
+    private static int selectedItemPos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,8 @@ public class MyItemsActivity extends AppCompatActivity {
         }
 
         myItemsList = (ListView) findViewById(R.id.MyItemList);
+
+        myItemsList.setOnItemClickListener(onItemClickListener);
 
         myItems.clear();
         for (int x=0; x<NavigationMainActivity.allItems.size(); x++) {
@@ -63,5 +69,19 @@ public class MyItemsActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<Item>(this,
                 R.layout.list_item, myItems);
         myItemsList.setAdapter(adapter);
+    }
+    private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            selectedItemPos = position;
+            editItem();
+        }
+    };
+
+    public void editItem() {
+        Intent intent = new Intent(this, EditItemActivity.class);
+        intent.putExtra("itemPos", selectedItemPos);
+
+        startActivityForResult(intent, 1);
     }
 }
