@@ -60,6 +60,14 @@ public class BidAcceptActivity extends AppCompatActivity {
             }
         });
 
+        Button declineButton = (Button)findViewById(R.id.declineButton);
+
+        declineButton.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                declineBid();
+            }
+        });
 
 
     }
@@ -101,6 +109,22 @@ public class BidAcceptActivity extends AppCompatActivity {
             Bid currentBid = NavigationMainActivity.allBids.get(i);
             if (currentBid.getItem().equals(itemName) &&
                     currentBid.getItemOwner().equals(itemOwner)){
+                NavigationMainActivity.allBids.remove(i);
+            }
+        }
+
+        NavigationMainActivity.saveBidsToFile(context2);
+
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    public void declineBid(){
+        for(int i=0; i<NavigationMainActivity.allBids.size(); i++) {
+            Bid currentBid = NavigationMainActivity.allBids.get(i);
+            if (currentBid.getItem().equals(itemName) &&
+                    currentBid.getItemOwner().equals(itemOwner) &&
+                    currentBid.getBidder().equals(itemBidder)){
                 NavigationMainActivity.allBids.remove(i);
             }
         }
