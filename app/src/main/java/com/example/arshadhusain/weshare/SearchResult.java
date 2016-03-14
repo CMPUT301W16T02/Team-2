@@ -13,14 +13,21 @@ public class SearchResult {
         this.origItemPos = origItemPos;
     }
 
+
+    public int getOrigItemPos(){
+        return origItemPos;
+    }
+
+    public Item getItem(){
+        return item;
+    }
+
     @Override
     public String toString(){
 
         return item.getName() + "\n" + item.statusToString() + "\nOwner: " + item.getOwner();
     }
 
-    public int getOrigItemPos(){
-        return origItemPos;
-    }
+
 
 }
