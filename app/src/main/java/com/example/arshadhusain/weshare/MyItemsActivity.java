@@ -81,7 +81,9 @@ public class MyItemsActivity extends AppCompatActivity {
     public void editItem() {
         Intent intent = new Intent(this, EditItemActivity.class);
         intent.putExtra("itemPos", selectedItemPos);
+        intent.putExtra("activeUser", MyUsername);
 
         startActivityForResult(intent, 1);
     }
+
 }

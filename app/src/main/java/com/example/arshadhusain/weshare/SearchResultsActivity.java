@@ -37,7 +37,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         searchResultsList.setOnItemClickListener(onItemClickListener);
     }
 
-    public ArrayList<SearchResult> getSearchResults(String keyword){
+    public ArrayList<SearchResult> getSearchResults(){
         ArrayList<SearchResult> searchResults = new ArrayList<SearchResult>();
 
         /*
@@ -113,7 +113,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         }
         */
 
-        searchResults = getSearchResults(keyword);
+        searchResults = getSearchResults();
 
         adapter = new ArrayAdapter<SearchResult>(this,
                 R.layout.list_item, searchResults);
