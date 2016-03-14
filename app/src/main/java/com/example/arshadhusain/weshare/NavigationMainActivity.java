@@ -25,6 +25,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
+ * This is the main screen once the user has signed in. This activity
+ * is never finished as long as the app is open. Navigation to most other
+ * activities takes place here.
  * Created by arshadhusain on 16-03-12.
  */
 public class NavigationMainActivity extends AppCompatActivity {
@@ -41,9 +44,6 @@ public class NavigationMainActivity extends AppCompatActivity {
 
     public static Context context;
     public static Context context1;
-
-
-
 
     @Override
     protected void onStart() {
@@ -75,6 +75,11 @@ public class NavigationMainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Method sets up the screen.
+     * Also performs the functionality where the owner gets a notification
+     * about a new bid on one of their items.
+     */
     public void onCreateSetup() {
         setContentView(R.layout.navigation_main_activity);
         bidNotify.clear();
@@ -98,11 +103,11 @@ public class NavigationMainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "You've got new bid requests!", Toast.LENGTH_LONG).show();
 
         }
-
-
-
     }
 
+    /**
+     * Method connects to all the buttons and sets up their usage.
+     */
     public void onCreateListeners() {
         Button EditProfile = (Button)findViewById(R.id.EditProfile);
         Button MyItems = (Button)findViewById(R.id.MyItems);
@@ -188,10 +193,17 @@ public class NavigationMainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * @return context returns the context
+     */
     public static Context getContext() {
         return context;
     }
 
+    /**
+     * Method loads the list of all items from the local save file.
+     * @param context the context of the calling activity.
+     */
     private void loadItemsFromFile(Context context) {
         try {
             FileInputStream fis = context.openFileInput(FILENAME);
@@ -214,6 +226,10 @@ public class NavigationMainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method loads the list of all bids from the local save file.
+     * @param context the context of the calling activity.
+     */
     private void loadBidsFromFile(Context context) {
         try {
             FileInputStream fis = context.openFileInput(FILENAME1);
@@ -237,6 +253,10 @@ public class NavigationMainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * saves the list of all items to the local save file.
+     * @param context the context of the calling activity.
+     */
     public static void saveInFile(Context context) {
         try {
             FileOutputStream fos = context.openFileOutput(FILENAME,
@@ -262,6 +282,13 @@ public class NavigationMainActivity extends AppCompatActivity {
 
     }*/
 
+    /**
+     * Method adds an item to the list of all items and saves to the local
+     * save file.
+     *
+     * @deprecated
+     * @param newItem the item to be added
+     */
     public static void addAndSaveToItems(Item newItem) {
         NavigationMainActivity.allItems.add(newItem);
         saveInFile(context);

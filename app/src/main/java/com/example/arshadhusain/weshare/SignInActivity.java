@@ -28,6 +28,7 @@ import java.util.ArrayList;
  * Starts NavigationMainActivity on successful sign in.
  *
  * @author Badran
+ * @version 1.0
  */
 public class SignInActivity extends AppCompatActivity {
     private EditText username;

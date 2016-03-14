@@ -1,11 +1,3 @@
-/**
- * Activity that shows the profile of another user.
- *
- * Started by ItemInfoActivity.
- * Does not start any activities of it's own.
- *
- * @author Hanson
- */
 package com.example.arshadhusain.weshare;
 
 import android.content.Intent;
@@ -23,6 +15,15 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+/**
+ * Activity that shows the profile of another user.
+ *
+ * Started by ItemInfoActivity.
+ * Returns to ItemInfoActivity when back button is clicked.
+ *
+ * @author Hanson
+ * @version 1.0
+ */
 public class ViewProfileActivity extends AppCompatActivity {
     ArrayList<Account> Accounts = new ArrayList<Account>();
     Account MyAccount;
