@@ -120,6 +120,9 @@ public class ItemInfoActivity extends AppCompatActivity {
 
         itemToView.setStatus(1);
 
+        NavigationMainActivity.saveInFile(context2);
+
+
         Toast.makeText(getApplicationContext(), "Bid added!", Toast.LENGTH_LONG).show();
         bidAmount.setText("");
     }

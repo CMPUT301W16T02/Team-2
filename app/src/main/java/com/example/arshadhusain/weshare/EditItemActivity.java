@@ -187,7 +187,6 @@ public class EditItemActivity extends AppCompatActivity {
         itemToEdit.setBorrower("");
 
         NavigationMainActivity.saveInFile(context1);
-        System.out.printf("%d\n", NavigationMainActivity.allItems.size());
 
         setResult(RESULT_OK);
         finish();
@@ -197,7 +196,8 @@ public class EditItemActivity extends AppCompatActivity {
         ArrayList<Bid> itemBids = new ArrayList<Bid>();
         for(int i=0; i<NavigationMainActivity.allBids.size(); i++){
             String itemOwner = NavigationMainActivity.allBids.get(i).getItemOwner();
-            if(itemOwner.equals(activeUser)){
+            String itemName = NavigationMainActivity.allBids.get(i).getItem();
+            if(itemOwner.equals(activeUser) &&  itemName.equals(itemToEdit.getName())){
                 itemBids.add(NavigationMainActivity.allBids.get(i));
             }
         }
