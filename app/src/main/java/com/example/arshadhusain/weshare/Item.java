@@ -5,7 +5,11 @@ import android.widget.ArrayAdapter;
 import java.util.ArrayList;
 
 /**
- * Created by Hanson on 2016-03-05.
+ * Item model class.
+ * Defines setters and getters for item object.
+ *
+ * @Author Hanson, Chris
+ * @Version 1.0
  */
 public class Item {
     private String name;

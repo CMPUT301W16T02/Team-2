@@ -28,6 +28,14 @@ import android.widget.ArrayAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * MainItemListActivity allows user to see all items.
+ * Passes intent of user
+ *
+ * @Author: Chris, Arshad
+ * @Version: 1.0
+ *
+ */
 public class MainItemListActivity extends AppCompatActivity {
 
     private static final String FILENAME = "items.sav";
@@ -36,13 +44,13 @@ public class MainItemListActivity extends AppCompatActivity {
     public static ArrayList<Item> allItems = new ArrayList<Item>();
     public ArrayAdapter<Item> adapter;
 
-    static final int CHANGE_MADE = 1;
 
-    private String activeUser;
+    private String activeUser;    static final int CHANGE_MADE = 1;
+
     private static int selectedItemPos;
     public Context context;
 
-    private EditText searchKeyword;
+    //private EditText searchKeyword;
 
 
     @Override
@@ -60,14 +68,14 @@ public class MainItemListActivity extends AppCompatActivity {
 
         allItemsList.setOnItemClickListener(onItemClickListener);
 
-        searchKeyword = (EditText) findViewById(R.id.searchKeyword);
+        //searchKeyword = (EditText) findViewById(R.id.searchKeyword);
 
         Button searchButton = (Button)findViewById(R.id.searchButton);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                //
+                searchItems();
             }
         });
 
@@ -81,6 +89,9 @@ public class MainItemListActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Create adapter for allItems
+     */
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -94,13 +105,22 @@ public class MainItemListActivity extends AppCompatActivity {
         }
     };
 
-
+    /**
+     * Allows user to add item. Passes intent to AddItemActivity
+     *
+     * @See: AddItemActivity
+     */
     public void addItem() {
         Intent intent = new Intent(this, AddItemActivity.class);
         intent.putExtra("activeUser", activeUser);
         startActivityForResult(intent, CHANGE_MADE);
     }
 
+    /**
+     * Allows user to edit item. Passes intent to EditItemActivity
+     *
+     * @See: EditItemActivity
+     */
     public void editItem() {
         Intent intent = new Intent(this, EditItemActivity.class);
         intent.putExtra("itemPos", selectedItemPos);
@@ -108,6 +128,11 @@ public class MainItemListActivity extends AppCompatActivity {
         startActivityForResult(intent, CHANGE_MADE);
     }
 
+    /**
+     * Allows user to view item. Passes intent to ItemInfoActivity
+     *
+     * @See: ItemInfoActivity
+     */
     public void viewItemInfo(){
         Intent intent = new Intent(this, ItemInfoActivity.class);
         intent.putExtra("itemPos", selectedItemPos);
@@ -117,10 +142,12 @@ public class MainItemListActivity extends AppCompatActivity {
     }
 
     public void searchItems(){
-        String keyword = searchKeyword.getText().toString();
+        //String keyword = searchKeyword.getText().toString();
 
         Intent intent = new Intent(this, SearchResultsActivity.class);
-        intent.putExtra("keyword", keyword);
+        intent.putExtra("activeUser", activeUser);
+
+        //intent.putExtra("keyword", keyword);
 
         startActivity(intent);
     }
@@ -145,6 +172,10 @@ public class MainItemListActivity extends AppCompatActivity {
         allItemsList.setAdapter(adapter);
     }
 
+    /**
+     * @deprecated
+     * @param context
+     */
     private void loadFromFile(Context context) {
         try {
             FileInputStream fis = context.openFileInput(FILENAME);
@@ -164,6 +195,9 @@ public class MainItemListActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * @deprecated
+     */
     // taken from lonelyTwitter
     private void saveInFile() {
         try {

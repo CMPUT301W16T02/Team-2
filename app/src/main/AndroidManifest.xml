@@ -23,7 +23,6 @@
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".CreateProfileActivity" />
-        <activity android:name=".BorrowingActivity" />
         <activity android:name=".MainItemListActivity" />
         <activity android:name=".AddItemActivity" />
         <activity android:name=".EditItemActivity" />
@@ -34,7 +33,8 @@
         <activity android:name=".MyBiddingActivity" />
         <activity android:name=".MyItemListWithBids" />
         <activity android:name=".ItemInfoActivity" />
-        <activity android:name=".SearchResultsActivity"></activity>
+        <activity android:name=".SearchResultsActivity" />
+        <activity android:name=".BidAcceptActivity"></activity>
     </application>
 
 </manifest>
