@@ -1,11 +1,15 @@
 package com.example.arshadhusain.weshare;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,8 +33,13 @@ public class EditItemActivity extends AppCompatActivity {
 
     private int itemPos;
     private Item itemToEdit;
+    private String activeUser;
+
+    private int selectedItemPos;
 
     public Context context1;
+    final Context context = this;
+
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +53,10 @@ public class EditItemActivity extends AppCompatActivity {
         if(intent.hasExtra("itemPos")) {
             itemPos = intent.getIntExtra("itemPos", itemPos);
         }
+        /*
+        if(intent.hasExtra("activeUser")) {
+            activeUser = intent.getStringExtra("activeUser");
+        }*/
 
         itemToEdit = NavigationMainActivity.allItems.get(itemPos);
 
@@ -87,10 +100,24 @@ public class EditItemActivity extends AppCompatActivity {
     /**
      * onStart create adapter for bidlist
      */
+    private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            selectedItemPos = position;
+        }
+    };
+
+
     @Override
     protected void onStart() {
         super.onStart();
-        ArrayList<Bid> bids = itemToEdit.getListBid();
+
+        Intent intent = getIntent();
+        if(intent.hasExtra("activeUser")) {
+            activeUser = intent.getStringExtra("activeUser");
+        }
+
+        ArrayList<Bid> bids = getItemsBids();
         ArrayAdapter<Bid> adapter = new ArrayAdapter<Bid>(this,
                 R.layout.list_item, bids);
         bidsList.setAdapter(adapter);
@@ -140,5 +167,16 @@ public class EditItemActivity extends AppCompatActivity {
     public void cancel(View view) {
         setResult(RESULT_CANCELED);
         finish();
+    }
+
+    public ArrayList<Bid> getItemsBids() {
+        ArrayList<Bid> itemBids = new ArrayList<Bid>();
+        for(int i=0; i<NavigationMainActivity.allBids.size(); i++){
+            String itemOwner = NavigationMainActivity.allBids.get(i).getItemOwner();
+            if(itemOwner.equals(activeUser)){
+                itemBids.add(NavigationMainActivity.allBids.get(i));
+            }
+        }
+        return itemBids;
     }
 }
