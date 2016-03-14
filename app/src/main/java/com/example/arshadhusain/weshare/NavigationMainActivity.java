@@ -129,10 +129,12 @@ public class NavigationMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setResult(RESULT_OK);
-                /*
-                Intent intent = new Intent(NavigationMainActivity.this, MainItemListActivity.class); //YOU NEED CHRIS' LIST ITEM FUNCTIONALITY
+
+                Intent intent = new Intent(NavigationMainActivity.this, MyItemsActivity.class); //YOU NEED CHRIS' LIST ITEM FUNCTIONALITY
+                intent.putExtra("Username", MyUsername);
+
                 startActivity(intent);
-                */
+
             }
         });
 /*
