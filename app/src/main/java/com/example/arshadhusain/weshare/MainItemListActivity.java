@@ -101,6 +101,7 @@ public class MainItemListActivity extends AppCompatActivity {
     public void viewItemInfo(){
         Intent intent = new Intent(this, ItemInfoActivity.class);
         intent.putExtra("itemPos", selectedItemPos);
+        intent.putExtra("Username", activeUser);
         startActivityForResult(intent, CHANGE_MADE);
     }
 

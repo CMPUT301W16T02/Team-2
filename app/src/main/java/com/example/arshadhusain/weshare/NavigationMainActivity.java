@@ -106,6 +106,17 @@ public class NavigationMainActivity extends AppCompatActivity {
             }
         });
 
+        MyBorrows.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_OK);
+                /*
+                Intent intent = new Intent(NavigationMainActivity.this, MainItemListActivity.class); //YOU NEED CHRIS' BORROWING FUNCTIONALITY
+                startActivity(intent);
+                */
+            }
+        });
+
         ItemMarketplace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

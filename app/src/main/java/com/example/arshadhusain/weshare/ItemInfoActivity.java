@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,9 @@ public class ItemInfoActivity extends AppCompatActivity {
 
     private int itemPos;
     private Item itemToView;
+    double doubleUserName;
+
+    String UserName;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +37,9 @@ public class ItemInfoActivity extends AppCompatActivity {
 
         if (intent.hasExtra("itemPos")) {
             itemPos = intent.getIntExtra("itemPos", itemPos);
+        }
+        if(intent.hasExtra("Username")) {
+            UserName = intent.getStringExtra("Username");
         }
 
         itemToView = NavigationMainActivity.allItems.get(itemPos);
@@ -67,10 +74,28 @@ public class ItemInfoActivity extends AppCompatActivity {
         submitBid.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
+                String BidAmount = bidAmount.getText().toString();
+                doubleUserName = Double.parseDouble(BidAmount);
+
+                addBid();
                 //submitBid(v);
             }
         });
 
 
     }
+
+    public void addBid() {
+
+        //Item newItem = new Item(itemName, itemDesc, owner);
+        String ItemName = name.getText().toString();
+
+        Bid newBid = new Bid(UserName, doubleUserName, ItemName);
+        //NavigationMainActivity.allItems.add(newItem);
+        NavigationMainActivity.allBids.add(newBid);
+
+        Toast.makeText(getApplicationContext(), "Bid added!", Toast.LENGTH_LONG).show();
+        bidAmount.setText("");
+    }
+
 }
