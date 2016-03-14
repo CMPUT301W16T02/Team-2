@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 public class SignInActivity extends AppCompatActivity {
     private EditText username;
+    private boolean accountExists;
     ArrayList<Account> Accounts = new ArrayList<Account>();
 
 
@@ -39,68 +40,70 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void onCreateListeners() {
-        Button signIn = (Button)findViewById(R.id.SignInButton);
+        Button signIn = (Button) findViewById(R.id.SignInButton);
 
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-            setResult(RESULT_OK);
+                setResult(RESULT_OK);
 
-            String UserName = username.getText().toString();
-            try {
+                String UserName = username.getText().toString();
+                try {
 
-                System.out.printf("Username 2: %s\n", UserName);
-                FileInputStream inputFile = openFileInput(UserName);
-                BufferedReader input = new BufferedReader(new InputStreamReader(inputFile));
-                System.out.println("File Loaded\n");
+                    System.out.printf("Username 2: %s\n", UserName);
+                    FileInputStream inputFile = openFileInput(UserName);
+                    BufferedReader input = new BufferedReader(new InputStreamReader(inputFile));
+                    System.out.println("File Loaded\n");
 
-                //String line = input.readLine();
-                Gson gson = new Gson();
-                //Type listType = new TypeToken<ArrayList<FuelLog>>() {}.getType();
+                    //String line = input.readLine();
+                    Gson gson = new Gson();
+                    //Type listType = new TypeToken<ArrayList<FuelLog>>() {}.getType();
 
-                Type listType = new TypeToken<ArrayList<Account>>() {
-                }.getType();
-
-
-                Accounts = gson.fromJson(input, listType);
+                    Type listType = new TypeToken<ArrayList<Account>>() {
+                    }.getType();
 
 
+                    Accounts = gson.fromJson(input, listType);
+
+                    accountExists = true;
 
 
-                //Account account = new Account();
+                    //Account account = new Account();
 
             /*while (line != null) {
                 fuelList.add(line);
                 line = input.readLine();
             }*/
 
-            } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
-                //e.printStackTrace();
-                Accounts = new ArrayList<Account>();
-                System.out.println("Username not found\n");
-                Toast.makeText(getApplicationContext(), "Username not found", Toast.LENGTH_LONG).show();
+                } catch (FileNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    //e.printStackTrace();
+                    Accounts = new ArrayList<Account>();
+                    System.out.println("Username not found\n");
+                    accountExists = false;
+                    Toast.makeText(getApplicationContext(), "Username not found", Toast.LENGTH_LONG).show();
 
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                //e.printStackTrace();
-                throw new RuntimeException();
-            }
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    //e.printStackTrace();
+                    throw new RuntimeException();
+                }
 
 
-            //Intent intent = new Intent(SignInActivity.this, WelcomeActivity.class);
+                //Intent intent = new Intent(SignInActivity.this, WelcomeActivity.class);
 
-            //startActivityForResult(intent, 1);
+                //startActivityForResult(intent, 1);
+                if (accountExists) {
+                    Intent intent = new Intent(SignInActivity.this, NavigationMainActivity.class);
+                    //startActivity(intent);
+                    intent.putExtra("Username", UserName);
+                    startActivityForResult(intent, 1);
 
-                Intent intent = new Intent(SignInActivity.this, NavigationMainActivity.class);
-                //startActivity(intent);
-                intent.putExtra("Username", UserName);
-                startActivityForResult(intent, 1);
-
-                setResult(RESULT_OK);
-                finish();
+                    setResult(RESULT_OK);
+                    finish();
+                }
 
 
             }
