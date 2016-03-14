@@ -95,8 +95,11 @@ public class ItemInfoActivity extends AppCompatActivity {
 
         //Item newItem = new Item(itemName, itemDesc, owner);
         String ItemName = name.getText().toString();
+        String ItemOwner = owner.getText().toString();
+        String ItemDescription = description.getText().toString();
 
-        Bid newBid = new Bid(UserName, doubleUserName, ItemName);
+
+        Bid newBid = new Bid(UserName, doubleUserName, ItemName, ItemOwner, ItemDescription);
         //NavigationMainActivity.allItems.add(newItem);
         NavigationMainActivity.allBids.add(newBid);
         NavigationMainActivity.saveBidsToFile(context2);

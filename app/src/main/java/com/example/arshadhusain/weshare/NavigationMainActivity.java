@@ -115,7 +115,7 @@ public class NavigationMainActivity extends AppCompatActivity {
                 setResult(RESULT_OK);
 
                 Intent intent = new Intent(NavigationMainActivity.this, MyBiddingActivity.class); //YOU NEED CHRIS' LIST ITEM FUNCTIONALITY
-                intent.putExtra("Username", MyUsername);
+                intent.putExtra("activeUser", MyUsername);
 
                 startActivity(intent);
 
