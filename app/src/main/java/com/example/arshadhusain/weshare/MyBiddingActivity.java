@@ -9,6 +9,16 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 //MyBiddingActivity view activity
+
+/**
+ * Activity that shows all items that active user is bidding on.
+ *
+ * Started from NavigationMainActivity.
+ * Doesn't start any new activities(for now).
+ *
+ * @author Arshad
+ * @version 1.0
+ */
 public class MyBiddingActivity extends AppCompatActivity {
 
     public static ArrayList<Bid> myBids = new ArrayList<Bid>();
