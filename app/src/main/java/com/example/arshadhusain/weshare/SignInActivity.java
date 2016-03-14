@@ -1,3 +1,12 @@
+/**
+ * Activity that prompts the user to enter username. Sign in is required to
+ * use the app.
+ *
+ * Started by WelcomeActivity.
+ * Starts NavigationMainActivity on successful sign in.
+ *
+ * @author Badran
+ */
 package com.example.arshadhusain.weshare;
 
 import android.content.Intent;
