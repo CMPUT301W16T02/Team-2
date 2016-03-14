@@ -1,5 +1,6 @@
 package com.example.arshadhusain.weshare;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +36,7 @@ public class NavigationMainActivity extends AppCompatActivity {
     public static ArrayList<Item> allItems = new ArrayList<Item>();
     public static ArrayList<Bid> allBids = new ArrayList<Bid>();
 
+    public static Context context;
 
 
 
@@ -49,6 +51,8 @@ public class NavigationMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = getApplicationContext();
+
         Intent intent = getIntent();
 
         if(intent.hasExtra("Username")) {
@@ -136,7 +140,7 @@ public class NavigationMainActivity extends AppCompatActivity {
 
     private void loadItemsFromFile() {
         try {
-            FileInputStream fis = openFileInput(FILENAME);
+            FileInputStream fis = context.openFileInput(FILENAME1);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             Gson gson = new Gson();
 
@@ -172,9 +176,9 @@ public class NavigationMainActivity extends AppCompatActivity {
         }
     }
 
-    private void saveInFile() {
+    public static void saveInFile(Context context) {
         try {
-            FileOutputStream fos = openFileOutput(FILENAME,
+            FileOutputStream fos = context.openFileOutput(FILENAME,
                     0);
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
             Gson gson = new Gson();
@@ -190,12 +194,43 @@ public class NavigationMainActivity extends AppCompatActivity {
         }
 
     }
+    /*public void addAndSaveToBid(Item newItem) {
+        NavigationMainActivity.allItems.add(newItem); //WRONG NEEDS TO BE BID
+        saveBidsToFile();
+
+    }*/
+
+    public static void addAndSaveToItems(Item newItem) {
+        NavigationMainActivity.allItems.add(newItem);
+        saveInFile(context);
+
+    }
+    public static void saveBidsToFile(Context context) {
+        try {
+            FileOutputStream fos = context.openFileOutput(FILENAME1,
+                    0);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+            Gson gson = new Gson();
+            gson.toJson(allBids, out);
+            out.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        }
+
+    }
 
 
-    @Override
+
+
+    /*@Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             saveInFile();
         }
-    }
+    }*/
 }

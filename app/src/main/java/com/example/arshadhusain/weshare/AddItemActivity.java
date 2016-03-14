@@ -1,6 +1,7 @@
 package com.example.arshadhusain.weshare;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,11 +14,14 @@ public class AddItemActivity extends AppCompatActivity {
     private EditText name;
     private EditText description;
     private String owner = "Username";
+    //ublic static Context context1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
+
+        //context1.getApplicationContext();
 
         Intent intent = getIntent();
 
@@ -55,7 +59,8 @@ public class AddItemActivity extends AppCompatActivity {
         Item newItem = new Item(itemName, itemDesc, owner);
 
         NavigationMainActivity.allItems.add(newItem);
-
+        //NavigationMainActivity.saveInFile(context1);
+        NavigationMainActivity.addAndSaveToItems(newItem);
         setResult(RESULT_OK);
         finish();
     }

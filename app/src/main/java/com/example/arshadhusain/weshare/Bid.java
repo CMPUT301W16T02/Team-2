@@ -11,6 +11,12 @@ public class Bid {
     private Double amount;  //Bid amount
     private String item;    //Item bid being place on
 
+    public Bid(String bidder, Double amount, String item) {
+        this.bidder = bidder;
+        this.amount = amount;
+        this.item = item;
+    }
+
     //Setter for bidder
     public void setBidder(String bidder) {
         this.bidder = bidder;

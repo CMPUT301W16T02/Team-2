@@ -94,6 +94,7 @@ public class ItemInfoActivity extends AppCompatActivity {
         //NavigationMainActivity.allItems.add(newItem);
         NavigationMainActivity.allBids.add(newBid);
 
+
         Toast.makeText(getApplicationContext(), "Bid added!", Toast.LENGTH_LONG).show();
         bidAmount.setText("");
     }
