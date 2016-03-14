@@ -29,6 +29,7 @@ public class EditItemActivity extends AppCompatActivity {
 
     private EditText name;
     private EditText description;
+    ArrayList<Bid> bids;
     private ListView bidsList;
 
     private int itemPos;
@@ -104,6 +105,9 @@ public class EditItemActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             selectedItemPos = position;
+
+            viewBid(bids.get(selectedItemPos));
+
         }
     };
 
@@ -117,7 +121,7 @@ public class EditItemActivity extends AppCompatActivity {
             activeUser = intent.getStringExtra("activeUser");
         }
 
-        ArrayList<Bid> bids = getItemsBids();
+        bids = getItemsBids();
         ArrayAdapter<Bid> adapter = new ArrayAdapter<Bid>(this,
                 R.layout.list_item, bids);
         bidsList.setAdapter(adapter);
@@ -178,5 +182,16 @@ public class EditItemActivity extends AppCompatActivity {
             }
         }
         return itemBids;
+    }
+
+    public void viewBid(Bid bidToView){
+        String itemName = bidToView.getItem();
+        String itemOwner = bidToView.getItemOwner();
+
+        Intent intent = new Intent(this, BidAcceptActivity.class);
+        intent.putExtra("itemName", itemName);
+        intent.putExtra("itemOwner", itemOwner);
+
+        startActivityForResult(intent, 1);
     }
 }
