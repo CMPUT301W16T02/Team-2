@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -35,6 +36,8 @@ public class NavigationMainActivity extends AppCompatActivity {
 
     public static ArrayList<Item> allItems = new ArrayList<Item>();
     public static ArrayList<Bid> allBids = new ArrayList<Bid>();
+    public static ArrayList<Bid> bidNotify = new ArrayList<Bid>();
+
 
     public static Context context;
     public static Context context1;
@@ -74,6 +77,28 @@ public class NavigationMainActivity extends AppCompatActivity {
 
     public void onCreateSetup() {
         setContentView(R.layout.navigation_main_activity);
+        bidNotify.clear();
+        for (int x=0; x<NavigationMainActivity.allBids.size(); x++) {
+            //System.out.println(NavigationMainActivity.allBids.get(x).getItem());
+            //System.out.printf("%s\n", NavigationMainActivity.allBids.get(x).getItem());
+            System.out.printf("%s\n", NavigationMainActivity.allBids.get(x).getBidder());
+            System.out.printf("%s\n", MyUsername);
+
+
+            if((NavigationMainActivity.allBids.get(x).getItemOwner()).equals(MyUsername))
+            {
+
+                Bid bidToCopy = NavigationMainActivity.allBids.get(x);
+                System.out.printf("%s\n", bidToCopy.getItem());
+                bidNotify.add(bidToCopy);
+            }
+
+        }
+        if(!bidNotify.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "You've got new bid requests!", Toast.LENGTH_LONG).show();
+
+        }
+
 
 
     }
@@ -84,6 +109,8 @@ public class NavigationMainActivity extends AppCompatActivity {
         Button MyBorrows = (Button)findViewById(R.id.MyBorrows);
         Button ItemMarketplace = (Button)findViewById(R.id.ShowAllItems);
         Button MyBids = (Button)findViewById(R.id.MyBids);
+        Button MyItemsWithBids = (Button)findViewById(R.id.MyItemsWithBids);
+
 
 
         EditProfile.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +137,19 @@ public class NavigationMainActivity extends AppCompatActivity {
         });
 
         MyBids.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_OK);
+
+                Intent intent = new Intent(NavigationMainActivity.this, MyBiddingActivity.class); //YOU NEED CHRIS' LIST ITEM FUNCTIONALITY
+                intent.putExtra("activeUser", MyUsername);
+
+                startActivity(intent);
+
+            }
+        });
+
+        MyItemsWithBids.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setResult(RESULT_OK);

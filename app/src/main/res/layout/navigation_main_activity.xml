@@ -15,6 +15,12 @@
         android:text="My Items" />
 
     <Button
+        android:id="@+id/MyItemsWithBids"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Items With Bids" />
+
+    <Button
         android:id="@+id/MyBorrows"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
