@@ -15,5 +15,4 @@ public class EditProfileActivityTest extends ActivityInstrumentationTestCase2 {
     public void setUp() throws Exception {
         super.setUp();
     }
-
 }
