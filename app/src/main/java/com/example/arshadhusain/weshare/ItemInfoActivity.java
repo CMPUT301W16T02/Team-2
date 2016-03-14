@@ -1,6 +1,7 @@
 package com.example.arshadhusain.weshare;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +30,8 @@ public class ItemInfoActivity extends AppCompatActivity {
 
     String UserName;
 
+    public Context context2;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_info);
@@ -38,9 +41,12 @@ public class ItemInfoActivity extends AppCompatActivity {
         if (intent.hasExtra("itemPos")) {
             itemPos = intent.getIntExtra("itemPos", itemPos);
         }
-        if(intent.hasExtra("Username")) {
-            UserName = intent.getStringExtra("Username");
+        if(intent.hasExtra("activeUser")) {
+            UserName = intent.getStringExtra("activeUser");
         }
+
+        context2 = NavigationMainActivity.getContext();
+
 
         itemToView = NavigationMainActivity.allItems.get(itemPos);
 
@@ -93,6 +99,7 @@ public class ItemInfoActivity extends AppCompatActivity {
         Bid newBid = new Bid(UserName, doubleUserName, ItemName);
         //NavigationMainActivity.allItems.add(newItem);
         NavigationMainActivity.allBids.add(newBid);
+        NavigationMainActivity.saveBidsToFile(context2);
 
 
         Toast.makeText(getApplicationContext(), "Bid added!", Toast.LENGTH_LONG).show();

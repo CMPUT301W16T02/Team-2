@@ -115,6 +115,8 @@ public class NavigationMainActivity extends AppCompatActivity {
                 setResult(RESULT_OK);
 
                 Intent intent = new Intent(NavigationMainActivity.this, MyBiddingActivity.class); //YOU NEED CHRIS' LIST ITEM FUNCTIONALITY
+                intent.putExtra("Username", MyUsername);
+
                 startActivity(intent);
 
             }
@@ -159,7 +161,7 @@ public class NavigationMainActivity extends AppCompatActivity {
             // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html 01-19 2016
             Type listType = new TypeToken<ArrayList<Item>>() {}.getType();
             allItems = gson.fromJson(in, listType);
-            System.out.printf("LOADING FROM FILE\n");
+            System.out.printf("LOADING ITEMS FROM FILE\n");
 
             System.out.printf("%d\n", NavigationMainActivity.allItems.size());
 
@@ -181,6 +183,10 @@ public class NavigationMainActivity extends AppCompatActivity {
             // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html 01-19 2016
             Type listType = new TypeToken<ArrayList<Bid>>() {}.getType();
             allBids = gson.fromJson(in, listType);
+
+            System.out.printf("LOADING BIDS FROM FILE\n");
+
+            System.out.printf("%d\n", NavigationMainActivity.allBids.size());
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block

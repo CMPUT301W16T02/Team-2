@@ -97,12 +97,15 @@ public class MainItemListActivity extends AppCompatActivity {
     public void editItem() {
         Intent intent = new Intent(this, EditItemActivity.class);
         intent.putExtra("itemPos", selectedItemPos);
+
         startActivityForResult(intent, CHANGE_MADE);
     }
 
     public void viewItemInfo(){
         Intent intent = new Intent(this, ItemInfoActivity.class);
         intent.putExtra("itemPos", selectedItemPos);
+        intent.putExtra("activeUser", activeUser);
+
         startActivityForResult(intent, CHANGE_MADE);
     }
 
