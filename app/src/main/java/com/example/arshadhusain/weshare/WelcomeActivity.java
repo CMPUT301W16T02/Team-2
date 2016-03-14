@@ -8,10 +8,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
-/** The first activity that starts. Displays two buttons. One button goes to sign in
+/**
+ * The first activity that starts. Displays two buttons.
+ * One button goes to sign in and the other creates an account.
  *
  * Started by opening the app.
+ * Starts either CreateProfileActivity or SignInActivity.
  *
+ * @author Arshad
+ * @version 1.0
  */
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -54,18 +59,26 @@ public class WelcomeActivity extends AppCompatActivity {
         });*/
     }
 
+    /**
+     * Auto-generated method.
+     * Inflate the menu; this adds items to the action bar if it is present.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
+    /**
+     * Auto-generated method.
+     * Handle action bar item clicks here. The action bar will
+     * automatically handle clicks on the Home/Up button, so long
+     * as you specify a parent activity in AndroidManifest.xml.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement

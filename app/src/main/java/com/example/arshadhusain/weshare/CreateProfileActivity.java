@@ -21,7 +21,14 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 /**
- * Created by arshadhusain on 16-03-09.
+ * Activity that allows user to create an account. A profile is
+ * required to use this app.
+ *
+ * Started by WelcomeActivity.
+ * Returns to WelcomeActivity with successful account creation.
+ *
+ * @author Badran
+ * @version 1.0
  */
 public class CreateProfileActivity extends Activity{
     boolean valid;
@@ -42,6 +49,9 @@ public class CreateProfileActivity extends Activity{
 
     }
 
+    /**
+     * Method that sets up input text box usage.
+     */
     public void onCreateSetup() {
         setContentView(R.layout.create_profile_activity);
         username = (EditText) findViewById(R.id.CreateProfileInput1);
@@ -51,6 +61,9 @@ public class CreateProfileActivity extends Activity{
 
     }
 
+    /**
+     * Method that sets up button clicking.
+     */
     public void onCreateListeners() {
         Button createAccount = (Button)findViewById(R.id.button);
         createAccount.setOnClickListener(new View.OnClickListener() {

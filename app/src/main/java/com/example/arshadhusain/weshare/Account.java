@@ -1,8 +1,12 @@
 package com.example.arshadhusain.weshare;
 
 /**
- * Created by Hanson on 2016-03-05.
- */
+ * Model class for account. Defines setters and getters for 'account'
+ *
+ * @Author: Arshad, Hanson
+ * @Version: 1.0
+ **/
+
 public class Account {
     private String username;
     private String email;

@@ -9,6 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+/**
+ * <p>AddItemActivity allows user to add an item. Passes intent of user and
+ * provides user interface for input</p>
+ *
+ * @Author: Chris
+ * @Version: 1.0
+ */
 public class AddItemActivity extends AppCompatActivity {
 
     private EditText name;
@@ -53,6 +60,13 @@ public class AddItemActivity extends AppCompatActivity {
     });
 }
 
+    /**
+     * addItem method creates new item and appends to allItems
+     *
+     * @see MainItemListActivity
+     * @param view
+     * @param owner
+     */
     public void addItem(View view, String owner){
 
         String itemName = name.getText().toString();
@@ -68,6 +82,10 @@ public class AddItemActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * User stops inputing item
+     * @param view
+     */
     public void cancel(View view) {
 
         setResult(RESULT_CANCELED);

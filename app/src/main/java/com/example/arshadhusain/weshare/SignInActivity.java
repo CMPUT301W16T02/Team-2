@@ -28,6 +28,7 @@ import java.util.ArrayList;
  * Starts NavigationMainActivity on successful sign in.
  *
  * @author Badran
+ * @version 1.0
  */
 public class SignInActivity extends AppCompatActivity {
     private EditText username;
@@ -102,6 +103,7 @@ public class SignInActivity extends AppCompatActivity {
 
                 //startActivityForResult(intent, 1);
                 if (accountExists) {
+                    Toast.makeText(getApplicationContext(), "Sign In Successful", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(SignInActivity.this, NavigationMainActivity.class);
                     //startActivity(intent);
                     intent.putExtra("Username", UserName);

@@ -3,6 +3,8 @@ package com.example.arshadhusain.weshare;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 /**
  * Created by hasan on 2016-03-12.
  */
@@ -27,17 +29,22 @@ public class EditItemActivityTest extends ActivityInstrumentationTestCase2 {
         username = "testName";
         city = "testCity";
         email = "test@email.ca";
+        name = "Macbook Pro";
+        description = "Mint condition";
+        owner = "testname";
 
+        ArrayList<Item> items = new ArrayList<Item>();
         Account fakeAccount = new Account(username, city, email);
         Item item = new Item(name, description, owner);
-        item.name = "microwave";
+        item.setName("microwave");
 
-        fakeAccount.addItem(item);
-        assertTrue(fakeAccount.getItem.hasItem(item));
+        items.add(item);
+        assertTrue(items.contains(item));
 
         String newItemName = "microwave";
-        UpdateName(fakeAccount.getItems().getItem(0), newItemName);
+        items.get(0).setName(newItemName);
         assertTrue(fakeAccount.getItems().getItem(0).getName == newItemName);
+        assertTrue((items.get(0).toString()).equals(newItemName));
     }
 
     public void testUpdateDescription() {
