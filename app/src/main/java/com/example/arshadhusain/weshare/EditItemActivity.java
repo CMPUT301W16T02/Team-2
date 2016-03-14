@@ -113,4 +113,8 @@ public class EditItemActivity extends AppCompatActivity {
         setResult(RESULT_CANCELED);
         finish();
     }
+
+    public void getItemsBids() {
+        
+    }
 }

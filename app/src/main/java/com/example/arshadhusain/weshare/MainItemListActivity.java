@@ -36,13 +36,13 @@ public class MainItemListActivity extends AppCompatActivity {
     public static ArrayList<Item> allItems = new ArrayList<Item>();
     public ArrayAdapter<Item> adapter;
 
-    static final int CHANGE_MADE = 1;
 
-    private String activeUser;
+    private String activeUser;    static final int CHANGE_MADE = 1;
+
     private static int selectedItemPos;
     public Context context;
 
-    private EditText searchKeyword;
+    //private EditText searchKeyword;
 
 
     @Override
@@ -60,14 +60,14 @@ public class MainItemListActivity extends AppCompatActivity {
 
         allItemsList.setOnItemClickListener(onItemClickListener);
 
-        searchKeyword = (EditText) findViewById(R.id.searchKeyword);
+        //searchKeyword = (EditText) findViewById(R.id.searchKeyword);
 
         Button searchButton = (Button)findViewById(R.id.searchButton);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                //
+                searchItems();
             }
         });
 
@@ -117,10 +117,12 @@ public class MainItemListActivity extends AppCompatActivity {
     }
 
     public void searchItems(){
-        String keyword = searchKeyword.getText().toString();
+        //String keyword = searchKeyword.getText().toString();
 
         Intent intent = new Intent(this, SearchResultsActivity.class);
-        intent.putExtra("keyword", keyword);
+        intent.putExtra("activeUser", activeUser);
+
+        //intent.putExtra("keyword", keyword);
 
         startActivity(intent);
     }
