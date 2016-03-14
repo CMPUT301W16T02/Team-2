@@ -1,3 +1,12 @@
+/**
+ * Activity that allows a user to edit his profile. The username cannot be
+ * changed. Just the email and city can be changed.
+ *
+ * Started by NavigationMainActivity.
+ * Returns to NavigationMainActivity on successful edit.
+ *
+ * @author Hanson
+ */
 package com.example.arshadhusain.weshare;
 
 import android.content.Intent;
@@ -21,6 +30,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+
+
 
 public class EditProfileActivity extends AppCompatActivity {
     ArrayList<Account> Accounts = new ArrayList<Account>();

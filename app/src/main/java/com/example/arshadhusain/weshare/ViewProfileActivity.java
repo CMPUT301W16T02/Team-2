@@ -1,3 +1,11 @@
+/**
+ * Activity that shows the profile of another user.
+ *
+ * Started by ItemInfoActivity.
+ * Does not start any activities of it's own.
+ *
+ * @author Hanson
+ */
 package com.example.arshadhusain.weshare;
 
 import android.content.Intent;
