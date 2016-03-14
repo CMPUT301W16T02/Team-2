@@ -128,5 +128,10 @@ public class BidAcceptActivity extends AppCompatActivity {
                 NavigationMainActivity.allBids.remove(i);
             }
         }
+
+        NavigationMainActivity.saveBidsToFile(context2);
+
+        setResult(RESULT_OK);
+        finish();
     }
 }

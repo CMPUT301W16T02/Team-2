@@ -182,7 +182,7 @@ public class NavigationMainActivity extends AppCompatActivity {
             }
         });
 
-
+/*
         MyBorrows.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

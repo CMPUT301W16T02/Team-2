@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:text="Decline Bid"
             android:id="@+id/declineButton"
-            android:layout_alignParentTop="true"
-            android:layout_toStartOf="@+id/acceptButton" />
+            android:layout_below="@+id/acceptButton"
+            android:layout_alignEnd="@+id/acceptButton" />
     </RelativeLayout>
 </LinearLayout>
