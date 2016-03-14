@@ -115,6 +115,7 @@ public class NavigationMainActivity extends AppCompatActivity {
         Button ItemMarketplace = (Button)findViewById(R.id.ShowAllItems);
         Button MyBids = (Button)findViewById(R.id.MyBids);
         Button MyItemsWithBids = (Button)findViewById(R.id.MyItemsWithBids);
+        Button MyBorrowedItems = (Button)findViewById(R.id.MyBorrowedItems);
 
 
 
@@ -142,7 +143,8 @@ public class NavigationMainActivity extends AppCompatActivity {
 
             }
         });
-/*
+
+        /*
         MyBids.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,26 +163,39 @@ public class NavigationMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 setResult(RESULT_OK);
 
-                Intent intent = new Intent(NavigationMainActivity.this, MyItemListWithBids.class); //YOU NEED CHRIS' LIST ITEM FUNCTIONALITY
+                Intent intent = new Intent(NavigationMainActivity.this, MyItemListWithBidsActivity.class); //YOU NEED CHRIS' LIST ITEM FUNCTIONALITY
                 intent.putExtra("activeUser", MyUsername);
 
                 startActivity(intent);
 
             }
         });
-*/
+
+        MyBorrowedItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_OK);
+
+                Intent intent = new Intent(NavigationMainActivity.this, MyBorrowedItemsActivity.class); //YOU NEED CHRIS' LIST ITEM FUNCTIONALITY
+                intent.putExtra("activeUser", MyUsername);
+
+                startActivity(intent);
+
+            }
+        });
 
 
         MyBorrows.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setResult(RESULT_OK);
-                /*
-                Intent intent = new Intent(NavigationMainActivity.this, MainItemListActivity.class); //YOU NEED CHRIS' BORROWING FUNCTIONALITY
+
+                Intent intent = new Intent(NavigationMainActivity.this, MyBorrowsActivity.class); //YOU NEED CHRIS' BORROWING FUNCTIONALITY
                 startActivity(intent);
-                */
+
             }
         });
+        */
 
         ItemMarketplace.setOnClickListener(new View.OnClickListener() {
             @Override
