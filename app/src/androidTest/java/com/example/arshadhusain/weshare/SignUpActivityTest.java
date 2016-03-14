@@ -8,7 +8,7 @@ import android.widget.Button;
 /**
  * Created by hasan on 2016-03-12.
  */
-public class SignUpActivityTest extends ActivityInstrumentationTestCase2 {
+/*public class SignUpActivityTest extends ActivityInstrumentationTestCase2 {
     private Button signupButton;
 
     public SignUpActivityTest(){
@@ -49,4 +49,4 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2 {
     getInstrumentation().removeMonitor(receiverActivityMonitor);
 
     receiverActivity.finish();
-}
+}*/
