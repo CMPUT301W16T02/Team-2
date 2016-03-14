@@ -1,12 +1,3 @@
-/**
- * Activity that prompts the user to enter username. Sign in is required to
- * use the app.
- *
- * Started by WelcomeActivity.
- * Starts NavigationMainActivity on successful sign in.
- *
- * @author Badran
- */
 package com.example.arshadhusain.weshare;
 
 import android.content.Intent;
@@ -29,18 +20,25 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+/**
+ * Activity that prompts the user to enter username. Sign in is required to
+ * use the app.
+ *
+ * Started by WelcomeActivity.
+ * Starts NavigationMainActivity on successful sign in.
+ *
+ * @author Badran
+ */
 public class SignInActivity extends AppCompatActivity {
     private EditText username;
     private boolean accountExists;
     ArrayList<Account> Accounts = new ArrayList<Account>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.onCreateSetup();
         this.onCreateListeners();
-
     }
 
     public void onCreateSetup() {
@@ -78,7 +76,6 @@ public class SignInActivity extends AppCompatActivity {
 
                     accountExists = true;
 
-
                     //Account account = new Account();
 
             /*while (line != null) {
@@ -113,8 +110,6 @@ public class SignInActivity extends AppCompatActivity {
                     setResult(RESULT_OK);
                     finish();
                 }
-
-
             }
 
         });

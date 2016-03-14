@@ -1,6 +1,7 @@
 package com.example.arshadhusain.weshare;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,9 +22,14 @@ public class EditItemActivity extends AppCompatActivity {
     private int itemPos;
     private Item itemToEdit;
 
+    public Context context1;
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_item);
+
+        context1 = NavigationMainActivity.getContext();
 
         Intent intent = getIntent();
 
@@ -87,12 +93,17 @@ public class EditItemActivity extends AppCompatActivity {
         itemToEdit.setName(newName);
         itemToEdit.setDescription(newDesc);
 
+        NavigationMainActivity.saveInFile(context1);
+
         setResult(RESULT_OK);
         finish();
     }
 
     public void deleteItem(View view){
         NavigationMainActivity.allItems.remove(itemToEdit);
+
+        NavigationMainActivity.saveInFile(context1);
+        System.out.printf("%d\n", NavigationMainActivity.allItems.size());
 
         setResult(RESULT_OK);
         finish();

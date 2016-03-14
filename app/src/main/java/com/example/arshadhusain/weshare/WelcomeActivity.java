@@ -8,6 +8,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+/** The first activity that starts. Displays two buttons. One button goes to sign in
+ *
+ * Started by opening the app.
+ *
+ */
 public class WelcomeActivity extends AppCompatActivity {
 
     private static String FILENAME;

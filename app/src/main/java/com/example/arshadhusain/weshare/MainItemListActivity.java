@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.io.BufferedReader;
@@ -19,6 +20,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import android.widget.ArrayAdapter;
@@ -40,6 +42,9 @@ public class MainItemListActivity extends AppCompatActivity {
     private static int selectedItemPos;
     public Context context;
 
+    private EditText searchKeyword;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +59,8 @@ public class MainItemListActivity extends AppCompatActivity {
         allItemsList = (ListView) findViewById(R.id.allItemsList);
 
         allItemsList.setOnItemClickListener(onItemClickListener);
+
+        searchKeyword = (EditText) findViewById(R.id.searchKeyword);
 
         Button searchButton = (Button)findViewById(R.id.searchButton);
 
@@ -107,6 +114,15 @@ public class MainItemListActivity extends AppCompatActivity {
         intent.putExtra("activeUser", activeUser);
 
         startActivityForResult(intent, CHANGE_MADE);
+    }
+
+    public void searchItems(){
+        String keyword = searchKeyword.getText().toString();
+
+        Intent intent = new Intent(this, SearchResultsActivity.class);
+        intent.putExtra("keyword", keyword);
+
+        startActivity(intent);
     }
 
     @Override
