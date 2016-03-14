@@ -6,8 +6,8 @@ import android.test.ActivityInstrumentationTestCase2;
 /**
  * Created by hasan on 2016-03-12.
  */
-public class MakeBidActivityTest extends ActivityInstrumentationTestCase2 {
-    String bidder;
+//public class MakeBidActivityTest extends ActivityInstrumentationTestCase2 {
+   /* String bidder;
     Double amount;
 
     public MakeBidActivityTest(){
@@ -27,7 +27,7 @@ public class MakeBidActivityTest extends ActivityInstrumentationTestCase2 {
         bid.setAmount((double) 10);
 
 
-    }
+    }*/
 
     /*
     public void testNetworkConnection() {
@@ -43,4 +43,4 @@ public class MakeBidActivityTest extends ActivityInstrumentationTestCase2 {
         }
     }*/
 
-}
+//}
