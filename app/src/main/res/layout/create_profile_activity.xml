@@ -9,7 +9,6 @@
         android:hint="Username"
         android:inputType="text"
         android:layout_height="wrap_content" >
-
         <requestFocus />
 
     </EditText>
@@ -21,8 +20,6 @@
         android:inputType="text"
         android:layout_height="wrap_content" >
 
-        <requestFocus />
-
     </EditText>
 
     <EditText
@@ -31,8 +28,6 @@
         android:hint="City"
         android:inputType="text"
         android:layout_height="wrap_content" >
-
-        <requestFocus />
 
     </EditText>
 
