@@ -24,12 +24,22 @@ import java.util.ArrayList;
 
 public class ItemInfoActivity extends AppCompatActivity {
 
+    public EditText getBidAmount() {
+        return bidAmount;
+    }
+
+    public Button getViewOwner() {
+        return viewOwner;
+    }
+
     private TextView name;
     private TextView owner;
-    private TextView description;
     private TextView status;
+    private TextView description;
 
     private EditText bidAmount;
+
+    private Button viewOwner;
 
     private int itemPos;
     private Item itemToView;
@@ -68,7 +78,7 @@ public class ItemInfoActivity extends AppCompatActivity {
 
         bidAmount = (EditText) findViewById(R.id.bidAmount);
 
-        Button viewOwner = (Button) findViewById(R.id.viewOwnerButton);
+        viewOwner = (Button) findViewById(R.id.viewOwnerButton);
 
         viewOwner.setOnClickListener(new View.OnClickListener() {
 
