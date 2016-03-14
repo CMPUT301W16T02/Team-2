@@ -22,11 +22,8 @@
             android:name=".SignInActivity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".CreateProfileActivity" />
-        <activity
-            android:name=".BorrowingActivity" />
-
+        <activity android:name=".CreateProfileActivity" />
+        <activity android:name=".BorrowingActivity" />
         <activity android:name=".MainItemListActivity" />
         <activity android:name=".AddItemActivity" />
         <activity android:name=".EditItemActivity" />
@@ -36,13 +33,8 @@
         <activity android:name=".ViewProfileActivity" />
         <activity android:name=".MyBiddingActivity" />
         <activity android:name=".MyItemListWithBids" />
-
-
-
-
-
-
-        <activity android:name=".ItemInfoActivity"></activity>
+        <activity android:name=".ItemInfoActivity" />
+        <activity android:name=".SearchResultsActivity"></activity>
     </application>
 
 </manifest>
