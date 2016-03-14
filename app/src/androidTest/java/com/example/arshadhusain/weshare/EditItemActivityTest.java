@@ -7,12 +7,12 @@ import android.widget.EditText;
  * Created by hasan on 2016-03-12.
  */
 public class EditItemActivityTest extends ActivityInstrumentationTestCase2 {
-    EditText username;
-    EditText city;
-    EditText email;
-    EditText name;
-    EditText description;
-    EditText owner;
+    String username;
+    String city;
+    String email;
+    String name;
+    String description;
+    String owner;
 
     public EditItemActivityTest(){
         super(EditItemActivity.class);
@@ -24,6 +24,10 @@ public class EditItemActivityTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testUpdateName() {
+        username = "testName";
+        city = "testCity";
+        email = "test@email.ca";
+
         Account fakeAccount = new Account(username, city, email);
         Item item = new Item(name, description, owner);
         item.name = "microwave";

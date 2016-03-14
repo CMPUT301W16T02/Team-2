@@ -8,9 +8,9 @@ import android.test.ActivityInstrumentationTestCase2;
 /**
  * Created by hasan on 2016-03-11.
  */
-public class MainActivityTest extends ActivityInstrumentationTestCase2 {
-    public MainActivityTest(){
-        super(com.example.arshadhusain.weshare.MainActivity.class);
+public class WelcomeActivityTest extends ActivityInstrumentationTestCase2 {
+    public WelcomeActivityTest(){
+        super(com.example.arshadhusain.weshare.WelcomeActivity.class);
     }
 
     public void testStart() throws Exception{

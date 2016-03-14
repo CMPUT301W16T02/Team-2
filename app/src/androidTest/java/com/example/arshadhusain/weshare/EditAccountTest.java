@@ -12,7 +12,7 @@ public class EditAccountTest extends ActivityInstrumentationTestCase2 {
     EditText email;
 
     public EditAccountTest(){
-        super(EditProfileActivity.class);
+        super(Account.class);
     }
 
     @Override
@@ -20,18 +20,18 @@ public class EditAccountTest extends ActivityInstrumentationTestCase2 {
         super.setUp();
     }
 
-    public void editEmailAddressTest(){
+    public void testEditEmailAddress(){
         String origEmail = "email@address.ca";
         String newEmail = "new_email@address.ca";
 
         Account account = new Account("username", "city", origEmail);
 
-        assertFalse(account.getEmail() == newEmail);
-        account.editEmail(newEmail);
-        assertTrue(account.getEmail() == newEmail);
+        assertFalse(account.getEmail().equals(newEmail));
+        account.setEmail(newEmail);
+        assertTrue(account.getEmail().equals(newEmail));
     }
 
-    public void editCityTest(){
+    public void testEditCity(){
         // tests the editAddress method
 
         String origCity = "Camrose";
@@ -39,9 +39,9 @@ public class EditAccountTest extends ActivityInstrumentationTestCase2 {
 
         Account account = new Account("username", origCity, "email@address.ca");
 
-        assertFalse(account.getCity()==newCity);
-        account.editCity(newCity);
-        assertTrue(account.getCity()==newCity);
+        assertFalse(account.getCity().equals(newCity));
+        account.setCity(newCity);
+        assertTrue(account.getCity().equals(newCity));
     }
 
 }
