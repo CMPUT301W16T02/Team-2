@@ -23,7 +23,6 @@
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".CreateProfileActivity" />
-        <activity android:name=".BorrowingActivity" />
         <activity android:name=".MainItemListActivity" />
         <activity android:name=".AddItemActivity" />
         <activity android:name=".EditItemActivity" />
