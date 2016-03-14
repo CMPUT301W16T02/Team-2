@@ -1,5 +1,6 @@
 package com.example.arshadhusain.weshare;
 
+import android.content.Context;
 import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ public class MainItemListActivity extends AppCompatActivity {
 
     private String activeUser;
     private static int selectedItemPos;
+    public Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,16 +118,17 @@ public class MainItemListActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //loadFromFile();
+        //context = NavigationMainActivity.getContext();
+        //loadFromFile(context);
         //allItems = NavigationMainActivity.allItems;
         adapter = new ArrayAdapter<Item>(this,
                 R.layout.list_item, NavigationMainActivity.allItems);
         allItemsList.setAdapter(adapter);
     }
 
-    private void loadFromFile() {
+    private void loadFromFile(Context context) {
         try {
-            FileInputStream fis = openFileInput(FILENAME);
+            FileInputStream fis = context.openFileInput(FILENAME);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             Gson gson = new Gson();
 

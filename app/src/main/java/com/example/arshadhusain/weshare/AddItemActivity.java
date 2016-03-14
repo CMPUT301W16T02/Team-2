@@ -14,7 +14,7 @@ public class AddItemActivity extends AppCompatActivity {
     private EditText name;
     private EditText description;
     private String owner = "Username";
-    //ublic static Context context1;
+    public Context context1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,8 @@ public class AddItemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_item);
 
         //context1.getApplicationContext();
+
+        context1 = NavigationMainActivity.getContext();
 
         Intent intent = getIntent();
 
@@ -59,8 +61,9 @@ public class AddItemActivity extends AppCompatActivity {
         Item newItem = new Item(itemName, itemDesc, owner);
 
         NavigationMainActivity.allItems.add(newItem);
-        //NavigationMainActivity.saveInFile(context1);
-        NavigationMainActivity.addAndSaveToItems(newItem);
+        NavigationMainActivity.saveInFile(context1);
+        System.out.printf("%d\n", NavigationMainActivity.allItems.size());
+        //NavigationMainActivity.addAndSaveToItems(newItem);
         setResult(RESULT_OK);
         finish();
     }

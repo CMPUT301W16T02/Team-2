@@ -37,14 +37,16 @@ public class NavigationMainActivity extends AppCompatActivity {
     public static ArrayList<Bid> allBids = new ArrayList<Bid>();
 
     public static Context context;
+    public static Context context1;
+
 
 
 
     @Override
     protected void onStart() {
         super.onStart();
-        loadItemsFromFile();
-        loadBidsFromFile();
+        //loadItemsFromFile();
+        //loadBidsFromFile();
     }
 
 
@@ -52,6 +54,12 @@ public class NavigationMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getApplicationContext();
+        context1 = getApplicationContext();
+
+        loadItemsFromFile(context);
+        loadBidsFromFile(context1);
+
+
 
         Intent intent = getIntent();
 
@@ -138,15 +146,22 @@ public class NavigationMainActivity extends AppCompatActivity {
         });
     }
 
-    private void loadItemsFromFile() {
+    public static Context getContext() {
+        return context;
+    }
+
+    private void loadItemsFromFile(Context context) {
         try {
-            FileInputStream fis = context.openFileInput(FILENAME1);
+            FileInputStream fis = context.openFileInput(FILENAME);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             Gson gson = new Gson();
 
             // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html 01-19 2016
             Type listType = new TypeToken<ArrayList<Item>>() {}.getType();
             allItems = gson.fromJson(in, listType);
+            System.out.printf("LOADING FROM FILE\n");
+
+            System.out.printf("%d\n", NavigationMainActivity.allItems.size());
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
@@ -157,9 +172,9 @@ public class NavigationMainActivity extends AppCompatActivity {
         }
     }
 
-    private void loadBidsFromFile() {
+    private void loadBidsFromFile(Context context) {
         try {
-            FileInputStream fis = openFileInput(FILENAME1);
+            FileInputStream fis = context.openFileInput(FILENAME1);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             Gson gson = new Gson();
 
@@ -184,6 +199,7 @@ public class NavigationMainActivity extends AppCompatActivity {
             Gson gson = new Gson();
             gson.toJson(allItems, out);
             out.flush();
+            System.out.println("saved all items into file");
             fos.close();
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
