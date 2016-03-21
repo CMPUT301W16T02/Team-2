@@ -5,19 +5,19 @@
 
     <Button
         android:id="@+id/AccInfo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Account Information" />
 
     <Button
         android:id="@+id/ItemList"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="My Things" />
 
     <Button
         android:id="@+id/BorrowList"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="My borrows" />
 

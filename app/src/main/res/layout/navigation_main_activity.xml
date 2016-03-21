@@ -5,18 +5,25 @@
 
     <Button
         android:id="@+id/EditProfile"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Edit Profile" />
     <Button
         android:id="@+id/MyItems"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="My Items" />
 
     <Button
+        android:id="@+id/MyBids"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Bids"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
         android:id="@+id/MyItemsWithBids"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="My Items With Bids" />
 <!--
@@ -28,20 +35,14 @@
 -->
     <Button
         android:id="@+id/MyBorrows"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="My Borrowings" />
-
-    <Button
-        android:id="@+id/MyBids"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My Bids" />
 
 
     <Button
         android:id="@+id/ShowAllItems"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Item Marketplace" />
 

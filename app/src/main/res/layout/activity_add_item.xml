@@ -7,7 +7,7 @@
     <EditText
         android:id="@+id/itemName"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="61dp"
         android:scrollbars="horizontal"
         android:inputType="text"
         android:hint="Item Name" />
@@ -15,7 +15,7 @@
     <EditText
         android:id="@+id/itemDesc"
         android:layout_width="fill_parent"
-        android:layout_height="200dp"
+        android:layout_height="62dp"
         android:scrollbars="horizontal"
         android:inputType="text"
         android:hint="Item Description" />
@@ -30,8 +30,9 @@
             android:layout_height="wrap_content"
             android:text="Add New Item"
             android:onClick="addItem"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/cancelButton" />
 
         <Button
             android:id="@+id/cancelButton"
@@ -39,8 +40,9 @@
             android:layout_height="wrap_content"
             android:text="Cancel"
             android:onClick="cancel"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
 </LinearLayout>
