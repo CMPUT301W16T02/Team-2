@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
     <item name="logInButton" type="id" />
     <item name="signUpButton" type="id" />
     <item name="usernameText" type="id" />
@@ -40,4 +41,8 @@
     <item name="EditProfileEmail" type="id" />
     <item name="EditProfileCity" type="id" />
     <item name="SaveButton" type="id" />
+=======
+    <item name="SignInInput" type="id" />
+    <item name="sign_in" type="id" />
+>>>>>>> master
 </resources>

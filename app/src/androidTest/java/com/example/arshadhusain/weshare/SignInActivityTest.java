@@ -10,7 +10,11 @@ import android.widget.EditText;
 /**
  * Created by hasan on 2016-03-12.
  */
+<<<<<<< HEAD
 public class SignInActivityTest extends ActivityInstrumentationTestCase2 {
+=======
+/*public class SignInActivityTest extends ActivityInstrumentationTestCase2 {
+>>>>>>> master
     private Button signinButton;
 
     public SignInActivityTest(){
@@ -60,4 +64,8 @@ public class SignInActivityTest extends ActivityInstrumentationTestCase2 {
     receiverActivity.finish();
 
 }
+<<<<<<< HEAD
 }
+=======
+}*/
+>>>>>>> master

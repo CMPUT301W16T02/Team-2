@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:background="#403b3b">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="48dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="WeShare"
+        android:id="@+id/textView4"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.04"
+        android:textStyle="bold"
+        android:textColor="#ffffff" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:src="@drawable/we_share"
+        android:contentDescription="wesharewelcome"
+        android:layout_weight="0.64" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.10" />
+
+    <EditText
+        android:id="@+id/SignInInput1"
+        android:layout_width="169dp"
+        android:hint="Username"
+        android:inputType="text"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#000000"
+        android:background="#ffffff">
+        <requestFocus />
+
+    </EditText>
+
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.04" />
+
+    <Button
+        android:id="@+id/SignInButton"
+        android:layout_width="167dp"
+        android:layout_height="37dp"
+        android:text="SIGN IN"
+        android:layout_gravity="center_horizontal"
+        android:background="#92d992"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OR"
+        android:id="@+id/textView3"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/main_create_account"
+        android:layout_width="167dp"
+        android:layout_height="37dp"
+        android:text="SIGN UP"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ffffff"
+        android:background="#8f8f8f" />
+
+
+</LinearLayout>
+
