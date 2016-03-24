@@ -20,6 +20,10 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 /**
  * Activity that allows user to create an account. A profile is
  * required to use this app.
@@ -38,7 +42,8 @@ public class CreateProfileActivity extends Activity{
     private EditText city;
     private ArrayList<Account> Accounts = new ArrayList<Account>();
     ArrayAdapter<Account> adapter;
-
+    HttpClient httpclient = new DefaultHttpClient();
+    HttpPost httppost = new HttpPost("http://www.yoursite.com/script.php");
 
 
     @Override
