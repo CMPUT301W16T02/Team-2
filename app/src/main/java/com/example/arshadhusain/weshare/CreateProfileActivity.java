@@ -20,9 +20,9 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
+//import org.apache.http.client.HttpClient;
+//import org.apache.http.client.methods.HttpPost;
+//import org.apache.http.impl.client.DefaultHttpClient;
 
 /**
  * Activity that allows user to create an account. A profile is
@@ -42,8 +42,8 @@ public class CreateProfileActivity extends Activity{
     private EditText city;
     private ArrayList<Account> Accounts = new ArrayList<Account>();
     ArrayAdapter<Account> adapter;
-    HttpClient httpclient = new DefaultHttpClient();
-    HttpPost httppost = new HttpPost("http://www.yoursite.com/script.php");
+    //HttpClient httpclient = new DefaultHttpClient();
+    //HttpPost httppost = new HttpPost("http://cmput301.softwareprocess.es:8080/");
 
 
     @Override
