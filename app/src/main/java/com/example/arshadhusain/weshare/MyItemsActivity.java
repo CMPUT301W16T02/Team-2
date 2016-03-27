@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  *  Activity shows a list of items that belong to the active user.
@@ -47,13 +48,8 @@ public class MyItemsActivity extends AppCompatActivity {
         myItemsList.setOnItemClickListener(onItemClickListener);
 
         myItems.clear();
-        for (int x=0; x<NavigationMainActivity.allItems.size(); x++) {
-            //System.out.println(NavigationMainActivity.allBids.get(x).getItem());
-            //System.out.printf("%s\n", NavigationMainActivity.allBids.get(x).getItem());
-            //System.out.printf("%s\n", NavigationMainActivity.allBids.get(x).getBidder());
-            //System.out.printf("%s\n", MyUsername);
+        /*for (int x=0; x<NavigationMainActivity.allItems.size(); x++) {
 
-            //System.out.printf("INSIDE ALLITEMS ARRAYLIST INTERATION\n");
             System.out.printf("allItems: %s MyUsername %s\n", NavigationMainActivity.allItems.get(x).getOwner(), MyUsername);
 
             if((NavigationMainActivity.allItems.get(x).getOwner()).equals(MyUsername))
@@ -64,6 +60,17 @@ public class MyItemsActivity extends AppCompatActivity {
                 myItems.add(ItemToCopy);
             }
 
+        }*/
+        ElasticSearchAppController.GetMyItemsTask getMyItemsTask = new ElasticSearchAppController.GetMyItemsTask();
+        getMyItemsTask.execute(MyUsername);
+
+        try {
+            myItems.addAll(getMyItemsTask.get());
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
         System.out.println("NUMBER OF FOUND BIDS FOR THIS USER");
 
