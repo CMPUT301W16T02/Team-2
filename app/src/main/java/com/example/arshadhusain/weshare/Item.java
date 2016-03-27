@@ -4,6 +4,8 @@ import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 
+import io.searchbox.annotations.JestId;
+
 /**
  * Item model class.
  * Defines setters and getters for item object.
@@ -12,6 +14,17 @@ import java.util.ArrayList;
  * @Version 1.0
  */
 public class Item {
+    @JestId
+    protected String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     private String name;
     private Integer status;
     private String description;

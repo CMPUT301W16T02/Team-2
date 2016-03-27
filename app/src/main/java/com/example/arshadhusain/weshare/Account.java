@@ -1,5 +1,7 @@
 package com.example.arshadhusain.weshare;
 
+import io.searchbox.annotations.JestId;
+
 /**
  * Model class for account. Defines setters and getters for 'account'
  *
@@ -8,6 +10,17 @@ package com.example.arshadhusain.weshare;
  **/
 
 public class Account {
+    @JestId
+    protected String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     private String username;
     private String email;
     private String city;
@@ -20,6 +33,8 @@ public class Account {
         this.city = city;
 
     }
+
+
 
     public void setUsername(String username) {
         this.username = username;

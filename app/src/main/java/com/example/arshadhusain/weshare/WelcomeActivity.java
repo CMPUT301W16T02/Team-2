@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * The first activity that starts. Displays two buttons.
@@ -60,7 +61,38 @@ public class WelcomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 setResult(RESULT_OK);
                 String UserName = username.getText().toString();
+
+                ElasticSearchAppController.GetAccountTask getAccountTask = new ElasticSearchAppController.GetAccountTask();
+                getAccountTask.execute(UserName);
                 try {
+                    Accounts.addAll(getAccountTask.get());
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+
+                if(Accounts.isEmpty())
+                {
+                    System.out.println("no user found");
+                    Toast.makeText(getApplicationContext(), "Username not found", Toast.LENGTH_LONG).show();
+                } else if (!(Accounts.isEmpty())) {
+                    Toast.makeText(getApplicationContext(), "Sign In Successful", Toast.LENGTH_LONG).show();
+
+                    Intent intent = new Intent(getApplicationContext(), NavigationMainActivity.class);
+                    intent.putExtra("Username", UserName);
+                    //startActivityForResult(intent, 1);
+                    startActivity(intent);
+
+                    setResult(RESULT_OK);
+                    finish();
+
+                }
+
+
+
+                /*try {
                     FileInputStream inputFile = openFileInput(UserName);
                     BufferedReader input = new BufferedReader(new InputStreamReader(inputFile));
 
@@ -75,10 +107,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
                     //Account account = new Account();
 
-            /*while (line != null) {
-                fuelList.add(line);
-                line = input.readLine();
-            }*/
+
 
                 } catch (FileNotFoundException e) {
                     // TODO Auto-generated catch block
@@ -103,11 +132,11 @@ public class WelcomeActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), NavigationMainActivity.class);
                     startActivity(intent);
                     intent.putExtra("Username", UserName);
-                    startActivityForResult(intent, 1);
+                    startActivityForResult(intent, 1); */
 
                     setResult(RESULT_OK);
-                    finish();
-                }
+                    //finish();
+                //}
             }
         });
 

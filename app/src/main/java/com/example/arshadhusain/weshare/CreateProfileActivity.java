@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,7 +19,18 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 
 /**
  * Activity that allows user to create an account. A profile is
@@ -38,7 +50,8 @@ public class CreateProfileActivity extends Activity{
     private EditText city;
     private ArrayList<Account> Accounts = new ArrayList<Account>();
     ArrayAdapter<Account> adapter;
-
+    HttpClient httpclient = new DefaultHttpClient();
+    HttpPost httppost = new HttpPost("http://cmput301.softwareprocess.es:8080/team2/users");
 
 
     @Override
@@ -47,12 +60,22 @@ public class CreateProfileActivity extends Activity{
         this.onCreateSetup();
         this.onCreateListeners();
 
+
     }
 
     /**
      * Method that sets up input text box usage.
      */
     public void onCreateSetup() {
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+
+                    .permitAll().build();
+
+            StrictMode.setThreadPolicy(policy);
+
+        }
         setContentView(R.layout.create_profile_activity);
         username = (EditText) findViewById(R.id.CreateProfileInput1);
         email = (EditText) findViewById(R.id.CreateProfileInput2);
@@ -76,10 +99,44 @@ public class CreateProfileActivity extends Activity{
                 String UserName = username.getText().toString();
                 String Email = email.getText().toString();
                 String City = city.getText().toString();
+
+                /*List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
+                nameValuePair.add(new BasicNameValuePair("username", UserName));
+                nameValuePair.add(new BasicNameValuePair("email", Email));
+                nameValuePair.add(new BasicNameValuePair("city", City));
+
+                try {
+                    httppost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+                    System.out.println(httppost.getURI());
+                } catch (UnsupportedEncodingException e)
+                {
+                    e.printStackTrace();
+                }
+
+                try {
+                    HttpResponse response = httpclient.execute(httppost);
+                    // write response to log
+                    System.out.println(response.getStatusLine().getStatusCode());
+                } catch (ClientProtocolException e) {
+                    // Log exception
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    // Log exception
+                    e.printStackTrace();
+                }*/
+
+
+
+
                 Account account = new Account(UserName, Email, City);
                 Accounts.add(account);
                 //adapter.notifyDataSetChanged();
-                System.out.println("Before save\n");
+
+                ElasticSearchAppController.AddAccountTask addAccountTask = new ElasticSearchAppController.AddAccountTask();
+                addAccountTask.execute(account);
+
+
+               /* System.out.println("Before save\n");
 
                 try {
 
@@ -118,7 +175,7 @@ public class CreateProfileActivity extends Activity{
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-                System.out.println("After save\n");
+                System.out.println("After save\n"); */
 
 
 

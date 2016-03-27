@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 /**
  * <p>AddItemActivity allows user to add an item. Passes intent of user and
  * provides user interface for input</p>
@@ -22,6 +24,7 @@ public class AddItemActivity extends AppCompatActivity {
     private EditText description;
     private String owner = "Username";
     public Context context1;
+    private ArrayList<Item> items = new ArrayList<Item>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,10 +77,14 @@ public class AddItemActivity extends AppCompatActivity {
 
         Item newItem = new Item(itemName, itemDesc, owner);
 
-        NavigationMainActivity.allItems.add(newItem);
+
+        /*NavigationMainActivity.allItems.add(newItem);
         NavigationMainActivity.saveInFile(context1);
-        System.out.printf("%d\n", NavigationMainActivity.allItems.size());
+        System.out.printf("%d\n", NavigationMainActivity.allItems.size());*/
         //NavigationMainActivity.addAndSaveToItems(newItem);
+
+        ElasticSearchAppController.AddItemTask addItemTask = new ElasticSearchAppController.AddItemTask();
+        addItemTask.execute(newItem);
         setResult(RESULT_OK);
         finish();
     }
