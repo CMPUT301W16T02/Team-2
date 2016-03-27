@@ -19,7 +19,7 @@ public class AddItemActivityTest extends ActivityInstrumentationTestCase2 {
 
 
     public void testAddItem() {
-        Account Account1 = new Account("HasanBadran", "badran@gmail.com", "Edmonton");
+        Account account = new Account("HasanBadran", "badran@gmail.com", "Edmonton");
 
         Item item = new Item("microwave", "Like new", "HasanBadran");
         ArrayList<Item> items = new ArrayList<Item>();
@@ -29,13 +29,10 @@ public class AddItemActivityTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testAddItemActivity() {
-        Item hello = new Item("microwave", "Like new", "HassanBadran");
+        Item newItem = new Item("microwave", "Like new", "HassanBadran");
 
-        hello.setName("ArshadHusain");
-
-
-        assertTrue(hello.getName().equals("ArshadHusain"));
-
+        newItem.setName("ArshadHusain");
+        assertTrue(newItem.getName().equals("ArshadHusain"));
 
     }
 

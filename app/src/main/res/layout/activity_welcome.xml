@@ -36,7 +36,7 @@
 
     <EditText
         android:id="@+id/SignInInput1"
-        android:layout_width="169dp"
+        android:layout_width="167dp"
         android:hint="Username"
         android:inputType="text"
         android:layout_height="wrap_content"
