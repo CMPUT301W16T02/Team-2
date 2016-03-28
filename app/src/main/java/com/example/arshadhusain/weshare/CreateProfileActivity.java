@@ -22,6 +22,7 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -49,6 +50,8 @@ public class CreateProfileActivity extends Activity{
     private EditText email;
     private EditText city;
     private ArrayList<Account> Accounts = new ArrayList<Account>();
+    private ArrayList<Account> duplicateAccounts = new ArrayList<Account>();
+
     ArrayAdapter<Account> adapter;
     HttpClient httpclient = new DefaultHttpClient();
     HttpPost httppost = new HttpPost("http://cmput301.softwareprocess.es:8080/team2/users");
@@ -129,11 +132,31 @@ public class CreateProfileActivity extends Activity{
 
 
                 Account account = new Account(UserName, Email, City);
+                ElasticSearchAppController.GetAccountTask getAccountTask = new ElasticSearchAppController.GetAccountTask();
+                getAccountTask.execute(UserName);
+                try {
+                    duplicateAccounts.addAll(getAccountTask.get());
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+
+                int ifDuplicate = duplicateAccounts.get(0).getUsername().compareToIgnoreCase(account.getUsername());
+                if(ifDuplicate == 0) {
+                    Toast.makeText(getApplicationContext(), "Username already exists", Toast.LENGTH_LONG).show();
+
+                } else {
+                    ElasticSearchAppController.AddAccountTask addAccountTask = new ElasticSearchAppController.AddAccountTask();
+                    addAccountTask.execute(account);
+                }
+
+
                 Accounts.add(account);
                 //adapter.notifyDataSetChanged();
 
-                ElasticSearchAppController.AddAccountTask addAccountTask = new ElasticSearchAppController.AddAccountTask();
-                addAccountTask.execute(account);
+
 
 
                /* System.out.println("Before save\n");

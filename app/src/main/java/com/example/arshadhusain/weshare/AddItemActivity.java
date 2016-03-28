@@ -77,11 +77,15 @@ public class AddItemActivity extends AppCompatActivity {
 
         Item newItem = new Item(itemName, itemDesc, owner);
 
-
         /*NavigationMainActivity.allItems.add(newItem);
         NavigationMainActivity.saveInFile(context1);
         System.out.printf("%d\n", NavigationMainActivity.allItems.size());*/
         //NavigationMainActivity.addAndSaveToItems(newItem);
+
+
+
+
+
 
         ElasticSearchAppController.AddItemTask addItemTask = new ElasticSearchAppController.AddItemTask();
         addItemTask.execute(newItem);
