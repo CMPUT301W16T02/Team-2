@@ -167,11 +167,15 @@ public class EditItemActivity extends AppCompatActivity {
      * @param view
      */
     public void deleteItem(View view){
-        NavigationMainActivity.allItems.remove(itemToEdit);
+        //NavigationMainActivity.allItems.remove(itemToEdit);
 
-        NavigationMainActivity.saveInFile(context1);
-        System.out.printf("%d\n", NavigationMainActivity.allItems.size());
+        //NavigationMainActivity.saveInFile(context1);
+        //System.out.printf("%d\n", NavigationMainActivity.allItems.size());
+        //Intent intent = new Intent(this, MyItemsActivity.class);
 
+        ElasticSearchAppController.DeleteItemTask deleteItemTask = new ElasticSearchAppController.DeleteItemTask();
+        deleteItemTask.execute(itemToEdit);
+        //startActivityForResult(intent, 1);
         setResult(RESULT_OK);
         finish();
     }

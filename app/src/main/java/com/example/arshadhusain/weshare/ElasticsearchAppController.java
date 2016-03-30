@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
@@ -151,6 +152,33 @@ public class ElasticSearchAppController {
                     DocumentResult execute = client.execute(index);
                     if(execute.isSucceeded()) {
                         item.setId(execute.getId());
+                    } else {
+                        Log.e("TODO", "Account add failed");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+        }
+    }
+
+    public static class DeleteItemTask extends AsyncTask<Item,Void,Void> {
+
+        @Override
+        protected Void doInBackground(Item... params) {
+            verifyConfig();
+
+            for(Item item : params) {
+                //Index index = new Index.Builder(item).index("team2").type("items").build();
+
+                Delete delete = new Delete.Builder(item.getId()).index("team2").type("items").build();
+                try {
+                    DocumentResult execute = client.execute(delete);
+                    if(execute.isSucceeded()) {
+                        //item.setId(execute.getId());
+                        System.out.println("Item deleted");
                     } else {
                         Log.e("TODO", "Account add failed");
                     }
