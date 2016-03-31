@@ -23,6 +23,8 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
 import android.widget.ArrayAdapter;
 
 import com.google.gson.Gson;
@@ -96,7 +98,7 @@ public class MainItemListActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             selectedItemPos = position;
-            if (NavigationMainActivity.allItems.get(selectedItemPos).getOwner().equals(activeUser)){
+            if (allItems.get(selectedItemPos).getOwner().equals(activeUser)){
                 editItem();
             } else {
                 viewItemInfo();
@@ -168,8 +170,21 @@ public class MainItemListActivity extends AppCompatActivity {
         //context = NavigationMainActivity.getContext();
         //loadFromFile(context);
         //allItems = NavigationMainActivity.allItems;
+        allItems.clear();
+        ElasticSearchAppController.GetMyItemsTask getMyItemsTask = new ElasticSearchAppController.GetMyItemsTask();
+        getMyItemsTask.execute("");
+
+        try {
+            allItems.addAll(getMyItemsTask.get());
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
         adapter = new ArrayAdapter<Item>(this,
-                R.layout.list_item, NavigationMainActivity.allItems);
+                R.layout.list_item, allItems);
         allItemsList.setAdapter(adapter);
     }
 

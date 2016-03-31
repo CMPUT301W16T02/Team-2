@@ -103,8 +103,14 @@ public class ElasticSearchAppController {
             ArrayList<Item> items = new ArrayList<Item>();
 
             String search_string;
+            if(params[0] == "") {
+                search_string = "{\"query\":{\"match_all\":{}}}";
+            } else {
+                search_string = "{\"query\":{\"match\":{ \"owner\" : \"" +params[0]+ "\"}}}";
 
-            search_string = "{\"query\":{\"match\":{ \"owner\" : \"" +params[0]+ "\"}}}";
+            }
+
+
 
 
             Search search = new Search.Builder(search_string).addIndex("team2").addType("items").build();
@@ -164,6 +170,32 @@ public class ElasticSearchAppController {
         }
     }
 
+    public static class EditItemTask extends AsyncTask<Item,Void,Void> {
+
+        @Override
+        protected Void doInBackground(Item... params) {
+            verifyConfig();
+
+            for(Item item : params) {
+                Index index = new Index.Builder(item).index("team2").type("items").build();
+
+                try {
+                    DocumentResult execute = client.execute(index);
+                    if(execute.isSucceeded()) {
+                        System.out.println("Update successful");
+                    } else {
+                        Log.e("TODO", "Item Edit failed");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+        }
+    }
+
+
     public static class DeleteItemTask extends AsyncTask<Item,Void,Void> {
 
         @Override
@@ -181,31 +213,6 @@ public class ElasticSearchAppController {
                         System.out.println("Item deleted");
                     } else {
                         Log.e("TODO", "Account add failed");
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            return null;
-        }
-    }
-
-    public static class EditItemTask extends AsyncTask<Item,Void,Void> {
-
-        @Override
-        protected Void doInBackground(Item... params) {
-            verifyConfig();
-
-            for(Item item : params) {
-                Index index = new Index.Builder(item).index("team2").type("items").build();
-
-                try {
-                    DocumentResult execute = client.execute(index);
-                    if(execute.isSucceeded()) {
-                        System.out.println("Update successful");
-                    } else {
-                        Log.e("TODO", "Item Edit failed");
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
