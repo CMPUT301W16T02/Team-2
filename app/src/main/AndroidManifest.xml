@@ -2,7 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.arshadhusain.weshare">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
 
     <application
         android:allowBackup="true"
@@ -32,11 +40,13 @@
         <activity android:name=".MyItemListWithBids" />
         <activity android:name=".ItemInfoActivity" />
         <activity android:name=".SearchResultsActivity" />
-        <activity android:name=".BidAcceptActivity"></activity>
+        <activity android:name=".BidAcceptActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDv0TMGnPv4LAl2Fx2xEO-xbIkys1cpFo4"/>
+            android:value="AIzaSyDv0TMGnPv4LAl2Fx2xEO-xbIkys1cpFo4" />
+
+        <activity android:name=".SetLocationActivity"></activity>
     </application>
 
 </manifest>
