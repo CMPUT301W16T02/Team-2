@@ -72,7 +72,7 @@ public class NavigationMainActivity extends AppCompatActivity {
         context = getApplicationContext();
         context1 = getApplicationContext();
 
-        loadItemsFromFile(context);
+        //loadItemsFromFile(context);
         loadBidsFromFile(context1);
 
 
@@ -96,17 +96,17 @@ public class NavigationMainActivity extends AppCompatActivity {
     public void onCreateSetup() {
         setContentView(R.layout.navigation_main_activity);
         bidNotify.clear();
-        for (int x=0; x<NavigationMainActivity.allBids.size(); x++) {
+        /*for (int x=0; x<NavigationMainActivity.allBids.size(); x++) {
             //System.out.println(NavigationMainActivity.allBids.get(x).getItem());
             //System.out.printf("%s\n", NavigationMainActivity.allBids.get(x).getItem());
             System.out.printf("%s\n", NavigationMainActivity.allBids.get(x).getBidder());
             System.out.printf("%s\n", MyUsername);
 
 
-            if((NavigationMainActivity.allBids.get(x).getItemOwner()).equals(MyUsername))
+            if((allBids.get(x).getItemOwner()).equals(MyUsername))
             {
 
-                Bid bidToCopy = NavigationMainActivity.allBids.get(x);
+                Bid bidToCopy = allBids.get(x);
                 System.out.printf("%s\n", bidToCopy.getItem());
                 bidNotify.add(bidToCopy);
             }
@@ -115,7 +115,7 @@ public class NavigationMainActivity extends AppCompatActivity {
         if(!bidNotify.isEmpty()) {
             Toast.makeText(getApplicationContext(), "You've got new bid requests!", Toast.LENGTH_LONG).show();
 
-        }
+        }*/
     }
 
     /**
@@ -259,7 +259,7 @@ public class NavigationMainActivity extends AppCompatActivity {
      * @param context the context of the calling activity.
      */
     private void loadBidsFromFile(Context context) {
-        try {
+        /*try {
             FileInputStream fis = context.openFileInput(FILENAME1);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             Gson gson = new Gson();
@@ -278,7 +278,15 @@ public class NavigationMainActivity extends AppCompatActivity {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             throw new RuntimeException();
-        }
+        }*/
+
+
+        /*for (int x=0; x<allBids.size(); x++) {
+            System.out.println(allBids.get(x).getItem());
+
+
+        }*/
+
     }
 
     /**
@@ -323,7 +331,7 @@ public class NavigationMainActivity extends AppCompatActivity {
 
     }
     public static void saveBidsToFile(Context context) {
-        try {
+        /*try {
             FileOutputStream fos = context.openFileOutput(FILENAME1,
                     0);
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
@@ -337,7 +345,8 @@ public class NavigationMainActivity extends AppCompatActivity {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             throw new RuntimeException();
-        }
+        }*/
+
 
     }
 
