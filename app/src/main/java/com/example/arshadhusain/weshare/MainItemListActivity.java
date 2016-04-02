@@ -183,6 +183,8 @@ public class MainItemListActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+
+
         adapter = new ArrayAdapter<Item>(this,
                 R.layout.list_item, allItems);
         allItemsList.setAdapter(adapter);
