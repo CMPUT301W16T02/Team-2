@@ -184,6 +184,7 @@ public class MainItemListActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+
         for(int i = 0; i < NavigationMainActivity.allItems.size(); i++)
         {
             if(NavigationMainActivity.allItems.get(i).getOwner().equals(activeUser))

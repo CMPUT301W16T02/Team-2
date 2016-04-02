@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Allows user to edit item name and description.
@@ -29,8 +30,9 @@ public class EditItemActivity extends AppCompatActivity {
 
     private EditText name;
     private EditText description;
-    ArrayList<Bid> bids;
     private ListView bidsList;
+    public static ArrayList<Bid> bidsOnItem = new ArrayList<Bid>();
+
 
     private int itemPos;
     private Item itemToEdit;
@@ -63,7 +65,7 @@ public class EditItemActivity extends AppCompatActivity {
 
         name = (EditText) findViewById(R.id.itemName);
         description = (EditText) findViewById(R.id.itemDesc);
-        //bidsList = (ListView) findViewById(R.id.bidsList);
+        bidsList = (ListView) findViewById(R.id.bidsList);
         itemToEdit = MyItemsActivity.myItems.get(itemPos);
 
 
@@ -115,7 +117,7 @@ public class EditItemActivity extends AppCompatActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             selectedItemPos = position;
 
-            viewBid(bids.get(selectedItemPos));
+            viewBid(bidsOnItem.get(selectedItemPos));
 
         }
     };
@@ -130,11 +132,11 @@ public class EditItemActivity extends AppCompatActivity {
             activeUser = intent.getStringExtra("activeUser");
         }
         //THIS COMMENTED CODE IS VERY IMPORTANT
-        /*bids = getItemsBids();
+        getItemsBids();
         ArrayAdapter<Bid> adapter = new ArrayAdapter<Bid>(this,
-                R.layout.list_item, bids);
+                R.layout.list_item, bidsOnItem);
         bidsList.setAdapter(adapter);
-        bidsList.setOnItemClickListener(onItemClickListener);*/
+        bidsList.setOnItemClickListener(onItemClickListener);
     }
 
     /**
@@ -197,11 +199,17 @@ public class EditItemActivity extends AppCompatActivity {
 
         NavigationMainActivity.saveInFile(context1);
 
+        //PUT REQUEST
+
+        ElasticSearchAppController.EditItemTask editItemTask = new ElasticSearchAppController.EditItemTask();
+        editItemTask.execute(itemToEdit);
+
         setResult(RESULT_OK);
         finish();
     }
 
-    public ArrayList<Bid> getItemsBids() {
+    public void getItemsBids() {
+        /*
         ArrayList<Bid> itemBids = new ArrayList<Bid>();
         for(int i=0; i<NavigationMainActivity.allBids.size(); i++){
             String itemOwner = NavigationMainActivity.allBids.get(i).getItemOwner();
@@ -210,7 +218,35 @@ public class EditItemActivity extends AppCompatActivity {
                 itemBids.add(NavigationMainActivity.allBids.get(i));
             }
         }
-        return itemBids;
+        return itemBids;*/
+        bidsOnItem.clear();
+        ArrayList<Bid> allBids = new ArrayList<Bid>();
+
+        ElasticSearchAppController.GetBidsTask getBidsTask = new ElasticSearchAppController.GetBidsTask();
+        getBidsTask.execute();
+
+        try {
+            allBids.addAll(getBidsTask.get());
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        for (Bid bid : allBids) {
+            if (bid.getItem().equals(itemToEdit.getName())){
+                bidsOnItem.add(bid);
+            }
+        }
+
+        System.out.println("NUMBER OF FOUND BIDS FOR THIS ITEM");
+
+        System.out.printf("%d\n", bidsOnItem.size());
+
+        for (int x=0; x<bidsOnItem.size(); x++) {
+            System.out.println(bidsOnItem.get(x).getBidder());
+        }
     }
 
     public void viewBid(Bid bidToView){

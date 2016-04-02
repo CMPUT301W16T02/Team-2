@@ -135,8 +135,14 @@ public class ItemInfoActivity extends AppCompatActivity {
             addBidTask.execute(newBid);
 
             itemToView.setStatus(1);
+            status.setText("Item Status: " + itemToView.statusToString());
 
             //NavigationMainActivity.saveInFile(context2);
+
+            //PUT REQUEST
+
+            ElasticSearchAppController.EditItemTask editItemTask = new ElasticSearchAppController.EditItemTask();
+            editItemTask.execute(itemToView);
 
 
             Toast.makeText(getApplicationContext(), "Bid added!", Toast.LENGTH_LONG).show();

@@ -76,10 +76,9 @@ public class NavigationMainActivity extends AppCompatActivity {
         loadBidsFromFile(context1);
 
 
-
         Intent intent = getIntent();
 
-        if(intent.hasExtra("Username")) {
+        if (intent.hasExtra("Username")) {
             MyUsername = intent.getStringExtra("Username");
         }
 
@@ -122,13 +121,12 @@ public class NavigationMainActivity extends AppCompatActivity {
      * Method connects to all the buttons and sets up their usage.
      */
     public void onCreateListeners() {
-        Button EditProfile = (Button)findViewById(R.id.EditProfile);
-        Button MyItems = (Button)findViewById(R.id.MyItems);
-        Button MyBorrows = (Button)findViewById(R.id.MyBorrows);
-        Button ItemMarketplace = (Button)findViewById(R.id.ShowAllItems);
-        Button MyBids = (Button)findViewById(R.id.MyBids);
-        Button MyItemsWithBids = (Button)findViewById(R.id.MyItemsWithBids);
-
+        Button EditProfile = (Button) findViewById(R.id.EditProfile);
+        Button MyItems = (Button) findViewById(R.id.MyItems);
+        Button MyBorrows = (Button) findViewById(R.id.MyBorrows);
+        Button ItemMarketplace = (Button) findViewById(R.id.ShowAllItems);
+        Button MyBids = (Button) findViewById(R.id.MyBids);
+        Button MyItemsWithBids = (Button) findViewById(R.id.MyItemsWithBids);
 
 
         EditProfile.setOnClickListener(new View.OnClickListener() {
@@ -183,7 +181,6 @@ public class NavigationMainActivity extends AppCompatActivity {
         });
 
 
-
         MyBorrows.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -230,6 +227,7 @@ public class NavigationMainActivity extends AppCompatActivity {
 
     /**
      * Method loads the list of all items from the local save file.
+     *
      * @param context the context of the calling activity.
      */
     private void loadItemsFromFile(Context context) {
@@ -239,7 +237,8 @@ public class NavigationMainActivity extends AppCompatActivity {
             Gson gson = new Gson();
 
             // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html 01-19 2016
-            Type listType = new TypeToken<ArrayList<Item>>() {}.getType();
+            Type listType = new TypeToken<ArrayList<Item>>() {
+            }.getType();
             allItems = gson.fromJson(in, listType);
             System.out.printf("LOADING ITEMS FROM FILE\n");
 
@@ -256,6 +255,7 @@ public class NavigationMainActivity extends AppCompatActivity {
 
     /**
      * Method loads the list of all bids from the local save file.
+     *
      * @param context the context of the calling activity.
      */
     private void loadBidsFromFile(Context context) {
@@ -291,6 +291,7 @@ public class NavigationMainActivity extends AppCompatActivity {
 
     /**
      * saves the list of all items to the local save file.
+     *
      * @param context the context of the calling activity.
      */
     public static void saveInFile(Context context) {
@@ -322,14 +323,15 @@ public class NavigationMainActivity extends AppCompatActivity {
      * Method adds an item to the list of all items and saves to the local
      * save file.
      *
-     * @deprecated
      * @param newItem the item to be added
+     * @deprecated
      */
     public static void addAndSaveToItems(Item newItem) {
         NavigationMainActivity.allItems.add(newItem);
         saveInFile(context);
 
     }
+
     public static void saveBidsToFile(Context context) {
         /*try {
             FileOutputStream fos = context.openFileOutput(FILENAME1,
@@ -359,4 +361,5 @@ public class NavigationMainActivity extends AppCompatActivity {
             saveInFile();
         }
     }*/
+
 }
