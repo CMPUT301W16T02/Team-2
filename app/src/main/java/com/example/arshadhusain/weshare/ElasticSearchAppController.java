@@ -91,6 +91,32 @@ public class ElasticSearchAppController {
         }
     }
 
+    public static class EditAccountTask extends AsyncTask<Account,Void,Void> {
+
+        @Override
+        protected Void doInBackground(Account... params) {
+            verifyConfig();
+
+            for(Account account : params) {
+                Index index = new Index.Builder(account).index("team2").type("users").build();
+
+                try {
+                    DocumentResult execute = client.execute(index);
+                    if(execute.isSucceeded()) {
+                        System.out.println("Update successful");
+                    } else {
+                        Log.e("TODO", "Account Edit failed");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+        }
+    }
+
+
     public static class GetMyItemsTask extends AsyncTask<String,Void,ArrayList<Item>> {
 
         public List<Item> foundItems;

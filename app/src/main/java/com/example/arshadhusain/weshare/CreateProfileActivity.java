@@ -143,7 +143,12 @@ public class CreateProfileActivity extends Activity{
                     e.printStackTrace();
                 }
 
-                int ifDuplicate = duplicateAccounts.get(0).getUsername().compareToIgnoreCase(account.getUsername());
+                int ifDuplicate;
+                if (duplicateAccounts.size() != 0) {
+                    ifDuplicate = duplicateAccounts.get(0).getUsername().compareToIgnoreCase(account.getUsername());
+                } else {
+                    ifDuplicate = 1;
+                }
                 if(ifDuplicate == 0) {
                     Toast.makeText(getApplicationContext(), "Username already exists", Toast.LENGTH_LONG).show();
 
