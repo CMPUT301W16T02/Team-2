@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,9 +40,8 @@ public class ItemInfoActivity extends AppCompatActivity {
     private TextView owner;
     private TextView status;
     private TextView description;
-
+    private ImageView image;
     private ImageButton pictureButton;
-    private Bitmap thumbnail;
 
     static final int REQUEST_IMAGE_CAPTURE = 1234;
 
@@ -75,12 +75,16 @@ public class ItemInfoActivity extends AppCompatActivity {
 
         itemToView = NavigationMainActivity.allItems.get(itemPos);
 
+        Bitmap thumbnail = itemToView.getThumbnail();
+
         name = (TextView) findViewById(R.id.itemName);
         name.setText(itemToView.getName());
         owner = (TextView) findViewById(R.id.itemOwner);
         owner.setText(itemToView.getOwner());
         description = (TextView) findViewById(R.id.itemDesc);
         description.setText(itemToView.getDescription());
+        image = (ImageView) findViewById(R.id.pictureButton);
+        pictureButton.setImageBitmap(thumbnail);
         status = (TextView) findViewById(R.id.itemStatus);
         status.setText("Item Status: " + itemToView.statusToString());
 

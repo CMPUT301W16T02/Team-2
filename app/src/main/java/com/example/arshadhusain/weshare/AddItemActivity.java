@@ -100,13 +100,11 @@ public class AddItemActivity extends AppCompatActivity {
         System.out.printf("%d\n", NavigationMainActivity.allItems.size());*/
         //NavigationMainActivity.addAndSaveToItems(newItem);
 
-
-
-
-
-
         ElasticSearchAppController.AddItemTask addItemTask = new ElasticSearchAppController.AddItemTask();
         addItemTask.execute(newItem);
+
+        pictureButton.setImageResource(android.R.color.transparent);
+        thumbnail = null;
         setResult(RESULT_OK);
         finish();
     }

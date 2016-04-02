@@ -47,6 +47,16 @@ public class Item {
         this.borrower = "";
     }
 
+    public Item(String name, String description, String owner, Bitmap thumbnail){
+        this.name = name;
+        this.status = 0;
+        this.description = description;
+        this.listBid = new ArrayList<Bid>();
+        this.owner = owner;
+        this.borrower = "";
+        this.thumbnail = thumbnail;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -128,7 +138,7 @@ public class Item {
             thumbnail = newThumbnail;
 
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            newThumbnail.compress(Bitmap.CompressFormat.PNG, 65536, byteArrayOutputStream);
+            newThumbnail.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
 
             byte[] b = byteArrayOutputStream.toByteArray();
             thumbnailBase64 = Base64.encodeToString(b, Base64.DEFAULT);
@@ -136,11 +146,10 @@ public class Item {
     }
 
     public Bitmap getThumbnail(){
-        if (thumbnail == null && thumbnailBase64 != null) {
+        if (thumbnail == null && thumbnailBase64 != null){
             byte[] decodeString = Base64.decode(thumbnailBase64, Base64.DEFAULT);
             thumbnail = BitmapFactory.decodeByteArray(decodeString, 0, decodeString.length);
         }
         return thumbnail;
     }
-
 }
