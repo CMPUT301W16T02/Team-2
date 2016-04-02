@@ -46,7 +46,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDv0TMGnPv4LAl2Fx2xEO-xbIkys1cpFo4" />
 
-        <activity android:name=".SetLocationActivity"></activity>
     </application>
 
 </manifest>
