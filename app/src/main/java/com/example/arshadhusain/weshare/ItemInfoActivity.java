@@ -136,12 +136,15 @@ public class ItemInfoActivity extends AppCompatActivity {
         } else {
             Bid newBid = new Bid(UserName, doubleUserName, ItemName, ItemOwner, ItemDescription);
             //NavigationMainActivity.allItems.add(newItem);
-            NavigationMainActivity.allBids.add(newBid);
-            NavigationMainActivity.saveBidsToFile(context2);
+            /*NavigationMainActivity.allBids.add(newBid);
+            NavigationMainActivity.saveBidsToFile(context2);*/
+
+            ElasticSearchAppController.AddBidTask addBidTask = new ElasticSearchAppController.AddBidTask();
+            addBidTask.execute(newBid);
 
             itemToView.setStatus(1);
 
-            NavigationMainActivity.saveInFile(context2);
+            //NavigationMainActivity.saveInFile(context2);
 
 
             Toast.makeText(getApplicationContext(), "Bid added!", Toast.LENGTH_LONG).show();

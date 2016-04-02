@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
@@ -102,8 +103,14 @@ public class ElasticSearchAppController {
             ArrayList<Item> items = new ArrayList<Item>();
 
             String search_string;
+            if(params[0] == "") {
+                search_string = "{\"query\":{\"match_all\":{}}}";
+            } else {
+                search_string = "{\"query\":{\"match\":{ \"owner\" : \"" +params[0]+ "\"}}}";
 
-            search_string = "{\"query\":{\"match\":{ \"owner\" : \"" +params[0]+ "\"}}}";
+            }
+
+
 
 
             Search search = new Search.Builder(search_string).addIndex("team2").addType("items").build();
@@ -136,6 +143,8 @@ public class ElasticSearchAppController {
 
 
 
+
+
     public static class AddItemTask extends AsyncTask<Item,Void,Void> {
 
         @Override
@@ -158,6 +167,134 @@ public class ElasticSearchAppController {
             }
 
             return null;
+        }
+    }
+
+    public static class EditItemTask extends AsyncTask<Item,Void,Void> {
+
+        @Override
+        protected Void doInBackground(Item... params) {
+            verifyConfig();
+
+            for(Item item : params) {
+                Index index = new Index.Builder(item).index("team2").type("items").build();
+
+                try {
+                    DocumentResult execute = client.execute(index);
+                    if(execute.isSucceeded()) {
+                        System.out.println("Update successful");
+                    } else {
+                        Log.e("TODO", "Item Edit failed");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+        }
+    }
+
+
+    public static class DeleteItemTask extends AsyncTask<Item,Void,Void> {
+
+        @Override
+        protected Void doInBackground(Item... params) {
+            verifyConfig();
+
+            for(Item item : params) {
+                //Index index = new Index.Builder(item).index("team2").type("items").build();
+
+                Delete delete = new Delete.Builder(item.getId()).index("team2").type("items").build();
+                try {
+                    DocumentResult execute = client.execute(delete);
+                    if(execute.isSucceeded()) {
+                        //item.setId(execute.getId());
+                        System.out.println("Item deleted");
+                    } else {
+                        Log.e("TODO", "Account add failed");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+        }
+    }
+
+    public static class AddBidTask extends AsyncTask<Bid,Void,Void> {
+
+        @Override
+        protected Void doInBackground(Bid... params) {
+            verifyConfig();
+
+            for(Bid bid : params) {
+                Index index = new Index.Builder(bid).index("team2").type("bids").build();
+
+                try {
+                    DocumentResult execute = client.execute(index);
+                    if(execute.isSucceeded()) {
+                        bid.setId(execute.getId());
+                    } else {
+                        Log.e("TODO", "Account add failed");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+        }
+    }
+
+    public static class GetBidsTask extends AsyncTask<Bid,Void,ArrayList<Bid>> {
+
+        public List<Bid> foundBids;
+
+        @Override
+        protected ArrayList<Bid> doInBackground(Bid... params) {
+            verifyConfig();
+
+            // Hold (eventually) the tweets that we get back from Elasticsearch
+            ArrayList<Bid> bids = new ArrayList<Bid>();
+
+            String search_string;
+            //if(params[0] == "") {
+            search_string = "{\"query\":{\"match_all\":{}}}";
+            //} else {
+                //search_string = "{\"query\":{\"match\":{ \"owner\" : \"" +params[0]+ "\"}}}";
+
+            //}
+
+
+
+
+            Search search = new Search.Builder(search_string).addIndex("team2").addType("bids").build();
+
+            System.out.println(search.toString());
+            try {
+                SearchResult execute = client.execute(search);
+                System.out.println(execute.getResponseCode());
+                if(execute.isSucceeded()) {
+
+                    foundBids = execute.getSourceAsObjectList(Bid.class);
+                    if(foundBids.isEmpty())
+                    {
+                        System.out.println("no user found");
+
+                    }
+
+                    bids.addAll(foundBids);
+                    System.out.println("Username found");
+                } else {
+                    Log.i("TODO", "Search was unsuccessful, do something!");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return bids;
         }
     }
 

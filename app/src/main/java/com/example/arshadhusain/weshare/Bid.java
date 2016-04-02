@@ -1,6 +1,8 @@
 
 package com.example.arshadhusain.weshare;
 
+import io.searchbox.annotations.JestId;
+
 /**
  * Bid Model class defines setters and getters for the "bid" item
  *
@@ -9,6 +11,17 @@ package com.example.arshadhusain.weshare;
  */
 
 public class Bid {
+    @JestId
+    protected String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     private String bidder;  //User placing the bid
     private Double amount;  //Bid amount
     private String item;    //Item bid being place on

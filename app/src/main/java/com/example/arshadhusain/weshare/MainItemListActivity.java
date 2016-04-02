@@ -23,6 +23,8 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
 import android.widget.ArrayAdapter;
 
 import com.google.gson.Gson;
@@ -42,6 +44,8 @@ public class MainItemListActivity extends AppCompatActivity {
     private ListView allItemsList;
 
     public static ArrayList<Item> allItems = new ArrayList<Item>();
+    public static ArrayList<Item> allItemsWithoutActiveUser = new ArrayList<Item>();
+
     public ArrayAdapter<Item> adapter;
 
 
@@ -168,6 +172,39 @@ public class MainItemListActivity extends AppCompatActivity {
         //context = NavigationMainActivity.getContext();
         //loadFromFile(context);
         //allItems = NavigationMainActivity.allItems;
+        NavigationMainActivity.allItems.clear();
+        ElasticSearchAppController.GetMyItemsTask getMyItemsTask = new ElasticSearchAppController.GetMyItemsTask();
+        getMyItemsTask.execute("");
+
+        try {
+            NavigationMainActivity.allItems.addAll(getMyItemsTask.get());
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        for(int i = 0; i < NavigationMainActivity.allItems.size(); i++)
+        {
+            if(NavigationMainActivity.allItems.get(i).getOwner().equals(activeUser))
+            {
+                NavigationMainActivity.allItems.remove(i);
+
+            }
+        }
+        int j = 0;
+        for(int i = 0; i < NavigationMainActivity.allItems.size(); i++)
+        {
+            /*if(allItems.)
+            {
+                System.out.println("POOP AND SCOOP");
+            }*/
+            System.out.println(NavigationMainActivity.allItems.get(i).toString());
+        }
+        //allItems.trimToSize();
+
+
+
         adapter = new ArrayAdapter<Item>(this,
                 R.layout.list_item, NavigationMainActivity.allItems);
         allItemsList.setAdapter(adapter);

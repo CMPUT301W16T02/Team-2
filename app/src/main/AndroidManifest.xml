@@ -20,10 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SignInActivity"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".CreateProfileActivity" />
         <activity android:name=".MainItemListActivity" />
         <activity android:name=".AddItemActivity" />
@@ -37,6 +33,10 @@
         <activity android:name=".ItemInfoActivity" />
         <activity android:name=".SearchResultsActivity" />
         <activity android:name=".BidAcceptActivity"></activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDv0TMGnPv4LAl2Fx2xEO-xbIkys1cpFo4"/>
     </application>
 
 </manifest>

@@ -59,15 +59,16 @@ public class EditItemActivity extends AppCompatActivity {
             activeUser = intent.getStringExtra("activeUser");
         }*/
 
-        itemToEdit = NavigationMainActivity.allItems.get(itemPos);
+        //itemToEdit = NavigationMainActivity.allItems.get(itemPos);
 
         name = (EditText) findViewById(R.id.itemName);
         description = (EditText) findViewById(R.id.itemDesc);
-        bidsList = (ListView) findViewById(R.id.bidsList);
+        //bidsList = (ListView) findViewById(R.id.bidsList);
+        itemToEdit = MyItemsActivity.myItems.get(itemPos);
+
 
         name.setText(itemToEdit.getName());
         description.setText(itemToEdit.getDescription());
-
 
 
         Button saveEdit = (Button) findViewById(R.id.saveButton);
@@ -128,12 +129,12 @@ public class EditItemActivity extends AppCompatActivity {
         if(intent.hasExtra("activeUser")) {
             activeUser = intent.getStringExtra("activeUser");
         }
-
-        bids = getItemsBids();
+        //THIS COMMENTED CODE IS VERY IMPORTANT
+        /*bids = getItemsBids();
         ArrayAdapter<Bid> adapter = new ArrayAdapter<Bid>(this,
                 R.layout.list_item, bids);
         bidsList.setAdapter(adapter);
-        bidsList.setOnItemClickListener(onItemClickListener);
+        bidsList.setOnItemClickListener(onItemClickListener);*/
     }
 
     /**
@@ -149,7 +150,10 @@ public class EditItemActivity extends AppCompatActivity {
         itemToEdit.setName(newName);
         itemToEdit.setDescription(newDesc);
 
-        NavigationMainActivity.saveInFile(context1);
+        //PUT REQUEST
+
+        ElasticSearchAppController.EditItemTask editItemTask = new ElasticSearchAppController.EditItemTask();
+        editItemTask.execute(itemToEdit);
 
         setResult(RESULT_OK);
         finish();
@@ -163,11 +167,15 @@ public class EditItemActivity extends AppCompatActivity {
      * @param view
      */
     public void deleteItem(View view){
-        NavigationMainActivity.allItems.remove(itemToEdit);
+        //NavigationMainActivity.allItems.remove(itemToEdit);
 
-        NavigationMainActivity.saveInFile(context1);
-        System.out.printf("%d\n", NavigationMainActivity.allItems.size());
+        //NavigationMainActivity.saveInFile(context1);
+        //System.out.printf("%d\n", NavigationMainActivity.allItems.size());
+        //Intent intent = new Intent(this, MyItemsActivity.class);
 
+        ElasticSearchAppController.DeleteItemTask deleteItemTask = new ElasticSearchAppController.DeleteItemTask();
+        deleteItemTask.execute(itemToEdit);
+        //startActivityForResult(intent, 1);
         setResult(RESULT_OK);
         finish();
     }

@@ -107,11 +107,15 @@ public class MyItemsActivity extends AppCompatActivity {
         intent.putExtra("activeUser", MyUsername);
 
         startActivityForResult(intent, 1);
+        finish();
+        //adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        System.out.println("INSIDE onActivityResult");
         if (requestCode == 1) {
+
             adapter.notifyDataSetChanged();
             setResult(RESULT_OK);
             //NavigationMainActivity.saveInFile();
