@@ -1,8 +1,12 @@
 package com.example.arshadhusain.weshare;
 
+import android.util.Base64;
 import android.widget.ArrayAdapter;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import io.searchbox.annotations.JestId;
 
@@ -16,6 +20,8 @@ import io.searchbox.annotations.JestId;
 public class Item {
     @JestId
     protected String id;
+    protected transient Bitmap thumbnail;
+    protected String thumbnailBase64;
 
     public String getId() {
         return id;
@@ -116,4 +122,25 @@ public class Item {
 
         return name + "\n" + statusToString();
     }
+
+    public void addThumbnail(Bitmap newThumbnail){
+        if (newThumbnail != null) {
+            thumbnail = newThumbnail;
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            newThumbnail.compress(Bitmap.CompressFormat.PNG, 65536, byteArrayOutputStream);
+
+            byte[] b = byteArrayOutputStream.toByteArray();
+            thumbnailBase64 = Base64.encodeToString(b, Base64.DEFAULT);
+        }
+    }
+
+    public Bitmap getThumbnail(){
+        if (thumbnail == null && thumbnailBase64 != null) {
+            byte[] decodeString = Base64.decode(thumbnailBase64, Base64.DEFAULT);
+            thumbnail = BitmapFactory.decodeByteArray(decodeString, 0, decodeString.length);
+        }
+        return thumbnail;
+    }
+
 }

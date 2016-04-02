@@ -9,9 +9,12 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 
 import java.util.ArrayList;
 
@@ -36,6 +39,11 @@ public class ItemInfoActivity extends AppCompatActivity {
     private TextView owner;
     private TextView status;
     private TextView description;
+
+    private ImageButton pictureButton;
+    private Bitmap thumbnail;
+
+    static final int REQUEST_IMAGE_CAPTURE = 1234;
 
     private EditText bidAmount;
 

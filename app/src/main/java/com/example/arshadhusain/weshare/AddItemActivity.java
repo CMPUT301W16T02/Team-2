@@ -3,11 +3,15 @@ package com.example.arshadhusain.weshare;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 
@@ -25,11 +29,25 @@ public class AddItemActivity extends AppCompatActivity {
     private String owner = "Username";
     public Context context1;
     private ArrayList<Item> items = new ArrayList<Item>();
+    private ImageButton pictureButton;
+    private Bitmap thumbnail;
+
+    static final int REQUEST_IMAGE_CAPTURE = 1234;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
+
+        pictureButton = (ImageButton) findViewById(R.id.pictureButton);
+        pictureButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                }
+            }
+        });
 
         //context1.getApplicationContext();
 
@@ -45,7 +63,6 @@ public class AddItemActivity extends AppCompatActivity {
         description = (EditText) findViewById(R.id.itemDesc);
 
         Button addItem = (Button)findViewById(R.id.addItemButton);
-
         addItem.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -76,6 +93,7 @@ public class AddItemActivity extends AppCompatActivity {
         String itemDesc = description.getText().toString();
 
         Item newItem = new Item(itemName, itemDesc, owner);
+        newItem.addThumbnail(thumbnail);
 
 
         /*NavigationMainActivity.allItems.add(newItem);
@@ -97,5 +115,14 @@ public class AddItemActivity extends AppCompatActivity {
 
         setResult(RESULT_CANCELED);
         finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
+            Bundle extras = data .getExtras();
+            thumbnail = (Bitmap) extras.get("data");
+            pictureButton.setImageBitmap(thumbnail);
+        }
     }
 }
