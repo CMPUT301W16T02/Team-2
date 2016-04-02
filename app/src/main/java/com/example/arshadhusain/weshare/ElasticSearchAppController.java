@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
@@ -102,8 +103,14 @@ public class ElasticSearchAppController {
             ArrayList<Item> items = new ArrayList<Item>();
 
             String search_string;
+            if(params[0] == "") {
+                search_string = "{\"query\":{\"match_all\":{}}}";
+            } else {
+                search_string = "{\"query\":{\"match\":{ \"owner\" : \"" +params[0]+ "\"}}}";
 
-            search_string = "{\"query\":{\"match\":{ \"owner\" : \"" +params[0]+ "\"}}}";
+            }
+
+
 
 
             Search search = new Search.Builder(search_string).addIndex("team2").addType("items").build();
@@ -178,6 +185,34 @@ public class ElasticSearchAppController {
                         System.out.println("Update successful");
                     } else {
                         Log.e("TODO", "Item Edit failed");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+        }
+    }
+
+
+    public static class DeleteItemTask extends AsyncTask<Item,Void,Void> {
+
+        @Override
+        protected Void doInBackground(Item... params) {
+            verifyConfig();
+
+            for(Item item : params) {
+                //Index index = new Index.Builder(item).index("team2").type("items").build();
+
+                Delete delete = new Delete.Builder(item.getId()).index("team2").type("items").build();
+                try {
+                    DocumentResult execute = client.execute(delete);
+                    if(execute.isSucceeded()) {
+                        //item.setId(execute.getId());
+                        System.out.println("Item deleted");
+                    } else {
+                        Log.e("TODO", "Account add failed");
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

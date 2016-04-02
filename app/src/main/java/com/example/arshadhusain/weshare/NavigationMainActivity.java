@@ -23,6 +23,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * This is the main screen once the user has signed in. This activity
@@ -50,6 +51,18 @@ public class NavigationMainActivity extends AppCompatActivity {
         super.onStart();
         //loadItemsFromFile();
         //loadBidsFromFile();
+        allItems.clear();
+        ElasticSearchAppController.GetMyItemsTask getMyItemsTask = new ElasticSearchAppController.GetMyItemsTask();
+        getMyItemsTask.execute("");
+
+        try {
+            allItems.addAll(getMyItemsTask.get());
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
 
