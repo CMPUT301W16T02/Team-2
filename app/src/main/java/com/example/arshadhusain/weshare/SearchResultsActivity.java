@@ -86,6 +86,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     }
 
     public ArrayList<SearchResult> getKeywordSearchResults() {
+        searchResults.clear();
         ArrayList<SearchResult> keywordSearchResults = new ArrayList<SearchResult>();
         for(int i=0; i<NavigationMainActivity.allItems.size(); i++){
             int itemStatus = NavigationMainActivity.allItems.get(i).getStatus();
