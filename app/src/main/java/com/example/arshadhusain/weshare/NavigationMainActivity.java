@@ -5,10 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -100,20 +97,15 @@ public class NavigationMainActivity extends AppCompatActivity {
             //System.out.printf("%s\n", NavigationMainActivity.allBids.get(x).getItem());
             System.out.printf("%s\n", NavigationMainActivity.allBids.get(x).getBidder());
             System.out.printf("%s\n", MyUsername);
-
-
             if((allBids.get(x).getItemOwner()).equals(MyUsername))
             {
-
                 Bid bidToCopy = allBids.get(x);
                 System.out.printf("%s\n", bidToCopy.getItem());
                 bidNotify.add(bidToCopy);
             }
-
         }
         if(!bidNotify.isEmpty()) {
             Toast.makeText(getApplicationContext(), "You've got new bid requests!", Toast.LENGTH_LONG).show();
-
         }*/
     }
 
@@ -263,15 +255,11 @@ public class NavigationMainActivity extends AppCompatActivity {
             FileInputStream fis = context.openFileInput(FILENAME1);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             Gson gson = new Gson();
-
             // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html 01-19 2016
             Type listType = new TypeToken<ArrayList<Bid>>() {}.getType();
             allBids = gson.fromJson(in, listType);
-
             System.out.printf("LOADING BIDS FROM FILE\n");
-
             System.out.printf("%d\n", NavigationMainActivity.allBids.size());
-
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             allBids = new ArrayList<Bid>();
@@ -283,8 +271,6 @@ public class NavigationMainActivity extends AppCompatActivity {
 
         /*for (int x=0; x<allBids.size(); x++) {
             System.out.println(allBids.get(x).getItem());
-
-
         }*/
 
     }
@@ -316,7 +302,6 @@ public class NavigationMainActivity extends AppCompatActivity {
     /*public void addAndSaveToBid(Item newItem) {
         NavigationMainActivity.allItems.add(newItem); //WRONG NEEDS TO BE BID
         saveBidsToFile();
-
     }*/
 
     /**

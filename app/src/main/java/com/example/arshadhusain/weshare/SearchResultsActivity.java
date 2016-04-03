@@ -1,16 +1,14 @@
 package com.example.arshadhusain.weshare;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.regex.Pattern;
 
 /**
  * <p>Allows user to search for specific item. Passes intent
@@ -86,6 +84,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     }
 
     public ArrayList<SearchResult> getKeywordSearchResults() {
+        searchResults.clear();
         ArrayList<SearchResult> keywordSearchResults = new ArrayList<SearchResult>();
         for(int i=0; i<NavigationMainActivity.allItems.size(); i++){
             int itemStatus = NavigationMainActivity.allItems.get(i).getStatus();
@@ -121,9 +120,9 @@ public class SearchResultsActivity extends AppCompatActivity {
 
     }
 
-        /**
-         * Sets adapter of list item
-         */
+    /**
+     * Sets adapter of list item
+     */
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -166,7 +165,6 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         /*
         Intent intent = getIntent();
-
         if(intent.hasExtra("keyword")) {
             keyword = intent.getStringExtra("keyword").toLowerCase();
         } else {
