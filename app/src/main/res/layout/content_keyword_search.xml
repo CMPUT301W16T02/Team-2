@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/SearchInput"
+            android:layout_width="match_parent"
+            android:hint="Search Keyword"
+            android:inputType="text"
+            android:layout_height="wrap_content" >
+
+            <requestFocus />
+
+        </EditText>
+
+        <Button
+            android:id="@+id/KeywordSearchButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Search Items" />
+
+
+    </LinearLayout>
+

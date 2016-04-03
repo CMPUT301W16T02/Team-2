@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -82,15 +83,25 @@ public class AddItemActivity extends AppCompatActivity {
         System.out.printf("%d\n", NavigationMainActivity.allItems.size());*/
         //NavigationMainActivity.addAndSaveToItems(newItem);
 
+        if(itemName.isEmpty() && itemDesc.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Please enter your information into each field", Toast.LENGTH_LONG).show();
 
 
+        } else if(itemName.isEmpty())
+        {
+            Toast.makeText(getApplicationContext(), "Please enter an item name", Toast.LENGTH_LONG).show();
 
+        } else if (itemDesc.isEmpty())
+        {
+            Toast.makeText(getApplicationContext(), "Please enter an item description", Toast.LENGTH_LONG).show();
 
+        } else {
 
-        ElasticSearchAppController.AddItemTask addItemTask = new ElasticSearchAppController.AddItemTask();
-        addItemTask.execute(newItem);
-        setResult(RESULT_OK);
-        finish();
+            ElasticSearchAppController.AddItemTask addItemTask = new ElasticSearchAppController.AddItemTask();
+            addItemTask.execute(newItem);
+            setResult(RESULT_OK);
+            finish();
+        }
     }
 
     /**

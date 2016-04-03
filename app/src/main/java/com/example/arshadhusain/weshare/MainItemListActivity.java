@@ -74,6 +74,16 @@ public class MainItemListActivity extends AppCompatActivity {
 
         //searchKeyword = (EditText) findViewById(R.id.searchKeyword);
 
+        Button KeywordSearchButton = (Button)findViewById(R.id.KeywordSearchButton);
+
+        KeywordSearchButton.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                searchItemDescriptions();
+            }
+        });
+
+
         Button searchButton = (Button)findViewById(R.id.searchButton);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +154,17 @@ public class MainItemListActivity extends AppCompatActivity {
         intent.putExtra("activeUser", activeUser);
 
         startActivityForResult(intent, CHANGE_MADE);
+    }
+
+    public void searchItemDescriptions(){
+        //String keyword = searchKeyword.getText().toString();
+
+        Intent intent = new Intent(this, KeywordSearchActivity.class);
+        intent.putExtra("activeUser", activeUser);
+
+        //intent.putExtra("keyword", keyword);
+
+        startActivity(intent);
     }
 
     public void searchItems(){
