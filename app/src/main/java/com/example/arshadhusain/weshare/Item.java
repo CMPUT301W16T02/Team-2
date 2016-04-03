@@ -146,9 +146,8 @@ public class Item {
     }
 
     public void removeThumbnail(){
-        if (thumbnail == null && thumbnailBase64 != null){
-            thumbnail = null;
-        }
+        thumbnail = null;
+        thumbnailBase64 = null;
     }
 
     public Bitmap getThumbnail(){
