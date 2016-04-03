@@ -23,6 +23,7 @@ public class AddItemActivityTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testAddItem() {
+        AddItemActivity activity = (AddItemActivity) getActivity();
         Account account = new Account("HasanBadran", "badran@gmail.com", "Edmonton");
 
         Item item = new Item("microwave", "Like new", "HasanBadran");

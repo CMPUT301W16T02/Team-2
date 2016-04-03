@@ -30,9 +30,9 @@
             android:layout_height="wrap_content"
             android:text="Add New Item"
             android:onClick="addItem"
+            android:layout_above="@+id/cancelButton"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:layout_above="@+id/cancelButton" />
+            android:layout_alignParentStart="true" />
 
         <Button
             android:id="@+id/cancelButton"
@@ -41,8 +41,8 @@
             android:text="Cancel"
             android:onClick="cancel"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true" />
     </RelativeLayout>
 
 </LinearLayout>
