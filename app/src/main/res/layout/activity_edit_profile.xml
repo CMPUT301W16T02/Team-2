@@ -19,7 +19,7 @@
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/EditProfileEmail"
+            android:id="@+id/emailField"
             android:layout_width="match_parent"
             android:hint="Email"
             android:inputType="text"
@@ -38,7 +38,7 @@
             android:textSize="18sp"/>
 
         <EditText
-            android:id="@+id/EditProfileCity"
+            android:id="@+id/cityField"
             android:layout_width="match_parent"
             android:hint="City"
             android:inputType="text"
@@ -46,7 +46,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/SaveButton"
+        android:id="@+id/saveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Save" />
