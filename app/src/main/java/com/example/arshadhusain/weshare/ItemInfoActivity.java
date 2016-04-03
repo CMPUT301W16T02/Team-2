@@ -40,8 +40,6 @@ public class ItemInfoActivity extends AppCompatActivity {
     private TextView owner;
     private TextView status;
     private TextView description;
-    private ImageView image;
-    private ImageButton pictureButton;
 
     static final int REQUEST_IMAGE_CAPTURE = 1234;
 
@@ -75,16 +73,14 @@ public class ItemInfoActivity extends AppCompatActivity {
 
         itemToView = NavigationMainActivity.allItems.get(itemPos);
 
-        Bitmap thumbnail = itemToView.getThumbnail();
-
         name = (TextView) findViewById(R.id.itemName);
         name.setText(itemToView.getName());
         owner = (TextView) findViewById(R.id.itemOwner);
         owner.setText(itemToView.getOwner());
         description = (TextView) findViewById(R.id.itemDesc);
         description.setText(itemToView.getDescription());
-        image = (ImageView) findViewById(R.id.pictureButton);
-        pictureButton.setImageBitmap(thumbnail);
+        ImageView itemImage = (ImageView) findViewById(R.id.pictureButton);
+        itemImage.setImageBitmap(itemToView.getThumbnail());
         status = (TextView) findViewById(R.id.itemStatus);
         status.setText("Item Status: " + itemToView.statusToString());
 

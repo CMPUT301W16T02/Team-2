@@ -122,7 +122,7 @@ public class AddItemActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
-            Bundle extras = data .getExtras();
+            Bundle extras = data.getExtras();
             thumbnail = (Bitmap) extras.get("data");
             pictureButton.setImageBitmap(thumbnail);
         }

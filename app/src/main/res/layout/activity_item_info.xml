@@ -64,8 +64,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
-        android:src="@mipmap/item_image" />
-
+        android:src="@drawable/we_share" />
     <TextView
         android:id="@+id/itemStatus"
         android:layout_width="wrap_content"
