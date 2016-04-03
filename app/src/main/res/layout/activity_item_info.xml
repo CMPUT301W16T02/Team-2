@@ -57,7 +57,7 @@
         android:text="Item Description" />
 
     <ImageView
-        android:id="@+id/pictureButton"
+        android:id="@+id/itemImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="5dp"

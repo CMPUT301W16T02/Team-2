@@ -79,7 +79,7 @@ public class ItemInfoActivity extends AppCompatActivity {
         owner.setText(itemToView.getOwner());
         description = (TextView) findViewById(R.id.itemDesc);
         description.setText(itemToView.getDescription());
-        ImageView itemImage = (ImageView) findViewById(R.id.pictureButton);
+        ImageView itemImage = (ImageView) findViewById(R.id.itemImage);
         itemImage.setImageBitmap(itemToView.getThumbnail());
         status = (TextView) findViewById(R.id.itemStatus);
         status.setText("Item Status: " + itemToView.statusToString());

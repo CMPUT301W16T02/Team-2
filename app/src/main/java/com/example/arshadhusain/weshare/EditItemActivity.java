@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -63,12 +64,15 @@ public class EditItemActivity extends AppCompatActivity {
 
         name = (EditText) findViewById(R.id.itemName);
         description = (EditText) findViewById(R.id.itemDesc);
+
         //bidsList = (ListView) findViewById(R.id.bidsList);
         itemToEdit = MyItemsActivity.myItems.get(itemPos);
 
 
         name.setText(itemToEdit.getName());
         description.setText(itemToEdit.getDescription());
+        ImageView itemImage = (ImageView) findViewById(R.id.itemImage);
+        itemImage.setImageBitmap(itemToEdit.getThumbnail());
 
 
         Button saveEdit = (Button) findViewById(R.id.saveButton);
