@@ -26,9 +26,9 @@ public class BidAcceptActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bid_accept);
 
-        context1 = NavigationMainActivity.getContext();
+        /*context1 = NavigationMainActivity.getContext();
         context2 = NavigationMainActivity.getContext();
-
+*/
 
         Intent intent = getIntent();
 
@@ -99,7 +99,7 @@ public class BidAcceptActivity extends AppCompatActivity {
                     currentItem.getOwner().equals(itemOwner)) {
                 currentItem.setStatus(2);
                 currentItem.setBorrower(itemBidder);
-                NavigationMainActivity.saveInFile(context1);
+                //NavigationMainActivity.saveInFile(context1);
             }
         }
 
@@ -113,7 +113,7 @@ public class BidAcceptActivity extends AppCompatActivity {
             }
         }
 
-        NavigationMainActivity.saveBidsToFile(context2);
+        //NavigationMainActivity.saveBidsToFile(context2);
 
         setResult(RESULT_OK);
         finish();
@@ -129,7 +129,7 @@ public class BidAcceptActivity extends AppCompatActivity {
             }
         }
 
-        NavigationMainActivity.saveBidsToFile(context2);
+        //NavigationMainActivity.saveBidsToFile(context2);
 
         setResult(RESULT_OK);
         finish();

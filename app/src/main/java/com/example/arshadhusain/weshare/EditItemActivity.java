@@ -49,7 +49,7 @@ public class EditItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_item);
 
-        context1 = NavigationMainActivity.getContext();
+        //context1 = NavigationMainActivity.getContext();
 
         Intent intent = getIntent();
 
@@ -197,7 +197,7 @@ public class EditItemActivity extends AppCompatActivity {
         itemToEdit.setStatus(0);
         itemToEdit.setBorrower("");
 
-        NavigationMainActivity.saveInFile(context1);
+        //NavigationMainActivity.saveInFile(context1);
 
         //PUT REQUEST
 

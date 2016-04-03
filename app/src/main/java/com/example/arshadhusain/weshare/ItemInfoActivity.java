@@ -62,7 +62,7 @@ public class ItemInfoActivity extends AppCompatActivity {
             UserName = intent.getStringExtra("activeUser");
         }
 
-        context2 = NavigationMainActivity.getContext();
+        //context2 = NavigationMainActivity.getContext();
 
 
         itemToView = NavigationMainActivity.allItems.get(itemPos);

@@ -34,7 +34,7 @@ public class AddItemActivity extends AppCompatActivity {
 
         //context1.getApplicationContext();
 
-        context1 = NavigationMainActivity.getContext();
+        //context1 = NavigationMainActivity.getContext();
 
         Intent intent = getIntent();
 
