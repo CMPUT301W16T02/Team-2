@@ -6,13 +6,12 @@ import android.test.ActivityInstrumentationTestCase2;
 /**
  * Created by hasan on 2016-03-12.
  */
-<<<<<<< HEAD
-public class MakeBidActivityTest extends ActivityInstrumentationTestCase2 {
-    String bidder;
-=======
+
+//public class MakeBidActivityTest extends ActivityInstrumentationTestCase2 {
+
 //public class MakeBidActivityTest extends ActivityInstrumentationTestCase2 {
    /* String bidder;
->>>>>>> master
+
     Double amount;
 
     public MakeBidActivityTest(){
@@ -32,11 +31,6 @@ public class MakeBidActivityTest extends ActivityInstrumentationTestCase2 {
         bid.setAmount((double) 10);
 
 
-<<<<<<< HEAD
-    }
-=======
-    }*/
->>>>>>> master
 
     /*
     public void testNetworkConnection() {
@@ -52,8 +46,5 @@ public class MakeBidActivityTest extends ActivityInstrumentationTestCase2 {
         }
     }*/
 
-<<<<<<< HEAD
 }
-=======
-//}
->>>>>>> master
+
