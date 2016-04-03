@@ -35,7 +35,7 @@
         android:layout_weight="0.10" />
 
     <EditText
-        android:id="@+id/SignInInput1"
+        android:id="@+id/usernameField"
         android:layout_width="167dp"
         android:hint="Username"
         android:inputType="text"
@@ -55,7 +55,7 @@
         android:layout_weight="0.04" />
 
     <Button
-        android:id="@+id/SignInButton"
+        android:id="@+id/signInButton"
         android:layout_width="167dp"
         android:layout_height="37dp"
         android:text="SIGN IN"
@@ -72,7 +72,7 @@
         android:textColor="#ffffff" />
 
     <Button
-        android:id="@+id/main_create_account"
+        android:id="@+id/signUpButton"
         android:layout_width="167dp"
         android:layout_height="37dp"
         android:text="SIGN UP"
