@@ -1,61 +1,34 @@
 package com.example.arshadhusain.weshare;
 
 import android.content.Context;
-import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
-
 import android.widget.ArrayAdapter;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 /**
  * MainItemListActivity allows user to see all items.
- * Passes intent of user
  *
- * @Author: Chris, Arshad
- * @Version: 1.0
+ * @Author: Christopher, Arshad
+ * @Version: 2.0
  *
  */
 public class MainItemListActivity extends AppCompatActivity {
 
-    private static final String FILENAME = "items.sav";
-    private ListView allItemsList;
-
-    public static ArrayList<Item> allItems = new ArrayList<Item>();
-    public static ArrayList<Item> allItemsWithoutActiveUser = new ArrayList<Item>();
-
+    private ListView allItemsListView;
     public ArrayAdapter<Item> adapter;
-
 
     private String myUsername;
     static final int CHANGE_MADE = 1;
 
-    private static int selectedItemPos;
+    private String clickedItemName;
     public Context context;
-
-    //private EditText searchKeyword;
 
 
     @Override
@@ -69,26 +42,21 @@ public class MainItemListActivity extends AppCompatActivity {
             myUsername = intent.getStringExtra("myUsername");
         }
 
-        allItemsList = (ListView) findViewById(R.id.allItemsList);
+        allItemsListView = (ListView) findViewById(R.id.allItemsListView);
 
-        allItemsList.setOnItemClickListener(onItemClickListener);
+        allItemsListView.setOnItemClickListener(onItemClickListener);
 
-        //searchKeyword = (EditText) findViewById(R.id.searchKeyword);
+        Button keywordSearchButton = (Button)findViewById(R.id.keywordSearchButton);
 
-        Button KeywordSearchButton = (Button)findViewById(R.id.KeywordSearchButton);
-
-        KeywordSearchButton.setOnClickListener(new View.OnClickListener() {
-
+        keywordSearchButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 searchItemDescriptions();
             }
         });
 
-
         Button searchButton = (Button)findViewById(R.id.searchButton);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View v) {
                 searchItems();
             }
@@ -110,11 +78,10 @@ public class MainItemListActivity extends AppCompatActivity {
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectedItemPos = position;
-            if (NavigationMainActivity.allItems.get(selectedItemPos).getOwner().equals(myUsername)){
-                editItem();
+            if (NavigationMainActivity.allItems.get(position).getOwner().equals(myUsername)){
+                editItem(clickedItemName);
             } else {
-                viewItemInfo();
+                viewItemInfo(clickedItemName);
             }
 
         }
@@ -136,11 +103,10 @@ public class MainItemListActivity extends AppCompatActivity {
      *
      * @See: EditItemActivity
      */
-    public void editItem() {
+    public void editItem(String itemName) {
         Intent intent = new Intent(this, EditItemActivity.class);
-        intent.putExtra("itemPos", selectedItemPos);
+        intent.putExtra("itemName", itemName);
         intent.putExtra("myUsername", myUsername);
-
         startActivityForResult(intent, CHANGE_MADE);
     }
 
@@ -149,33 +115,22 @@ public class MainItemListActivity extends AppCompatActivity {
      *
      * @See: ItemInfoActivity
      */
-    public void viewItemInfo(){
+    public void viewItemInfo(String itemName){
         Intent intent = new Intent(this, ItemInfoActivity.class);
-        intent.putExtra("itemPos", selectedItemPos);
+        intent.putExtra("itemName", itemName);
         intent.putExtra("myUsername", myUsername);
-
         startActivityForResult(intent, CHANGE_MADE);
     }
 
     public void searchItemDescriptions(){
-        //String keyword = searchKeyword.getText().toString();
-
         Intent intent = new Intent(this, KeywordSearchActivity.class);
         intent.putExtra("myUsername", myUsername);
-
-        //intent.putExtra("keyword", keyword);
-
         startActivity(intent);
     }
 
     public void searchItems(){
-        //String keyword = searchKeyword.getText().toString();
-
         Intent intent = new Intent(this, SearchResultsActivity.class);
         intent.putExtra("myUsername", myUsername);
-
-        //intent.putExtra("keyword", keyword);
-
         startActivity(intent);
     }
 
@@ -184,16 +139,12 @@ public class MainItemListActivity extends AppCompatActivity {
         if (requestCode == 1) {
             adapter.notifyDataSetChanged();
             setResult(RESULT_OK);
-            //NavigationMainActivity.saveInFile();
         }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        //context = NavigationMainActivity.getContext();
-        //loadFromFile(context);
-        //allItems = NavigationMainActivity.allItems;
         NavigationMainActivity.allItems.clear();
         ElasticSearchAppController.GetMyItemsTask getMyItemsTask = new ElasticSearchAppController.GetMyItemsTask();
         getMyItemsTask.execute("");
@@ -212,70 +163,16 @@ public class MainItemListActivity extends AppCompatActivity {
             if(NavigationMainActivity.allItems.get(i).getOwner().equals(myUsername))
             {
                 NavigationMainActivity.allItems.remove(i);
-
             }
         }
         int j = 0;
         for(int i = 0; i < NavigationMainActivity.allItems.size(); i++)
         {
-            /*if(allItems.)
-            {
-                System.out.println("POOP AND SCOOP");
-            }*/
             System.out.println(NavigationMainActivity.allItems.get(i).toString());
         }
-        //allItems.trimToSize();
-
-
 
         adapter = new ArrayAdapter<Item>(this,
                 R.layout.list_item, NavigationMainActivity.allItems);
-        allItemsList.setAdapter(adapter);
+        allItemsListView.setAdapter(adapter);
     }
-
-    /**
-     * @deprecated
-     * @param context
-     */
-    private void loadFromFile(Context context) {
-        try {
-            FileInputStream fis = context.openFileInput(FILENAME);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-            Gson gson = new Gson();
-
-            // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html 01-19 2016
-            Type listType = new TypeToken<ArrayList<Item>>() {}.getType();
-            allItems = gson.fromJson(in, listType);
-
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            allItems = new ArrayList<Item>();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        }
-    }
-
-    /**
-     * @deprecated
-     */
-    // taken from lonelyTwitter
-    private void saveInFile() {
-        try {
-            FileOutputStream fos = openFileOutput(FILENAME,
-                    0);
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
-            Gson gson = new Gson();
-            gson.toJson(allItems, out);
-            out.flush();
-            fos.close();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        }
-    }
-
 }

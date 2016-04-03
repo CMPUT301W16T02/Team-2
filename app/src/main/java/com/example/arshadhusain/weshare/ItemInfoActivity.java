@@ -18,8 +18,8 @@ import java.util.ArrayList;
 /**
  * Shows the information regarding specific item.
  * Passes intent user and item.
- * @Author: Chris, Arshad
- * @Version: 1.0
+ * @Author: Christopher, Arshad
+ * @Version: 2.0
  */
 
 public class ItemInfoActivity extends AppCompatActivity {
@@ -41,13 +41,11 @@ public class ItemInfoActivity extends AppCompatActivity {
 
     private Button viewOwner;
 
-    private int itemPos;
     private Item itemToView;
     double doubleUserName;
 
-    String UserName;
-
-    public Context context2;
+    String myUsername;
+    String itemName;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,14 +53,13 @@ public class ItemInfoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        if (intent.hasExtra("itemPos")) {
-            itemPos = intent.getIntExtra("itemPos", itemPos);
+        if (intent.hasExtra("itemName")) {
+            itemName = intent.getStringExtra("itemName");
         }
-        if(intent.hasExtra("activeUser")) {
-            UserName = intent.getStringExtra("activeUser");
+        if(intent.hasExtra("myUsername")) {
+            myUsername = intent.getStringExtra("myUsername");
         }
 
-        //context2 = NavigationMainActivity.getContext();
 
 
         itemToView = NavigationMainActivity.allItems.get(itemPos);
@@ -84,7 +81,6 @@ public class ItemInfoActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 Intent intent = new Intent(ItemInfoActivity.this, ViewProfileActivity.class);
-                //startActivity(intent);
                 String UserName = owner.getText().toString();
                 System.out.println(UserName);
                 intent.putExtra("Username", UserName);
@@ -101,7 +97,6 @@ public class ItemInfoActivity extends AppCompatActivity {
                 doubleUserName = Double.parseDouble(BidAmount);
 
                 addBid();
-                //submitBid(v);
             }
         });
 
