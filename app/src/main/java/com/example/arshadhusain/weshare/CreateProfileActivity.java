@@ -127,38 +127,67 @@ public class CreateProfileActivity extends Activity{
                     // Log exception
                     e.printStackTrace();
                 }*/
+                if(UserName.isEmpty() && Email.isEmpty() && City.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Please enter your information into each field", Toast.LENGTH_LONG).show();
 
 
+                } else if(UserName.isEmpty())
+                {
+                    Toast.makeText(getApplicationContext(), "Please enter a user name", Toast.LENGTH_LONG).show();
 
+                } else if (Email.isEmpty())
+                {
+                    Toast.makeText(getApplicationContext(), "Please enter your email", Toast.LENGTH_LONG).show();
 
-                Account account = new Account(UserName, Email, City);
-                ElasticSearchAppController.GetAccountTask getAccountTask = new ElasticSearchAppController.GetAccountTask();
-                getAccountTask.execute(UserName);
-                try {
-                    duplicateAccounts.addAll(getAccountTask.get());
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-
-                int ifDuplicate;
-                if (duplicateAccounts.size() != 0) {
-                    ifDuplicate = duplicateAccounts.get(0).getUsername().compareToIgnoreCase(account.getUsername());
-                } else {
-                    ifDuplicate = 1;
-                }
-                if(ifDuplicate == 0) {
-                    Toast.makeText(getApplicationContext(), "Username already exists", Toast.LENGTH_LONG).show();
+                } else if (City.isEmpty())
+                {
+                    Toast.makeText(getApplicationContext(), "Please enter your city", Toast.LENGTH_LONG).show();
 
                 } else {
-                    ElasticSearchAppController.AddAccountTask addAccountTask = new ElasticSearchAppController.AddAccountTask();
-                    addAccountTask.execute(account);
+                    Account account = new Account(UserName, Email, City);
+                    ElasticSearchAppController.GetAccountTask getAccountTask = new ElasticSearchAppController.GetAccountTask();
+                    getAccountTask.execute(UserName);
+                    try {
+                        duplicateAccounts.addAll(getAccountTask.get());
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
+
+                    int ifDuplicate;
+                    if (duplicateAccounts.size() != 0) {
+                        ifDuplicate = duplicateAccounts.get(0).getUsername().compareToIgnoreCase(account.getUsername());
+                    } else {
+                        ifDuplicate = 1;
+                    }
+                    if(ifDuplicate == 0) {
+                        Toast.makeText(getApplicationContext(), "Username already exists", Toast.LENGTH_LONG).show();
+
+                    } else {
+                        ElasticSearchAppController.AddAccountTask addAccountTask = new ElasticSearchAppController.AddAccountTask();
+                        addAccountTask.execute(account);
+                        Accounts.add(account);
+
+                        Intent myIntent = new Intent(getApplicationContext(), WelcomeActivity.class);
+
+                        startActivityForResult(myIntent, 0);
+
+                        setResult(RESULT_OK);
+                        finish();
+
+
+                    }
+
+
+
+
                 }
 
 
-                Accounts.add(account);
+
+
                 //adapter.notifyDataSetChanged();
 
 
@@ -207,12 +236,6 @@ public class CreateProfileActivity extends Activity{
 
 
 
-                Intent myIntent = new Intent(getApplicationContext(), WelcomeActivity.class);
-
-                startActivityForResult(myIntent, 0);
-
-                setResult(RESULT_OK);
-                finish();
 
                 //}
 

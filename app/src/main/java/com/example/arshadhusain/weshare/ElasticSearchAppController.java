@@ -262,8 +262,10 @@ public class ElasticSearchAppController {
                     DocumentResult execute = client.execute(index);
                     if(execute.isSucceeded()) {
                         bid.setId(execute.getId());
+                        System.out.println(bid.getId());
+                        System.out.println("****SET ID FOR BID****");
                     } else {
-                        Log.e("TODO", "Account add failed");
+                        Log.e("TODO", "Bid add failed");
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

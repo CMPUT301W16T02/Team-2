@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Activity that shows the profile of another user.
@@ -45,7 +46,7 @@ public class ViewProfileActivity extends AppCompatActivity {
             MyUsername = intent.getStringExtra("Username");
         }
 
-        try {
+        /*try {
             FileInputStream inputFile = openFileInput(MyUsername);
             BufferedReader input = new BufferedReader(new InputStreamReader(inputFile));
 
@@ -59,6 +60,17 @@ public class ViewProfileActivity extends AppCompatActivity {
 
         catch(FileNotFoundException ex) {
             ex.printStackTrace();
+        }*/
+
+        ElasticSearchAppController.GetAccountTask getAccountTask = new ElasticSearchAppController.GetAccountTask();
+        getAccountTask.execute(MyUsername);
+        try {
+            Accounts.addAll(getAccountTask.get());
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
 
         for(Account account : Accounts) {
