@@ -192,7 +192,7 @@ public class EditItemActivity extends AppCompatActivity {
         editItemTask.execute(itemToEdit);
 
         setResult(RESULT_OK);
-        finish();
+        //finish();
     }
 
     /**
