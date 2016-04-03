@@ -185,10 +185,10 @@ public class NavigationMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setResult(RESULT_OK);
-                /*
-                Intent intent = new Intent(NavigationMainActivity.this, MainItemListActivity.class); //YOU NEED CHRIS' BORROWING FUNCTIONALITY
+
+                Intent intent = new Intent(NavigationMainActivity.this, SetLocation.class); //YOU NEED CHRIS' BORROWING FUNCTIONALITY
                 startActivity(intent);
-                */
+
             }
         });
 
