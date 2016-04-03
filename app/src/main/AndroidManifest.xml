@@ -3,6 +3,7 @@
     package="com.example.arshadhusain.weshare">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -41,6 +42,10 @@
         <activity
             android:name=".KeywordSearchActivity"
             android:label="@string/title_activity_keyword_search"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SetLocation"
+            android:label="@string/title_activity_set_location"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
