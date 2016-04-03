@@ -1,7 +1,6 @@
 package com.example.arshadhusain.weshare;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.EditText;
 
 import java.util.ArrayList;
 
@@ -25,6 +24,11 @@ public class EditItemActivityTest extends ActivityInstrumentationTestCase2 {
         super.setUp();
     }
 
+    public void testActivityExists() {
+        EditItemActivity activity = (EditItemActivity) getActivity();
+        assertNotNull(activity);
+    }
+
     public void testUpdateName() {
         username = "testName";
         city = "testCity";
@@ -45,6 +49,11 @@ public class EditItemActivityTest extends ActivityInstrumentationTestCase2 {
         items.get(0).setName(newItemName);
         //assertTrue(fakeAccount.getItems().getItem(0).getName == newItemName);
         assertTrue((items.get(0).toString()).equals(newItemName));
+    }
+
+    @Override
+    public void tearDown() throws Exception {
+        super.tearDown();
     }
 
    /* public void testUpdateDescription() {

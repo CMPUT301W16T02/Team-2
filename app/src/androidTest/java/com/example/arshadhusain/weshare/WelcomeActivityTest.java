@@ -10,11 +10,25 @@ import android.test.ActivityInstrumentationTestCase2;
  */
 public class WelcomeActivityTest extends ActivityInstrumentationTestCase2 {
     public WelcomeActivityTest(){
-        super(com.example.arshadhusain.weshare.WelcomeActivity.class);
+        super(WelcomeActivity.class);
     }
 
-    public void testStart() throws Exception{
+    @Override
+    public void setUp() throws Exception {
+        super.setUp();
+    }
+
+    public void testActivityExists() {
+        WelcomeActivity activity = (WelcomeActivity) getActivity();
+        assertNotNull(activity);
+    }
+
+    public void testWelcomeActivity() throws Exception{
         Activity activity = getActivity();
     }
 
+    @Override
+    public void tearDown() throws Exception {
+        super.tearDown();
+    }
 }

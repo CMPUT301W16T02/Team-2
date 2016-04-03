@@ -12,11 +12,15 @@ public class AddItemActivityTest extends ActivityInstrumentationTestCase2 {
         super(AddItemActivity.class);
     }
 
-    /*public void testAddItem() {
+    @Override
+    public void setUp() throws Exception {
+        super.setUp();
+    }
+
+    public void testActivityExists() {
         AddItemActivity activity = (AddItemActivity) getActivity();
-    }*/
-
-
+        assertNotNull(activity);
+    }
 
     public void testAddItem() {
         Account account = new Account("HasanBadran", "badran@gmail.com", "Edmonton");
@@ -44,4 +48,9 @@ public class AddItemActivityTest extends ActivityInstrumentationTestCase2 {
 
     }
 
+
+    @Override
+    public void tearDown() throws Exception {
+        super.tearDown();
+    }
 }

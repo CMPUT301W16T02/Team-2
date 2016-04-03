@@ -16,7 +16,12 @@ public class BidTest extends ActivityInstrumentationTestCase2 {
         super(Bid.class);
     }
 
-    public void testBid(){
-        //needs to be developed
+    public void testAddBid() throws Exception {
+        //test
+    }
+
+    @Override
+    public void tearDown() throws Exception {
+        super.tearDown();
     }
 }

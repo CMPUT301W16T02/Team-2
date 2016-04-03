@@ -20,6 +20,11 @@ public class EditAccountTest extends ActivityInstrumentationTestCase2 {
         super.setUp();
     }
 
+    public void testActivityExists() {
+        EditProfileActivity activity = (EditProfileActivity) getActivity();
+        assertNotNull(activity);
+    }
+
     public void testEditEmailAddress(){
         String origEmail = "email@address.ca";
         String newEmail = "new_email@address.ca";
@@ -32,8 +37,6 @@ public class EditAccountTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testEditCity(){
-        // tests the editAddress method
-
         String origCity = "Camrose";
         String newCity = "Edmonton";
 
@@ -44,4 +47,8 @@ public class EditAccountTest extends ActivityInstrumentationTestCase2 {
         assertTrue(account.getCity().equals(newCity));
     }
 
+    @Override
+    public void tearDown() throws Exception {
+        super.tearDown();
+    }
 }
