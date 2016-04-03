@@ -49,7 +49,8 @@ public class MainItemListActivity extends AppCompatActivity {
     public ArrayAdapter<Item> adapter;
 
 
-    private String activeUser;    static final int CHANGE_MADE = 1;
+    private String myUsername;
+    static final int CHANGE_MADE = 1;
 
     private static int selectedItemPos;
     public Context context;
@@ -64,8 +65,8 @@ public class MainItemListActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        if(intent.hasExtra("Username")) {
-            activeUser = intent.getStringExtra("Username");
+        if(intent.hasExtra("myUsername")) {
+            myUsername = intent.getStringExtra("myUsername");
         }
 
         allItemsList = (ListView) findViewById(R.id.allItemsList);
@@ -110,7 +111,7 @@ public class MainItemListActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             selectedItemPos = position;
-            if (NavigationMainActivity.allItems.get(selectedItemPos).getOwner().equals(activeUser)){
+            if (NavigationMainActivity.allItems.get(selectedItemPos).getOwner().equals(myUsername)){
                 editItem();
             } else {
                 viewItemInfo();
@@ -126,7 +127,7 @@ public class MainItemListActivity extends AppCompatActivity {
      */
     public void addItem() {
         Intent intent = new Intent(this, AddItemActivity.class);
-        intent.putExtra("activeUser", activeUser);
+        intent.putExtra("myUsername", myUsername);
         startActivityForResult(intent, CHANGE_MADE);
     }
 
@@ -138,7 +139,7 @@ public class MainItemListActivity extends AppCompatActivity {
     public void editItem() {
         Intent intent = new Intent(this, EditItemActivity.class);
         intent.putExtra("itemPos", selectedItemPos);
-        intent.putExtra("activeUser", activeUser);
+        intent.putExtra("myUsername", myUsername);
 
         startActivityForResult(intent, CHANGE_MADE);
     }
@@ -151,7 +152,7 @@ public class MainItemListActivity extends AppCompatActivity {
     public void viewItemInfo(){
         Intent intent = new Intent(this, ItemInfoActivity.class);
         intent.putExtra("itemPos", selectedItemPos);
-        intent.putExtra("activeUser", activeUser);
+        intent.putExtra("myUsername", myUsername);
 
         startActivityForResult(intent, CHANGE_MADE);
     }
@@ -160,7 +161,7 @@ public class MainItemListActivity extends AppCompatActivity {
         //String keyword = searchKeyword.getText().toString();
 
         Intent intent = new Intent(this, KeywordSearchActivity.class);
-        intent.putExtra("activeUser", activeUser);
+        intent.putExtra("myUsername", myUsername);
 
         //intent.putExtra("keyword", keyword);
 
@@ -171,7 +172,7 @@ public class MainItemListActivity extends AppCompatActivity {
         //String keyword = searchKeyword.getText().toString();
 
         Intent intent = new Intent(this, SearchResultsActivity.class);
-        intent.putExtra("activeUser", activeUser);
+        intent.putExtra("myUsername", myUsername);
 
         //intent.putExtra("keyword", keyword);
 
@@ -208,7 +209,7 @@ public class MainItemListActivity extends AppCompatActivity {
 
         for(int i = 0; i < NavigationMainActivity.allItems.size(); i++)
         {
-            if(NavigationMainActivity.allItems.get(i).getOwner().equals(activeUser))
+            if(NavigationMainActivity.allItems.get(i).getOwner().equals(myUsername))
             {
                 NavigationMainActivity.allItems.remove(i);
 

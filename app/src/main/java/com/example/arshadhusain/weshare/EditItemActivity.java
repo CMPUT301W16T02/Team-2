@@ -188,7 +188,6 @@ public class EditItemActivity extends AppCompatActivity {
 
         try {
             allBids.addAll(getBidsTask.get());
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

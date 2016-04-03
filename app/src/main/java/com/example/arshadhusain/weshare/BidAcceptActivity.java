@@ -1,6 +1,5 @@
 package com.example.arshadhusain.weshare;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,26 +8,32 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
+/**
+ * Activity that allows a user to accept or decline a bid an item they own.
+ *
+ * Started by EditItemActivity.
+ * Returns to EditItemActivity bid is accepted or declined, or when back button is pressed.
+ *
+ * Starts ViewProfileActivity when view bidder profile button is pressed.
+ *
+ * @author Hanson, Christopher
+ * @version 2.0
+ */
 public class BidAcceptActivity extends AppCompatActivity {
+    private Bid bidToView;
+    private String itemBidder;
+    private String itemName;
+    private String itemOwner;
+    private ArrayList<Bid> allBids = new ArrayList<>();
 
-    TextView bidText;
-    String itemBidder;
-    String itemName;
-    String itemOwner;
-    public Context context1;
-    public Context context2;
-
-
+    final static int TEXTSIZE = 18;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bid_accept);
-
-        /*context1 = NavigationMainActivity.getContext();
-        context2 = NavigationMainActivity.getContext();
-*/
 
         Intent intent = getIntent();
 
@@ -38,9 +43,33 @@ public class BidAcceptActivity extends AppCompatActivity {
         if(intent.hasExtra("itemOwner")) {
             itemOwner = intent.getStringExtra("itemOwner");
         }
+        if(intent.hasExtra("bidderName")) {
+            itemBidder = intent.getStringExtra("bidderName");
+        }
 
-        bidText = (TextView) findViewById(R.id.bidInfoText);
-        getBidText();
+        allBids.clear();
+        allBids = new ArrayList<>();
+        ElasticSearchAppController.GetBidsTask getBidsTask = new ElasticSearchAppController.GetBidsTask();
+        getBidsTask.execute();
+
+        try {
+            allBids.addAll(getBidsTask.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        for (Bid bid : allBids) {
+            if (bid.getBidder().equals(itemBidder) && bid.getItem().equals(itemName) &&
+                    bid.getItemOwner().equals(itemOwner)) {
+                bidToView = bid;
+            }
+        }
+
+        TextView bidTextView = (TextView) findViewById(R.id.bidInfoText);
+        bidTextView.setTextSize(TEXTSIZE);
+        bidTextView.setText(bidToView.toString());
 
         Button acceptButton = (Button)findViewById(R.id.acceptButton);
 
@@ -68,68 +97,49 @@ public class BidAcceptActivity extends AppCompatActivity {
                 declineBid();
             }
         });
-
-
-    }
-
-    public void getBidText(){
-        for(int i=0; i<NavigationMainActivity.allBids.size(); i++){
-            Bid currentBid = NavigationMainActivity.allBids.get(i);
-            if(currentBid.getItem().equals(itemName) &&
-                    currentBid.getItemOwner().equals(itemOwner)){
-                bidText.setText(currentBid.toString());
-                itemBidder = currentBid.getBidder();
-            }
-        }
     }
 
     public void viewBidderProfile(){
         Intent intent = new Intent(this, ViewProfileActivity.class);
-        //startActivity(intent);
-        String UserName = itemBidder;
-        System.out.println(UserName);
-        intent.putExtra("Username", UserName);
+        String bidderName = itemBidder;
+        System.out.println(bidderName);
+        intent.putExtra("username", bidderName);
         startActivity(intent);
     }
 
     public void acceptBid(){
-        for(int i=0; i<NavigationMainActivity.allItems.size(); i++) {
-            Item currentItem = NavigationMainActivity.allItems.get(i);
-            if (currentItem.getName().equals(itemName) &&
-                    currentItem.getOwner().equals(itemOwner)) {
-                currentItem.setStatus(2);
-                currentItem.setBorrower(itemBidder);
-                //NavigationMainActivity.saveInFile(context1);
+        // Set the item's status to borrowed
+        ElasticSearchAppController.GetMyItemsTask getMyItemsTask = new ElasticSearchAppController.GetMyItemsTask();
+        getMyItemsTask.execute(itemOwner);
+        ArrayList<Item> myItems = new ArrayList<>();
+        try {
+            myItems.addAll(getMyItemsTask.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        for (Item item : myItems) {
+            if (item.getName().equals(itemName) && item.getOwner().equals(itemOwner)) {
+                item.setStatus(2);
             }
         }
 
-        ArrayList<Bid> bidsToRemove = new ArrayList<Bid>();
-
-        for(int i=0; i<NavigationMainActivity.allBids.size(); i++) {
-            Bid currentBid = NavigationMainActivity.allBids.get(i);
-            if (currentBid.getItem().equals(itemName) &&
-                    currentBid.getItemOwner().equals(itemOwner)){
-                NavigationMainActivity.allBids.remove(i);
+        for (Bid bid : allBids) {
+            if (bid.getItem().equals(itemName) && bid.getItemOwner().equals(itemOwner)) {
+                ElasticSearchAppController.DeleteBidTask deleteBidTask = new ElasticSearchAppController.DeleteBidTask();
+                deleteBidTask.execute(bid);
             }
         }
-
-        //NavigationMainActivity.saveBidsToFile(context2);
 
         setResult(RESULT_OK);
         finish();
     }
 
     public void declineBid(){
-        for(int i=0; i<NavigationMainActivity.allBids.size(); i++) {
-            Bid currentBid = NavigationMainActivity.allBids.get(i);
-            if (currentBid.getItem().equals(itemName) &&
-                    currentBid.getItemOwner().equals(itemOwner) &&
-                    currentBid.getBidder().equals(itemBidder)){
-                NavigationMainActivity.allBids.remove(i);
-            }
-        }
-
-        //NavigationMainActivity.saveBidsToFile(context2);
+        ElasticSearchAppController.DeleteBidTask deleteBidTask = new ElasticSearchAppController.DeleteBidTask();
+        deleteBidTask.execute(bidToView);
 
         setResult(RESULT_OK);
         finish();

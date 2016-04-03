@@ -276,6 +276,33 @@ public class ElasticSearchAppController {
         }
     }
 
+    public static class DeleteBidTask extends AsyncTask<Bid,Void,Void> {
+
+        @Override
+        protected Void doInBackground(Bid... params) {
+            verifyConfig();
+
+            for(Bid bid : params) {
+                //Index index = new Index.Builder(item).index("team2").type("items").build();
+
+                Delete delete = new Delete.Builder(bid.getId()).index("team2").type("bids").build();
+                try {
+                    DocumentResult execute = client.execute(delete);
+                    if(execute.isSucceeded()) {
+                        //item.setId(execute.getId());
+                        System.out.println("Bid deleted");
+                    } else {
+                        Log.e("TODO", "Bid delete failed");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+        }
+    }
+
     public static class GetBidsTask extends AsyncTask<Bid,Void,ArrayList<Bid>> {
 
         public List<Bid> foundBids;

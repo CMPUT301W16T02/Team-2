@@ -5,14 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -22,18 +14,17 @@ import java.util.concurrent.ExecutionException;
  * Started by ItemInfoActivity.
  * Returns to ItemInfoActivity when back button is clicked.
  *
- * @author Hanson
- * @version 1.0
+ * @author Hanson, Christopher
+ * @version 2.0
  */
 public class ViewProfileActivity extends AppCompatActivity {
-    ArrayList<Account> Accounts = new ArrayList<Account>();
-    Account MyAccount;
-    String MyUsername;
-    TextView username;
-    TextView email;
-    TextView city;
+    Account accountToView;
+    String accountUsername;
+    TextView usernameTextView;
+    TextView emailTextView;
+    TextView cityTextView;
 
-    public static int TEXTSIZE = 18;
+    final static int TEXTSIZE = 18;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,30 +33,16 @@ public class ViewProfileActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        if(intent.hasExtra("Username")) {
-            MyUsername = intent.getStringExtra("Username");
+        if(intent.hasExtra("username")) {
+            accountUsername = intent.getStringExtra("username");
         }
 
-        /*try {
-            FileInputStream inputFile = openFileInput(MyUsername);
-            BufferedReader input = new BufferedReader(new InputStreamReader(inputFile));
-
-            Gson gson = new Gson();
-
-            Type listType = new TypeToken<ArrayList<Account>>() {
-            }.getType();
-
-            Accounts = gson.fromJson(input, listType);
-        }
-
-        catch(FileNotFoundException ex) {
-            ex.printStackTrace();
-        }*/
+        ArrayList<Account> allAccounts = new ArrayList<>();
 
         ElasticSearchAppController.GetAccountTask getAccountTask = new ElasticSearchAppController.GetAccountTask();
-        getAccountTask.execute(MyUsername);
+        getAccountTask.execute(accountUsername);
         try {
-            Accounts.addAll(getAccountTask.get());
+            allAccounts.addAll(getAccountTask.get());
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -73,26 +50,25 @@ public class ViewProfileActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        for(Account account : Accounts) {
-            if(account.getUsername().equals(MyUsername)){
-                MyAccount = account;
+        for(Account account : allAccounts) {
+            if(account.getUsername().equals(accountUsername)){
+                accountToView = account;
             }
         }
 
-        username = (TextView) findViewById(R.id.username);
-        String dispUsername = "Username: " + MyAccount.getUsername();
-        username.setTextSize(TEXTSIZE);
-        username.setText(dispUsername);
+        usernameTextView = (TextView) findViewById(R.id.usernameTextView);
+        String dispUsername = "Username: " + accountToView.getUsername();
+        usernameTextView.setTextSize(TEXTSIZE);
+        usernameTextView.setText(dispUsername);
 
-        email = (TextView) findViewById(R.id.email);
-        String dispEmail = "Email: " + MyAccount.getEmail();
-        email.setTextSize(TEXTSIZE);
-        email.setText(dispEmail);
+        emailTextView = (TextView) findViewById(R.id.emailTextView);
+        String dispEmail = "Email: " + accountToView.getEmail();
+        emailTextView.setTextSize(TEXTSIZE);
+        emailTextView.setText(dispEmail);
 
-        city = (TextView) findViewById(R.id.city);
-        String dispAddress = "Address: " + MyAccount.getCity();
-        city.setTextSize(TEXTSIZE);
-        city.setText(dispAddress);
-
+        cityTextView = (TextView) findViewById(R.id.cityTextView);
+        String dispAddress = "Address: " + accountToView.getCity();
+        cityTextView.setTextSize(TEXTSIZE);
+        cityTextView.setText(dispAddress);
     }
 }

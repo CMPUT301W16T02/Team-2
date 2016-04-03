@@ -32,9 +32,7 @@ public class MyItemsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_items);
 
-
         Intent intent = getIntent();
-
 
         if(intent.hasExtra("myUsername")) {
             myUsername = intent.getStringExtra("myUsername");

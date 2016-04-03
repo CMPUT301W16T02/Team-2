@@ -5,19 +5,22 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/usernameTextView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="username" />
 
     <TextView
-        android:id="@+id/email"
+        android:id="@+id/emailTextView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="email" />
 
     <TextView
-        android:id="@+id/city"
+        android:id="@+id/cityTextView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="city" />
 
 
 
