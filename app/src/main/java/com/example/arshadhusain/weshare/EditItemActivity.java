@@ -84,6 +84,15 @@ public class EditItemActivity extends AppCompatActivity {
             }
         });
 
+        Button removePicture = (Button) findViewById(R.id.removePicture);
+
+        removePicture.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                removePicture(v);
+            }
+        });
+
         Button delete = (Button)findViewById(R.id.deleteButton);
 
         delete.setOnClickListener(new View.OnClickListener() {
@@ -153,6 +162,29 @@ public class EditItemActivity extends AppCompatActivity {
 
         itemToEdit.setName(newName);
         itemToEdit.setDescription(newDesc);
+
+        //PUT REQUEST
+
+        ElasticSearchAppController.EditItemTask editItemTask = new ElasticSearchAppController.EditItemTask();
+        editItemTask.execute(itemToEdit);
+
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    /**
+     * Removes picture from item
+     *
+     * @param view
+     */
+    public void removePicture(View view){
+
+        String newName = name.getText().toString();
+        String newDesc = description.getText().toString();
+
+        itemToEdit.setName(newName);
+        itemToEdit.setDescription(newDesc);
+        itemToEdit.removeThumbnail();
 
         //PUT REQUEST
 

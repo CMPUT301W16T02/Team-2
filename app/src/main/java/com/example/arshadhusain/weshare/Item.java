@@ -145,6 +145,12 @@ public class Item {
         }
     }
 
+    public void removeThumbnail(){
+        if (thumbnail == null && thumbnailBase64 != null){
+            thumbnail = null;
+        }
+    }
+
     public Bitmap getThumbnail(){
         if (thumbnail == null && thumbnailBase64 != null){
             byte[] decodeString = Base64.decode(thumbnailBase64, Base64.DEFAULT);
