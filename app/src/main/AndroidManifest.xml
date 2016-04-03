@@ -1,19 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.arshadhusain.weshare">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COURSE_LOCATION" />
 
-    <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity
-            android:name=".WelcomeActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+    <application android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:label="@string/app_name"
+        android:supportsRtl="true" android:theme="@style/AppTheme">
+        <activity android:name=".WelcomeActivity" android:label="@string/app_name" android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,14 +28,22 @@
         <activity android:name=".SearchResultsActivity" />
         <activity android:name=".BidAcceptActivity" />
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
+        <activity android:name=".KeywordSearchActivity" android:label="@string/title_activity_keyword_search"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+
+        <activity android:name="com.example.arshadhusain.weshare.SetLocation"
+            android:label="@string/title_activity_set_location">
+        </activity>
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDv0TMGnPv4LAl2Fx2xEO-xbIkys1cpFo4" />
 
-        <activity
-            android:name=".KeywordSearchActivity"
-            android:label="@string/title_activity_keyword_search"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
     </application>
 
 </manifest>

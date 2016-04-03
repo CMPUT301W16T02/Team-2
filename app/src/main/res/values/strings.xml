@@ -4,4 +4,5 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_item_info">ItemInfoActivity</string>
     <string name="title_activity_keyword_search">KeywordSearchActivity</string>
+    <string name="title_activity_set_location">Map</string>
 </resources>
