@@ -26,19 +26,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="My Items With Bids" />
-<!--
+
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My Borrowed Items"
-        android:id="@+id/MyBorrowedItems" />
--->
-    <Button
-        android:id="@+id/MyBorrows"
+        android:id="@+id/myBorrowingsButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="My Borrowings" />
 
+
+    <Button
+        android:id="@+id/myBorrowedItemsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Borrowed Items"/>
 
     <Button
         android:id="@+id/ShowAllItems"

@@ -41,7 +41,12 @@
         <activity
             android:name=".KeywordSearchActivity"
             android:label="@string/title_activity_keyword_search"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MyBorrowedItemsActivity"
+            android:label="@string/title_activity_my_borrowed_items"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MyBorrowingsActivity"></activity>
     </application>
 
 </manifest>
