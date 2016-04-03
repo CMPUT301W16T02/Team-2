@@ -29,11 +29,18 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Keyword Search"
+            android:id="@+id/KeywordSearchButton"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Filter unborrowed items"
             android:id="@+id/searchButton"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
     <TextView
@@ -46,7 +53,7 @@
         android:id="@+id/allItemsList"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.00"
+        android:layout_weight="0.02"
         android:scrollbars="vertical" >
 
     </ListView>

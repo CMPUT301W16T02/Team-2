@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by arshadhusain on 16-03-14.
@@ -34,6 +35,24 @@ public class MyItemListWithBids extends AppCompatActivity {
         MyItemsWithBidsList = (ListView) findViewById(R.id.MyItemsBids);
 
         System.out.printf("ITEM LIST BIDS USERNAME: %s\n", MyUsername);
+
+        NavigationMainActivity.allBids.clear();
+
+
+        ElasticSearchAppController.GetBidsTask getBidsTask = new ElasticSearchAppController.GetBidsTask();
+        getBidsTask.execute();
+
+        try {
+            NavigationMainActivity.allBids.addAll(getBidsTask.get());
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        System.out.println("NUMBER OF FOUND BIDS FOR THIS USER");
+
+        System.out.printf("%d\n", NavigationMainActivity.allBids.size());
 
         myItemsWithBids.clear();
         for (int x=0; x<NavigationMainActivity.allBids.size(); x++) {

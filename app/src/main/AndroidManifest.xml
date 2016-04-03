@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.arshadhusain.weshare">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,10 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SignInActivity"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".CreateProfileActivity" />
         <activity android:name=".MainItemListActivity" />
         <activity android:name=".AddItemActivity" />
@@ -37,7 +35,16 @@
         <activity android:name=".MyItemListWithBids" />
         <activity android:name=".ItemInfoActivity" />
         <activity android:name=".SearchResultsActivity" />
-        <activity android:name=".BidAcceptActivity"></activity>
+        <activity android:name=".BidAcceptActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDv0TMGnPv4LAl2Fx2xEO-xbIkys1cpFo4" />
+
+        <activity
+            android:name=".KeywordSearchActivity"
+            android:label="@string/title_activity_keyword_search"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 >>>>>>> master
 

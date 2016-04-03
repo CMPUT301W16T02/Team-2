@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 //MyBiddingActivity view activity
 
@@ -48,6 +49,23 @@ public class MyBiddingActivity extends AppCompatActivity {
 
 
         //ArrayList<Bid> ItemBids = new ArrayList<Bid>();
+        NavigationMainActivity.allBids.clear();
+
+        ElasticSearchAppController.GetBidsTask getBidsTask = new ElasticSearchAppController.GetBidsTask();
+        getBidsTask.execute();
+
+        try {
+            NavigationMainActivity.allBids.addAll(getBidsTask.get());
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        System.out.println("NUMBER OF FOUND BIDS FOR THIS USER");
+
+        System.out.printf("%d\n", NavigationMainActivity.allBids.size());
+
         myBids.clear();
         for (int x=0; x<NavigationMainActivity.allBids.size(); x++) {
             //System.out.println(NavigationMainActivity.allBids.get(x).getItem());

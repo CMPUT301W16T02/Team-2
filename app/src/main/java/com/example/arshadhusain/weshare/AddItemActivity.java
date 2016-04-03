@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 /**
  * <p>AddItemActivity allows user to add an item. Passes intent of user and
@@ -22,6 +25,7 @@ public class AddItemActivity extends AppCompatActivity {
     private EditText description;
     private String owner = "Username";
     public Context context1;
+    private ArrayList<Item> items = new ArrayList<Item>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +78,30 @@ public class AddItemActivity extends AppCompatActivity {
 
         Item newItem = new Item(itemName, itemDesc, owner);
 
-        NavigationMainActivity.allItems.add(newItem);
+        /*NavigationMainActivity.allItems.add(newItem);
         NavigationMainActivity.saveInFile(context1);
-        System.out.printf("%d\n", NavigationMainActivity.allItems.size());
+        System.out.printf("%d\n", NavigationMainActivity.allItems.size());*/
         //NavigationMainActivity.addAndSaveToItems(newItem);
-        setResult(RESULT_OK);
-        finish();
+
+        if(itemName.isEmpty() && itemDesc.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Please enter your information into each field", Toast.LENGTH_LONG).show();
+
+
+        } else if(itemName.isEmpty())
+        {
+            Toast.makeText(getApplicationContext(), "Please enter an item name", Toast.LENGTH_LONG).show();
+
+        } else if (itemDesc.isEmpty())
+        {
+            Toast.makeText(getApplicationContext(), "Please enter an item description", Toast.LENGTH_LONG).show();
+
+        } else {
+
+            ElasticSearchAppController.AddItemTask addItemTask = new ElasticSearchAppController.AddItemTask();
+            addItemTask.execute(newItem);
+            setResult(RESULT_OK);
+            finish();
+        }
     }
 
     /**

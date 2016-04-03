@@ -23,6 +23,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * This is the main screen once the user has signed in. This activity
@@ -50,6 +51,18 @@ public class NavigationMainActivity extends AppCompatActivity {
         super.onStart();
         //loadItemsFromFile();
         //loadBidsFromFile();
+        allItems.clear();
+        ElasticSearchAppController.GetMyItemsTask getMyItemsTask = new ElasticSearchAppController.GetMyItemsTask();
+        getMyItemsTask.execute("");
+
+        try {
+            allItems.addAll(getMyItemsTask.get());
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -59,14 +72,13 @@ public class NavigationMainActivity extends AppCompatActivity {
         context = getApplicationContext();
         context1 = getApplicationContext();
 
-        loadItemsFromFile(context);
+        //loadItemsFromFile(context);
         loadBidsFromFile(context1);
-
 
 
         Intent intent = getIntent();
 
-        if(intent.hasExtra("Username")) {
+        if (intent.hasExtra("Username")) {
             MyUsername = intent.getStringExtra("Username");
         }
 
@@ -83,17 +95,17 @@ public class NavigationMainActivity extends AppCompatActivity {
     public void onCreateSetup() {
         setContentView(R.layout.navigation_main_activity);
         bidNotify.clear();
-        for (int x=0; x<NavigationMainActivity.allBids.size(); x++) {
+        /*for (int x=0; x<NavigationMainActivity.allBids.size(); x++) {
             //System.out.println(NavigationMainActivity.allBids.get(x).getItem());
             //System.out.printf("%s\n", NavigationMainActivity.allBids.get(x).getItem());
             System.out.printf("%s\n", NavigationMainActivity.allBids.get(x).getBidder());
             System.out.printf("%s\n", MyUsername);
 
 
-            if((NavigationMainActivity.allBids.get(x).getItemOwner()).equals(MyUsername))
+            if((allBids.get(x).getItemOwner()).equals(MyUsername))
             {
 
-                Bid bidToCopy = NavigationMainActivity.allBids.get(x);
+                Bid bidToCopy = allBids.get(x);
                 System.out.printf("%s\n", bidToCopy.getItem());
                 bidNotify.add(bidToCopy);
             }
@@ -102,20 +114,19 @@ public class NavigationMainActivity extends AppCompatActivity {
         if(!bidNotify.isEmpty()) {
             Toast.makeText(getApplicationContext(), "You've got new bid requests!", Toast.LENGTH_LONG).show();
 
-        }
+        }*/
     }
 
     /**
      * Method connects to all the buttons and sets up their usage.
      */
     public void onCreateListeners() {
-        Button EditProfile = (Button)findViewById(R.id.EditProfile);
-        Button MyItems = (Button)findViewById(R.id.MyItems);
-        Button MyBorrows = (Button)findViewById(R.id.MyBorrows);
-        Button ItemMarketplace = (Button)findViewById(R.id.ShowAllItems);
-        Button MyBids = (Button)findViewById(R.id.MyBids);
-        Button MyItemsWithBids = (Button)findViewById(R.id.MyItemsWithBids);
-
+        Button EditProfile = (Button) findViewById(R.id.EditProfile);
+        Button MyItems = (Button) findViewById(R.id.MyItems);
+        Button MyBorrows = (Button) findViewById(R.id.MyBorrows);
+        Button ItemMarketplace = (Button) findViewById(R.id.ShowAllItems);
+        Button MyBids = (Button) findViewById(R.id.MyBids);
+        Button MyItemsWithBids = (Button) findViewById(R.id.MyItemsWithBids);
 
 
         EditProfile.setOnClickListener(new View.OnClickListener() {
@@ -170,7 +181,6 @@ public class NavigationMainActivity extends AppCompatActivity {
         });
 
 
-
         MyBorrows.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -217,6 +227,7 @@ public class NavigationMainActivity extends AppCompatActivity {
 
     /**
      * Method loads the list of all items from the local save file.
+     *
      * @param context the context of the calling activity.
      */
     private void loadItemsFromFile(Context context) {
@@ -226,7 +237,8 @@ public class NavigationMainActivity extends AppCompatActivity {
             Gson gson = new Gson();
 
             // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html 01-19 2016
-            Type listType = new TypeToken<ArrayList<Item>>() {}.getType();
+            Type listType = new TypeToken<ArrayList<Item>>() {
+            }.getType();
             allItems = gson.fromJson(in, listType);
             System.out.printf("LOADING ITEMS FROM FILE\n");
 
@@ -243,10 +255,11 @@ public class NavigationMainActivity extends AppCompatActivity {
 
     /**
      * Method loads the list of all bids from the local save file.
+     *
      * @param context the context of the calling activity.
      */
     private void loadBidsFromFile(Context context) {
-        try {
+        /*try {
             FileInputStream fis = context.openFileInput(FILENAME1);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             Gson gson = new Gson();
@@ -265,11 +278,20 @@ public class NavigationMainActivity extends AppCompatActivity {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             throw new RuntimeException();
-        }
+        }*/
+
+
+        /*for (int x=0; x<allBids.size(); x++) {
+            System.out.println(allBids.get(x).getItem());
+
+
+        }*/
+
     }
 
     /**
      * saves the list of all items to the local save file.
+     *
      * @param context the context of the calling activity.
      */
     public static void saveInFile(Context context) {
@@ -301,16 +323,17 @@ public class NavigationMainActivity extends AppCompatActivity {
      * Method adds an item to the list of all items and saves to the local
      * save file.
      *
-     * @deprecated
      * @param newItem the item to be added
+     * @deprecated
      */
     public static void addAndSaveToItems(Item newItem) {
         NavigationMainActivity.allItems.add(newItem);
         saveInFile(context);
 
     }
+
     public static void saveBidsToFile(Context context) {
-        try {
+        /*try {
             FileOutputStream fos = context.openFileOutput(FILENAME1,
                     0);
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
@@ -324,7 +347,8 @@ public class NavigationMainActivity extends AppCompatActivity {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             throw new RuntimeException();
-        }
+        }*/
+
 
     }
 
@@ -337,4 +361,5 @@ public class NavigationMainActivity extends AppCompatActivity {
             saveInFile();
         }
     }*/
+
 }

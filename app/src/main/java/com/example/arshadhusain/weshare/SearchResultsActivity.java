@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.regex.Pattern;
 
 /**
  * <p>Allows user to search for specific item. Passes intent
@@ -27,6 +29,9 @@ public class SearchResultsActivity extends AppCompatActivity {
     private static int selectedItemPos;
     private static int origItemPos;
     static final int CHANGE_MADE = 1;
+    private ArrayList<SearchResult> keywordSearchResults = new ArrayList<SearchResult>();
+    String[] individualWords;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,10 @@ public class SearchResultsActivity extends AppCompatActivity {
         if(intent.hasExtra("activeUser")) {
             activeUser = intent.getStringExtra("activeUser");
         }
+        if(intent.hasExtra("stringOfWords")) {
+            individualWords = intent.getStringArrayExtra("stringOfWords");
+        }
+
 
         searchResultsList = (ListView) findViewById(R.id.searchResultsList);
 
@@ -76,9 +85,45 @@ public class SearchResultsActivity extends AppCompatActivity {
         return searchResults;
     }
 
-    /**
-     * Sets adapter of list item
-     */
+    public ArrayList<SearchResult> getKeywordSearchResults() {
+        ArrayList<SearchResult> keywordSearchResults = new ArrayList<SearchResult>();
+        for(int i=0; i<NavigationMainActivity.allItems.size(); i++){
+            int itemStatus = NavigationMainActivity.allItems.get(i).getStatus();
+            String itemOwner = NavigationMainActivity.allItems.get(i).getOwner();
+            boolean containsWord = true;
+            if(itemStatus!=2 && !itemOwner.equals(activeUser)){
+                //NavigationMainActivity.allItems.get(1).getOwner().con
+                //add CONTAINS here
+                int keywordIterator = 0;
+                System.out.println(NavigationMainActivity.allItems.get(i).getDescription());
+
+                while(containsWord == true)
+                {
+                    containsWord = NavigationMainActivity.allItems.get(i).getDescription().toString().toLowerCase().contains(individualWords[keywordIterator].toLowerCase());
+                    //containsWord = Pattern.compile(Pattern.quote(NavigationMainActivity.allItems.get(i).getDescription().toString()), Pattern.CASE_INSENSITIVE).matcher(individualWords[keywordIterator]).find();
+
+                    System.out.println(containsWord);
+                    if(keywordIterator == individualWords.length -1)
+                    {
+                        break;
+                    }
+                    keywordIterator++;
+                }
+                if (containsWord == true) {
+                    System.out.println("****INSIDE ADDING SEARCH RESULT WORDS****");
+                    SearchResult newResult = new SearchResult(NavigationMainActivity.allItems.get(i), i);
+                    searchResults.add(newResult);
+                }
+
+            }
+        }
+        return searchResults;
+
+    }
+
+        /**
+         * Sets adapter of list item
+         */
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -128,8 +173,16 @@ public class SearchResultsActivity extends AppCompatActivity {
             keyword = "";
         }
         */
+        if(individualWords != null)
+        {
+            searchResults = getKeywordSearchResults();
+            System.out.println("****THERE ARE SEARCH KEYWORDS****");
 
-        searchResults = getSearchResults();
+        } else if(individualWords == null) {
+            searchResults = getSearchResults();
+            System.out.println("****NO SEARCH KEYWORDS****");
+        }
+
 
         adapter = new ArrayAdapter<SearchResult>(this,
                 R.layout.list_item, searchResults);
