@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/CreateProfileInput1"
+        android:id="@+id/usernameField"
         android:layout_width="match_parent"
         android:hint="Username"
         android:inputType="text"
@@ -14,7 +14,7 @@
     </EditText>
 
     <EditText
-        android:id="@+id/CreateProfileInput2"
+        android:id="@+id/emailField"
         android:layout_width="match_parent"
         android:hint="Email"
         android:inputType="text"
@@ -23,16 +23,16 @@
     </EditText>
 
     <EditText
-        android:id="@+id/CreateProfileInput3"
+        android:id="@+id/cityField"
         android:layout_width="match_parent"
         android:hint="City"
         android:inputType="text"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
     </EditText>
 
     <Button
-    android:id="@+id/button"
+    android:id="@+id/createAccountButton"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="Create Account" />

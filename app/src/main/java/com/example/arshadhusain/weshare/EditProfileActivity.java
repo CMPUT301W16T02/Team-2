@@ -42,7 +42,7 @@ public class EditProfileActivity extends AppCompatActivity {
     EditText city;
     Button SaveButton;
     public static int TEXTSIZE = 18;
-    private ArrayList<Account> matchingAccounts = new ArrayList<Account>();
+    private ArrayList<Account> matchingAccounts = new ArrayList<>();
 
 
 
@@ -53,8 +53,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        if(intent.hasExtra("Username")) {
-            MyUsername = intent.getStringExtra("Username");
+        if(intent.hasExtra("myUsername")) {
+            MyUsername = intent.getStringExtra("myUsername");
         }
 
         ElasticSearchAppController.GetAccountTask getAccountTask = new ElasticSearchAppController.GetAccountTask();
