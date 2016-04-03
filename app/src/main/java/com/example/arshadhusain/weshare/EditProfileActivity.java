@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -80,15 +81,19 @@ public class EditProfileActivity extends AppCompatActivity {
 
                 String newEmail = emailInput.getText().toString();
                 String newCity = cityInput.getText().toString();
-
-                myAccount.setEmail(newEmail);
-                myAccount.setCity(newCity);
-
-                //PUT REQUEST
-                ElasticSearchAppController.EditAccountTask editAccountTask = new ElasticSearchAppController.EditAccountTask();
-                editAccountTask.execute(myAccount);
-
-                finish();
+                if (newEmail.isEmpty() && newCity.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "Please enter your information into each field", Toast.LENGTH_LONG).show();
+                } else if (newEmail.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "Please enter your email", Toast.LENGTH_LONG).show();
+                } else if (newCity.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Please enter your city", Toast.LENGTH_LONG).show();
+                } else {
+                    myAccount.setEmail(newEmail);
+                    myAccount.setCity(newCity);
+                    ElasticSearchAppController.EditAccountTask editAccountTask = new ElasticSearchAppController.EditAccountTask();
+                    editAccountTask.execute(myAccount);
+                    finish();
+                }
             }
         });
     }

@@ -1,19 +1,15 @@
 package com.example.arshadhusain.weshare;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -22,81 +18,77 @@ import java.util.concurrent.ExecutionException;
  * Allows user to edit item name and description.
  * Passes intent of item to edit.
  *
- * @Author: Chris
- * @Version: 1.0
+ * @author: Christopher, Arshad
+ * @version: 2.0
  */
 
 public class EditItemActivity extends AppCompatActivity {
-
-    private EditText name;
-    private EditText description;
-    private ListView bidsList;
-    public static ArrayList<Bid> bidsOnItem = new ArrayList<Bid>();
-
-
-    private int itemPos;
+    private String itemName;
     private Item itemToEdit;
-    private String activeUser;
+    private String myUsername;
 
-    private int selectedItemPos;
+    private ListView bidsListView;
+    private EditText nameField;
+    private EditText descriptionField;
 
-    public Context context1;
-    final Context context = this;
+    final static int CHANGE_MADE = 1;
 
+    public static ArrayList<Bid> bidsOnItem = new ArrayList<>();
 
-
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_item);
 
-        //context1 = NavigationMainActivity.getContext();
-
         Intent intent = getIntent();
 
-        if(intent.hasExtra("itemPos")) {
-            itemPos = intent.getIntExtra("itemPos", itemPos);
+        if(intent.hasExtra("itemName")) {
+            itemName = intent.getStringExtra("itemName");
         }
-        /*
-        if(intent.hasExtra("activeUser")) {
-            activeUser = intent.getStringExtra("activeUser");
-        }*/
+        if(intent.hasExtra("myUsername")) {
+            myUsername = intent.getStringExtra("myUsername");
+        }
 
-        //itemToEdit = NavigationMainActivity.allItems.get(itemPos);
+        ElasticSearchAppController.GetMyItemsTask getMyItemsTask = new ElasticSearchAppController.GetMyItemsTask();
+        getMyItemsTask.execute(myUsername);
+        ArrayList<Item> myItems = new ArrayList<>();
+        try {
+            myItems.addAll(getMyItemsTask.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
-        name = (EditText) findViewById(R.id.itemName);
-        description = (EditText) findViewById(R.id.itemDesc);
-        bidsList = (ListView) findViewById(R.id.bidsList);
-        itemToEdit = MyItemsActivity.myItems.get(itemPos);
+        for (Item item : myItems) {
+            if (item.getName().equals(itemName) && item.getOwner().equals(myUsername)) {
+                itemToEdit = item;
+            }
+        }
+
+        nameField = (EditText) findViewById(R.id.itemNameField);
+        descriptionField = (EditText) findViewById(R.id.itemDescField);
+        bidsListView = (ListView) findViewById(R.id.bidsListView);
+
+        nameField.setText(itemToEdit.getName());
+        descriptionField.setText(itemToEdit.getDescription());
 
 
-        name.setText(itemToEdit.getName());
-        description.setText(itemToEdit.getDescription());
+        Button saveButton = (Button) findViewById(R.id.saveButton);
 
-
-        Button saveEdit = (Button) findViewById(R.id.saveButton);
-
-        saveEdit.setOnClickListener(new View.OnClickListener() {
+        saveButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                editItem(v);
+                saveEdit(v);
             }
         });
 
-        Button delete = (Button)findViewById(R.id.deleteButton);
+        Button deleteButton = (Button)findViewById(R.id.deleteButton);
 
-        delete.setOnClickListener(new View.OnClickListener() {
+        deleteButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
                 deleteItem(v);
-            }
-        });
-
-        Button cancel = (Button)findViewById(R.id.cancelButton);
-
-        cancel.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                cancel(v);
             }
         });
 
@@ -115,10 +107,7 @@ public class EditItemActivity extends AppCompatActivity {
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectedItemPos = position;
-
-            viewBid(bidsOnItem.get(selectedItemPos));
-
+            viewBid(bidsOnItem.get(position));
         }
     };
 
@@ -128,67 +117,52 @@ public class EditItemActivity extends AppCompatActivity {
         super.onStart();
 
         Intent intent = getIntent();
-        if(intent.hasExtra("activeUser")) {
-            activeUser = intent.getStringExtra("activeUser");
+        if(intent.hasExtra("myUsername")) {
+            myUsername = intent.getStringExtra("myUsername");
         }
-        //THIS COMMENTED CODE IS VERY IMPORTANT
         getItemsBids();
-        ArrayAdapter<Bid> adapter = new ArrayAdapter<Bid>(this,
-                R.layout.list_item, bidsOnItem);
-        bidsList.setAdapter(adapter);
-        bidsList.setOnItemClickListener(onItemClickListener);
+        ArrayAdapter<Bid> adapter = new ArrayAdapter<>(this, R.layout.list_item, bidsOnItem);
+        bidsListView.setAdapter(adapter);
+        bidsListView.setOnItemClickListener(onItemClickListener);
     }
 
     /**
      * Setup view for edit item
-     *
      * @param view
      */
-    public void editItem(View view){
+    public void saveEdit(View view){
 
-        String newName = name.getText().toString();
-        String newDesc = description.getText().toString();
+        String newName = nameField.getText().toString();
+        String newDesc = descriptionField.getText().toString();
 
         itemToEdit.setName(newName);
         itemToEdit.setDescription(newDesc);
 
-        //PUT REQUEST
+        if(itemToEdit.getName().isEmpty() && itemToEdit.getDescription().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Please enter your information into each field", Toast.LENGTH_LONG).show();
+        } else if (itemToEdit.getName().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Please enter the item name", Toast.LENGTH_LONG).show();
+        } else if (itemToEdit.getDescription().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Please enter the item description", Toast.LENGTH_LONG).show();
+        } else {
+            ElasticSearchAppController.EditItemTask editItemTask = new ElasticSearchAppController.EditItemTask();
+            editItemTask.execute(itemToEdit);
 
-        ElasticSearchAppController.EditItemTask editItemTask = new ElasticSearchAppController.EditItemTask();
-        editItemTask.execute(itemToEdit);
-
-        setResult(RESULT_OK);
-        finish();
+            setResult(CHANGE_MADE);
+            finish();
+        }
     }
 
     /**
      * Remove item
-     * Remove item for allItems
-     *
-     * @See MainItemListActivity
      * @param view
      */
     public void deleteItem(View view){
-        //NavigationMainActivity.allItems.remove(itemToEdit);
-
-        //NavigationMainActivity.saveInFile(context1);
-        //System.out.printf("%d\n", NavigationMainActivity.allItems.size());
-        //Intent intent = new Intent(this, MyItemsActivity.class);
 
         ElasticSearchAppController.DeleteItemTask deleteItemTask = new ElasticSearchAppController.DeleteItemTask();
         deleteItemTask.execute(itemToEdit);
-        //startActivityForResult(intent, 1);
-        setResult(RESULT_OK);
-        finish();
-    }
 
-    /**
-     * Stop item edit
-     *
-     * @param view
-     */
-    public void cancel(View view) {
-        setResult(RESULT_CANCELED);
+        setResult(CHANGE_MADE);
         finish();
     }
 
@@ -197,10 +171,7 @@ public class EditItemActivity extends AppCompatActivity {
         itemToEdit.setStatus(0);
         itemToEdit.setBorrower("");
 
-        //NavigationMainActivity.saveInFile(context1);
-
         //PUT REQUEST
-
         ElasticSearchAppController.EditItemTask editItemTask = new ElasticSearchAppController.EditItemTask();
         editItemTask.execute(itemToEdit);
 
@@ -209,16 +180,6 @@ public class EditItemActivity extends AppCompatActivity {
     }
 
     public void getItemsBids() {
-        /*
-        ArrayList<Bid> itemBids = new ArrayList<Bid>();
-        for(int i=0; i<NavigationMainActivity.allBids.size(); i++){
-            String itemOwner = NavigationMainActivity.allBids.get(i).getItemOwner();
-            String itemName = NavigationMainActivity.allBids.get(i).getItem();
-            if(itemOwner.equals(activeUser) &&  itemName.equals(itemToEdit.getName())){
-                itemBids.add(NavigationMainActivity.allBids.get(i));
-            }
-        }
-        return itemBids;*/
         bidsOnItem.clear();
         ArrayList<Bid> allBids = new ArrayList<Bid>();
 
@@ -256,6 +217,7 @@ public class EditItemActivity extends AppCompatActivity {
         Intent intent = new Intent(this, BidAcceptActivity.class);
         intent.putExtra("itemName", itemName);
         intent.putExtra("itemOwner", itemOwner);
+        intent.putExtra("bidderName", bidToView.getBidder());
 
         startActivityForResult(intent, 1);
     }

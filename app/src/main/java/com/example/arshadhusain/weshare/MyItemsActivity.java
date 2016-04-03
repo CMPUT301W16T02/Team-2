@@ -17,18 +17,15 @@ import java.util.concurrent.ExecutionException;
  *  Started from NavigationMainActivity
  *  Can start EditItemActivity
  *
- *  @author Badran
- *  @version  1.0
+ *  @author Badran, Arshad, Christopher
+ *  @version  2.0
  */
 public class MyItemsActivity extends AppCompatActivity {
 
-    public static ArrayList<Item> myItems = new ArrayList<Item>();
+    public static ArrayList<Item> myItems = new ArrayList<>();
     public ArrayAdapter<Item> adapter;
-    private String MyUsername;
-
-    private ListView myItemsList;
-
-    private static int selectedItemPos;
+    private String myUsername;
+    final static int CHANGE_MADE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,51 +36,35 @@ public class MyItemsActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
 
-        if(intent.hasExtra("Username")) {
-            MyUsername = intent.getStringExtra("Username");
+        if(intent.hasExtra("myUsername")) {
+            myUsername = intent.getStringExtra("myUsername");
         }
 
-        myItemsList = (ListView) findViewById(R.id.MyItemList);
+        ListView myItemsList = (ListView) findViewById(R.id.myItemsListView);
 
         myItemsList.setOnItemClickListener(onItemClickListener);
 
         myItems.clear();
-        /*for (int x=0; x<NavigationMainActivity.allItems.size(); x++) {
 
-            System.out.printf("allItems: %s MyUsername %s\n", NavigationMainActivity.allItems.get(x).getOwner(), MyUsername);
-
-            if((NavigationMainActivity.allItems.get(x).getOwner()).equals(MyUsername))
-            {
-
-                Item ItemToCopy = NavigationMainActivity.allItems.get(x);
-                System.out.printf("allItems: %s MyUsername %s\n", NavigationMainActivity.allItems.get(x).getOwner(), MyUsername);
-                myItems.add(ItemToCopy);
-            }
-
-        }*/
         ElasticSearchAppController.GetMyItemsTask getMyItemsTask = new ElasticSearchAppController.GetMyItemsTask();
-        getMyItemsTask.execute(MyUsername);
+        getMyItemsTask.execute(myUsername);
 
         try {
             myItems.addAll(getMyItemsTask.get());
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        System.out.println("NUMBER OF FOUND BIDS FOR THIS USER");
+        System.out.println("NUMBER OF FOUND ITEMS FOR THIS USER");
 
         System.out.printf("%d\n", myItems.size());
 
-        for (int x=0; x<myItems.size(); x++) {
-            System.out.println(myItems.get(x).getName());
-
-
+        for (Item item: myItems) {
+            System.out.println(item.getName());
         }
 
-        adapter = new ArrayAdapter<Item>(this,
-                R.layout.list_item, myItems);
+        adapter = new ArrayAdapter<Item>(this, R.layout.list_item, myItems);
         myItemsList.setAdapter(adapter);
     }
 
@@ -93,32 +74,26 @@ public class MyItemsActivity extends AppCompatActivity {
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectedItemPos = position;
-            editItem();
+            editItem(myItems.get(position).getName());
         }
     };
 
     /**
      * Method starts the EditItemActivity to edit an item
      */
-    public void editItem() {
+    public void editItem(String itemName) {
         Intent intent = new Intent(this, EditItemActivity.class);
-        intent.putExtra("itemPos", selectedItemPos);
-        intent.putExtra("activeUser", MyUsername);
-
-        startActivityForResult(intent, 1);
-        finish();
-        //adapter.notifyDataSetChanged();
+        intent.putExtra("itemName", itemName);
+        intent.putExtra("myUsername", myUsername);
+        startActivityForResult(intent, CHANGE_MADE);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         System.out.println("INSIDE onActivityResult");
-        if (requestCode == 1) {
-
+        if (requestCode == CHANGE_MADE) {
             adapter.notifyDataSetChanged();
             setResult(RESULT_OK);
-            //NavigationMainActivity.saveInFile();
         }
     }
 

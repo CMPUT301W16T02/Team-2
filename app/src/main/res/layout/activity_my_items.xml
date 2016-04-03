@@ -10,12 +10,12 @@
         android:layout_height="0dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="My Items"
-        android:id="@+id/textView2"
+        android:id="@+id/myItemsTitle"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.08" />
 
     <ListView
-        android:id="@+id/MyItemList"
+        android:id="@+id/myItemsListView"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
