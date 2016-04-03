@@ -11,7 +11,7 @@
 //    Double amount;
 //
 //    public MakeBidActivityTest(){
-//        super(MakeBidActivity.class);
+//        super(MyBiddingActivity.class);
 //    }
 //
 //    @Override
@@ -30,10 +30,7 @@
 //        assertTrue(bid.hasAmount());
 //
 //        bid.setAmount((double) 10);
-//
-//
 //    }
-//
 //
 //    public void testNetworkConnection() {
 //        // tests the network connection

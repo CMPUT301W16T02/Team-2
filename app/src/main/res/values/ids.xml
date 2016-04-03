@@ -2,4 +2,6 @@
 <resources>
     <item name="SignInInput" type="id" />
     <item name="sign_in" type="id" />
+    <item name="startextView" type="id" />
+    <item name="submitRateButton" type="id" />
 </resources>
