@@ -33,7 +33,5 @@ public class ItemInfoActivityTest extends ActivityInstrumentationTestCase2 {
         });
         getInstrumentation().waitForIdleSync();
 
-
-
     }
 }

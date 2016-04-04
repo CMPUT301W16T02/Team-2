@@ -16,6 +16,7 @@ public class EditProfileActivityTest extends ActivityInstrumentationTestCase2 {
         super.setUp();
     }
 
+
     public void testUpdateName() {
         String myName = "Jimmy";
         String myCity = "Edmonton";
