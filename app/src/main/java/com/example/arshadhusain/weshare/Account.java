@@ -36,7 +36,6 @@ public class Account {
         this.username = username;
         this.email = email;
         this.city = city;
-
     }
 
     public void setUsername(String username) {

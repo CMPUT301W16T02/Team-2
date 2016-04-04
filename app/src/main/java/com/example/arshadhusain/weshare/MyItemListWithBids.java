@@ -78,7 +78,7 @@ public class MyItemListWithBids extends AppCompatActivity {
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            editItem(myItemsWithBids.get(position).getItemOwner());
+            editItem(myItemsWithBids.get(position).getItem());
         }
     };
 
