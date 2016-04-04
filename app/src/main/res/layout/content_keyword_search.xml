@@ -6,7 +6,7 @@
         <EditText
             android:id="@+id/SearchInput"
             android:layout_width="match_parent"
-            android:hint="Search Keyword"
+            android:hint="Enter keywords"
             android:inputType="text"
             android:layout_height="wrap_content" >
 

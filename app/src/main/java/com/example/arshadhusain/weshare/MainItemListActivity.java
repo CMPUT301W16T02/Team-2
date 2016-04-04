@@ -54,14 +54,6 @@ public class MainItemListActivity extends AppCompatActivity {
             }
         });
 
-        Button searchButton = (Button)findViewById(R.id.searchButton);
-
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                searchItems();
-            }
-        });
-
         Button addItemButton = (Button)findViewById(R.id.addItemButton);
 
         addItemButton.setOnClickListener(new View.OnClickListener() {

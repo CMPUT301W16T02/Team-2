@@ -2,10 +2,7 @@ package com.example.arshadhusain.weshare;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,37 +18,22 @@ import java.util.ArrayList;
 
 public class KeywordSearchActivity extends AppCompatActivity {
     private EditText searchKeyword;
-    private ArrayList<SearchResult> searchResults = new ArrayList<SearchResult>();
-    private String activeUser;
+    private ArrayList<Item> searchResults = new ArrayList<>();
+    private String myUsername;
     static final int CHANGE_MADE = 1;
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.onCreateSetup();
         this.onCreateListeners();
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
     }
     public void onCreateSetup() {
         setContentView(R.layout.content_keyword_search);
         Intent intent = getIntent();
 
-        if(intent.hasExtra("activeUser")) {
-            activeUser = intent.getStringExtra("activeUser");
+        if(intent.hasExtra("myUsername")) {
+            myUsername = intent.getStringExtra("myUsername");
         }
 
         searchKeyword = (EditText) findViewById(R.id.SearchInput);
@@ -67,22 +49,16 @@ public class KeywordSearchActivity extends AppCompatActivity {
                 String[] individualWords = SearchKeyboard.split(" ");
 
                 sendSearchQuery(individualWords);
-
-
             }
         });
-
-
-
     }
 
     public void sendSearchQuery(String[] individualWords) {
         Intent intent = new Intent(this, SearchResultsActivity.class);
+        intent.putExtra("myUsername", myUsername);
         intent.putExtra("stringOfWords", individualWords);
 
         startActivityForResult(intent, CHANGE_MADE);
         finish();
     }
-
-
 }
