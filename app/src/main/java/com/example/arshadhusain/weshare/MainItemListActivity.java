@@ -27,7 +27,7 @@ public class MainItemListActivity extends AppCompatActivity {
     public ArrayAdapter<Item> adapter;
 
     private String myUsername;
-    static final int CHANGE_MADE = 1;
+    static final int CHANGE_MADE = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,25 +136,22 @@ public class MainItemListActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CHANGE_MADE) {
+        if (requestCode == CHANGE_MADE && resultCode == RESULT_OK) {
 
-            if (resultCode == RESULT_OK) {
+            allItems.clear();
 
-                allItems.clear();
+            ElasticSearchAppController.GetMyItemsTask getMyItemsTask = new ElasticSearchAppController.GetMyItemsTask();
 
-                ElasticSearchAppController.GetMyItemsTask getMyItemsTask = new ElasticSearchAppController.GetMyItemsTask();
+            getMyItemsTask.execute("");
 
-                getMyItemsTask.execute("");
-
-                try {
-                    allItems.addAll(getMyItemsTask.get());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-                adapter.notifyDataSetChanged();
+            try {
+                allItems.addAll(getMyItemsTask.get());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
             }
+            adapter.notifyDataSetChanged();
         }
     }
 
