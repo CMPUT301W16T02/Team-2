@@ -28,6 +28,7 @@ public class EditProfileActivity extends AppCompatActivity {
     Account myAccount;
     String myUsername;
     TextView usernameText;
+    TextView rating;
     EditText emailInput;
     EditText cityInput;
     Button saveButton;
@@ -71,6 +72,11 @@ public class EditProfileActivity extends AppCompatActivity {
         String usernameString = "Username: " + myAccount.getUsername();
         usernameText.setTextSize(TEXTSIZE);
         usernameText.setText(usernameString);
+
+        rating = (TextView) findViewById(R.id.ratingSys);
+        String dispRate = "User Rating: " + myAccount.showAverage();
+        rating.setTextSize(TEXTSIZE);
+        rating.setText(dispRate);
 
         emailInput.setText(myAccount.getEmail());
 
