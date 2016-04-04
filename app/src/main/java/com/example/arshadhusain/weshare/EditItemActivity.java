@@ -31,7 +31,7 @@ public class EditItemActivity extends AppCompatActivity {
     private EditText nameField;
     private EditText descriptionField;
 
-    final static int CHANGE_MADE = 1;
+    public ArrayAdapter<Bid> adapter;
 
     public static ArrayList<Bid> bidsOnItem = new ArrayList<>();
 
@@ -121,7 +121,7 @@ public class EditItemActivity extends AppCompatActivity {
             myUsername = intent.getStringExtra("myUsername");
         }
         getItemsBids();
-        ArrayAdapter<Bid> adapter = new ArrayAdapter<>(this, R.layout.list_item, bidsOnItem);
+        adapter = new ArrayAdapter<>(this, R.layout.list_item, bidsOnItem);
         bidsListView.setAdapter(adapter);
         bidsListView.setOnItemClickListener(onItemClickListener);
     }
@@ -171,7 +171,6 @@ public class EditItemActivity extends AppCompatActivity {
         itemToEdit.setStatus(0);
         itemToEdit.setBorrower("");
 
-        //PUT REQUEST
         ElasticSearchAppController.EditItemTask editItemTask = new ElasticSearchAppController.EditItemTask();
         editItemTask.execute(itemToEdit);
 
@@ -219,5 +218,12 @@ public class EditItemActivity extends AppCompatActivity {
         intent.putExtra("bidderName", bidToView.getBidder());
 
         startActivityForResult(intent, 1);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            adapter.notifyDataSetChanged();
+        }
     }
 }

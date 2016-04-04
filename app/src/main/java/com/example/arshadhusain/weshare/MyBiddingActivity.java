@@ -28,8 +28,6 @@ public class MyBiddingActivity extends AppCompatActivity {
 
     private ListView allBidsList;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

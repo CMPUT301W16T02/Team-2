@@ -101,9 +101,7 @@ public class BidAcceptActivity extends AppCompatActivity {
 
     public void viewBidderProfile(){
         Intent intent = new Intent(this, ViewProfileActivity.class);
-        String bidderName = itemBidder;
-        System.out.println(bidderName);
-        intent.putExtra("username", bidderName);
+        intent.putExtra("username", itemBidder);
         startActivity(intent);
     }
 
@@ -123,6 +121,7 @@ public class BidAcceptActivity extends AppCompatActivity {
         for (Item item : myItems) {
             if (item.getName().equals(itemName) && item.getOwner().equals(itemOwner)) {
                 item.setStatus(2);
+                item.setBorrower(itemBidder);
             }
         }
 
