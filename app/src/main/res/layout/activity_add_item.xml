@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/itemNameField"
+        android:layout_width="fill_parent"
+        android:layout_height="61dp"
+        android:scrollbars="horizontal"
+        android:inputType="text"
+        android:hint="Item Name" />
+
+    <EditText
+        android:id="@+id/itemDescField"
+        android:layout_width="fill_parent"
+        android:layout_height="62dp"
+        android:scrollbars="horizontal"
+        android:inputType="text"
+        android:hint="Item Description" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pictureButton"
+            android:background="@android:drawable/ic_menu_camera"
+            android:layout_alignBottom="@+id/addItemButton"
+            android:layout_toStartOf="@+id/addItemButton" />
+
+        <Button
+            android:id="@+id/addItemButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add New Item"
+            android:onClick="addItem"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+</LinearLayout>

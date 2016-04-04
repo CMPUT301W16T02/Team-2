@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/usernameTextView" />
+
+    <Button
+        android:id="@+id/editProfileButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit Profile" />
+    <Button
+        android:id="@+id/myItemsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Items" />
+
+    <Button
+        android:id="@+id/myBiddedItemsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Bidded Items" />
+
+    <Button
+        android:id="@+id/myBorrowedItemsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Borrowed Items"/>
+
+    <Button
+        android:id="@+id/myBidsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Bids"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:id="@+id/myBorrowingsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Borrowings" />
+
+
+    <Button
+        android:id="@+id/marketplaceButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Item Marketplace" />
+
+
+
+</LinearLayout>
