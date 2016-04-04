@@ -43,7 +43,7 @@
             android:name=".KeywordSearchActivity"
             android:label="@string/title_activity_keyword_search"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SetLocationActivity"/>
+        <activity android:name=".SetLocationActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -52,7 +52,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-
+        <activity android:name=".ShowLocationActivity"></activity>
     </application>
 
 </manifest>

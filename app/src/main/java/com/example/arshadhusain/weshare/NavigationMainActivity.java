@@ -186,7 +186,7 @@ public class NavigationMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 setResult(RESULT_OK);
 
-                Intent intent = new Intent(NavigationMainActivity.this, SetLocationActivity.class); //YOU NEED CHRIS' BORROWING FUNCTIONALITY
+                Intent intent = new Intent(NavigationMainActivity.this, ShowLocationActivity.class); //YOU NEED CHRIS' BORROWING FUNCTIONALITY
                 startActivity(intent);
 
             }

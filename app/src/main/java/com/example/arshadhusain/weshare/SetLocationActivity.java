@@ -2,12 +2,12 @@ package com.example.arshadhusain.weshare;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import com.google.android.gms.maps.GoogleMap;
 
 /**
  * This Activity is used to show the map where the owner
- * chooses the location to meet the borrower
+ * chooses the location to meet the borrower.
+ * The owner selects the location on this map.
  *
  * @author Hanson
  * @version 1.0
