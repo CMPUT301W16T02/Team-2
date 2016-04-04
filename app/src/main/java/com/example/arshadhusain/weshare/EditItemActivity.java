@@ -35,6 +35,8 @@ public class EditItemActivity extends AppCompatActivity {
 
     public static ArrayList<Bid> bidsOnItem = new ArrayList<>();
 
+    static final int CHANGE_MADE = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,20 +164,43 @@ public class EditItemActivity extends AppCompatActivity {
         ElasticSearchAppController.DeleteItemTask deleteItemTask = new ElasticSearchAppController.DeleteItemTask();
         deleteItemTask.execute(itemToEdit);
 
+        ElasticSearchAppController.GetBidsTask getBidsTask = new ElasticSearchAppController.GetBidsTask();
+        getBidsTask.execute();
+        ArrayList<Bid> allBids = new ArrayList<>();
+
+        try {
+            allBids.addAll(getBidsTask.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        for (Bid bid : allBids) {
+            if (bid.getItem().equals(itemToEdit.getName()) && bid.getItemOwner().equals(itemToEdit.getOwner())){
+                ElasticSearchAppController.DeleteBidTask deleteBidTask = new ElasticSearchAppController.DeleteBidTask();
+                deleteBidTask.execute(bid);
+            }
+        }
+
         setResult(RESULT_OK);
         finish();
     }
 
     public void returnItem(View view) {
 
-        itemToEdit.setStatus(0);
-        itemToEdit.setBorrower("");
+        if (itemToEdit.getStatus() == 2) {
+            itemToEdit.setStatus(0);
+            itemToEdit.setBorrower("");
 
-        ElasticSearchAppController.EditItemTask editItemTask = new ElasticSearchAppController.EditItemTask();
-        editItemTask.execute(itemToEdit);
+            ElasticSearchAppController.EditItemTask editItemTask = new ElasticSearchAppController.EditItemTask();
+            editItemTask.execute(itemToEdit);
 
-        setResult(RESULT_OK);
-        finish();
+            setResult(RESULT_OK);
+            finish();
+        } else {
+            Toast.makeText(getApplicationContext(), "Item is not being borrowed\nCannot return", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void getItemsBids() {
@@ -217,13 +242,16 @@ public class EditItemActivity extends AppCompatActivity {
         intent.putExtra("itemOwner", itemOwner);
         intent.putExtra("bidderName", bidToView.getBidder());
 
-        startActivityForResult(intent, 1);
+        startActivityForResult(intent, CHANGE_MADE);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1) {
-            adapter.notifyDataSetChanged();
+        if (requestCode == CHANGE_MADE) {
+            if (resultCode == RESULT_OK) {
+                getItemsBids();
+                adapter.notifyDataSetChanged();
+            }
         }
     }
 }

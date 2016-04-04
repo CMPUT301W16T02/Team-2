@@ -136,8 +136,25 @@ public class MainItemListActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1) {
-            adapter.notifyDataSetChanged();
+        if (requestCode == CHANGE_MADE) {
+
+            if (resultCode == RESULT_OK) {
+
+                allItems.clear();
+
+                ElasticSearchAppController.GetMyItemsTask getMyItemsTask = new ElasticSearchAppController.GetMyItemsTask();
+
+                getMyItemsTask.execute("");
+
+                try {
+                    allItems.addAll(getMyItemsTask.get());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                adapter.notifyDataSetChanged();
+            }
         }
     }
 

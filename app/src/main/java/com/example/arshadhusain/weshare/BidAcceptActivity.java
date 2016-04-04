@@ -142,7 +142,51 @@ public class BidAcceptActivity extends AppCompatActivity {
         ElasticSearchAppController.DeleteBidTask deleteBidTask = new ElasticSearchAppController.DeleteBidTask();
         deleteBidTask.execute(bidToView);
 
-        setResult(RESULT_OK);
+        allBids.clear();
+        allBids = new ArrayList<>();
+        ElasticSearchAppController.GetBidsTask getBidsTask = new ElasticSearchAppController.GetBidsTask();
+        getBidsTask.execute();
+
+        try {
+            allBids.addAll(getBidsTask.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        // If item has zero bids, set status back to 0 ("Available")
+        int bidCount = 0;
+        for (Bid bid : allBids) {
+            if (bid.getItem().equals(itemName) && bid.getItemOwner().equals(itemOwner)) {
+                bidCount++;
+            }
+        }
+
+        if(bidCount == 0) {
+            ElasticSearchAppController.GetMyItemsTask getMyItemsTask = new ElasticSearchAppController.GetMyItemsTask();
+            getMyItemsTask.execute("");
+            ArrayList<Item> allItems = new ArrayList<>();
+            try {
+                allItems.addAll(getMyItemsTask.get());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
+            for (Item item : allItems) {
+                if (item.getName().equals(itemName) && item.getOwner().equals(itemOwner)) {
+                    item.setStatus(0);
+                    item.setBorrower("");
+                    ElasticSearchAppController.EditItemTask editItemTask = new ElasticSearchAppController.EditItemTask();
+                    editItemTask.execute(item);
+                }
+            }
+        }
+
+        Intent intent = getIntent();
+        setResult(RESULT_OK, intent);
         finish();
     }
 }
