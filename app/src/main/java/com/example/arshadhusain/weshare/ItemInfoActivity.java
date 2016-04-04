@@ -128,13 +128,18 @@ public class ItemInfoActivity extends AppCompatActivity {
                 Double latitude = itemToView.getLatitude();
                 Double longitude = itemToView.getLongitude();
 
-                Intent intent = new Intent(ItemInfoActivity.this, ShowLocationActivity.class);
+                if(address.equals("No address given")) {
+                    Toast.makeText(getApplicationContext(), "Not Available", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Intent intent = new Intent(ItemInfoActivity.this, ShowLocationActivity.class);
 
-                intent.putExtra("address", address);
-                intent.putExtra("latitude", latitude);
-                intent.putExtra("longitude", longitude);
+                    intent.putExtra("address", address);
+                    intent.putExtra("latitude", latitude);
+                    intent.putExtra("longitude", longitude);
 
-                startActivity(intent);
+                    startActivity(intent);
+                }
             }
         });
     }
