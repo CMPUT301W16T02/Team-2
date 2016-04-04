@@ -1,5 +1,7 @@
 package com.example.arshadhusain.weshare;
 
+import java.util.ArrayList;
+
 import io.searchbox.annotations.JestId;
 
 /**
@@ -24,7 +26,8 @@ public class Account {
     private String username;
     private String email;
     private String city;
-    //add password?
+
+    private ArrayList<Float> rateArray = new ArrayList<>();
 
     Account(String username, String email, String city)
     {
@@ -33,8 +36,6 @@ public class Account {
         this.city = city;
 
     }
-
-
 
     public void setUsername(String username) {
         this.username = username;
@@ -60,4 +61,23 @@ public class Account {
         return city;
     }
 
+    public void addRate(float rate) {
+        rateArray.add(rate);
+    }
+
+
+    public double showAverage() {
+
+        if ((rateArray == null ) || (rateArray.size() == 0) ){
+            return 0.0;
+        }else{
+
+            float sum = 0;
+            for (Float rate: rateArray){
+                sum+= rate;
+            }
+            return sum/rateArray.size();
+        }
+
+    }
 }

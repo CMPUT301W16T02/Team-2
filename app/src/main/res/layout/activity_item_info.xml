@@ -65,6 +65,18 @@
         android:hint="Item Name"
         android:text="Item Status" />
 
+    <ImageView
+        android:id="@+id/itemImage"
+        android:layout_width="match_parent"
+        android:layout_height="99dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/we_share"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.59" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,9 @@ public class ItemInfoActivity extends AppCompatActivity {
     String myUsername;
     String ownerName;
     String itemName;
+
+    static final int REQUEST_IMAGE_CAPTURE = 1234;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +87,8 @@ public class ItemInfoActivity extends AppCompatActivity {
         ownerText.setText(itemToView.getOwner());
         descriptionText = (TextView) findViewById(R.id.itemDescText);
         descriptionText.setText(itemToView.getDescription());
+        ImageView itemImage = (ImageView) findViewById(R.id.itemImage);
+        itemImage.setImageBitmap(itemToView.getThumbnail());
         statusText = (TextView) findViewById(R.id.itemStatusText);
         String statusString = "Item Status: " + itemToView.statusToString();
         statusText.setText(statusString);

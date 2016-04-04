@@ -3,6 +3,9 @@ package com.example.arshadhusain.weshare;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -23,6 +26,11 @@ public class ViewProfileActivity extends AppCompatActivity {
     TextView usernameTextView;
     TextView emailTextView;
     TextView cityTextView;
+    TextView rating;
+
+    private static Button Submit_button;
+    private static TextView starText_View;
+    private static RatingBar star_bar;
 
     final static int TEXTSIZE = 18;
 
@@ -30,6 +38,8 @@ public class ViewProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
+        listenerForRating();
+        onButtonClickListener();
 
         Intent intent = getIntent();
 
@@ -70,5 +80,41 @@ public class ViewProfileActivity extends AppCompatActivity {
         String dispAddress = "Address: " + accountToView.getCity();
         cityTextView.setTextSize(TEXTSIZE);
         cityTextView.setText(dispAddress);
+
+        rating = (TextView) findViewById(R.id.ratingSys);
+        String dispRate = "User Rating: " + accountToView.showAverage();
+        rating.setTextSize(TEXTSIZE);
+        rating.setText(dispRate);
+
+    }
+    public void listenerForRating() {
+        star_bar = (RatingBar) findViewById(R.id.ratingBar);
+        starText_View = (TextView) findViewById(R.id.startextView);
+
+        star_bar.setOnRatingBarChangeListener(
+                new RatingBar.OnRatingBarChangeListener() {
+                    @Override
+                    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                        starText_View.setText(String.valueOf(rating));
+                    }
+                }
+        );
+    }
+
+    public void onButtonClickListener() {
+        star_bar = (RatingBar) findViewById(R.id.ratingBar);
+        Submit_button = (Button) findViewById(R.id.submitRateButton);
+
+        Submit_button.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        accountToView.addRate(star_bar.getRating());
+                        ElasticSearchAppController.EditAccountTask editAccountTask = new ElasticSearchAppController.EditAccountTask();
+                        editAccountTask.execute(accountToView);
+                        finish();
+                    }
+                }
+        );
     }
 }

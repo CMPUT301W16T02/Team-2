@@ -2,4 +2,5 @@
 <resources>
     <item name="SignInInput" type="id" />
     <item name="sign_in" type="id" />
+    <item name="pictureButton" type="id" />
 </resources>

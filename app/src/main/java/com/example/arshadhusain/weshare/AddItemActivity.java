@@ -1,11 +1,14 @@
 package com.example.arshadhusain.weshare;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 /**
@@ -20,12 +23,25 @@ public class AddItemActivity extends AppCompatActivity {
     private EditText name;
     private EditText description;
     private String myUsername;
+    private ImageButton pictureButton;
+    private Bitmap thumbnail;
     final static int CHANGE_MADE = 1;
+    static final int REQUEST_IMAGE_CAPTURE = 1234;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
+
+        pictureButton = (ImageButton) findViewById(R.id.pictureButton);
+        pictureButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                }
+            }
+        });
 
         Intent intent = getIntent();
 
@@ -63,14 +79,28 @@ public class AddItemActivity extends AppCompatActivity {
         } else if (itemName.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Please enter an item name", Toast.LENGTH_LONG).show();
         } else if (itemDesc.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Please enter an item desceription", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Please enter an item description", Toast.LENGTH_LONG).show();
         } else {
             Item newItem = new Item(itemName, itemDesc, owner);
+            newItem.addThumbnail(thumbnail);
 
             ElasticSearchAppController.AddItemTask addItemTask = new ElasticSearchAppController.AddItemTask();
             addItemTask.execute(newItem);
+
+            pictureButton.setImageResource(android.R.color.transparent);
+            thumbnail = null;
+
             setResult(RESULT_OK);
             finish();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
+            Bundle extras = data.getExtras();
+            thumbnail = (Bitmap) extras.get("data");
+            pictureButton.setImageBitmap(thumbnail);
         }
     }
 }

@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -75,6 +76,8 @@ public class EditItemActivity extends AppCompatActivity {
         nameField.setText(itemToEdit.getName());
         descriptionField.setText(itemToEdit.getDescription());
 
+        ImageView itemImage = (ImageView) findViewById(R.id.itemImage);
+        itemImage.setImageBitmap(itemToEdit.getThumbnail());
 
         Button saveButton = (Button) findViewById(R.id.saveButton);
 
@@ -82,6 +85,15 @@ public class EditItemActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 saveEdit(v);
+            }
+        });
+
+        Button removePicture = (Button) findViewById(R.id.removePicture);
+
+        removePicture.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                removePicture(v);
             }
         });
 
@@ -153,6 +165,29 @@ public class EditItemActivity extends AppCompatActivity {
             setResult(RESULT_OK);
             finish();
         }
+    }
+
+    /**
+     * Removes picture from item
+     *
+     * @param view
+     */
+    public void removePicture(View view){
+
+        String newName = nameField.getText().toString();
+        String newDesc = descriptionField.getText().toString();
+
+        itemToEdit.setName(newName);
+        itemToEdit.setDescription(newDesc);
+        itemToEdit.removeThumbnail();
+
+        //PUT REQUEST
+
+        ElasticSearchAppController.EditItemTask editItemTask = new ElasticSearchAppController.EditItemTask();
+        editItemTask.execute(itemToEdit);
+
+        setResult(RESULT_OK);
+        finish();
     }
 
     /**
