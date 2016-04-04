@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -19,6 +20,7 @@ public class MyBorrowingsActivity extends AppCompatActivity {
     private String myUsername;
 
     private ListView myBorrowingsList;
+    static final int CHANGE_MADE = 1;
 
 
     @Override
@@ -32,6 +34,8 @@ public class MyBorrowingsActivity extends AppCompatActivity {
             myUsername = intent.getStringExtra("myUsername");
         }
         myBorrowingsList = (ListView) findViewById(R.id.myBorrowings);
+        myBorrowingsList.setOnItemClickListener(onItemClickListener);
+
 
         System.out.printf("USERNAME: %s\n", myUsername);
 
@@ -59,4 +63,26 @@ public class MyBorrowingsActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Method sets up functionality for when an item in a list is clicked.
+     */
+    private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            viewItemInfo(myBorrowingItems.get(position).getName(), myBorrowingItems.get(position).getOwner());
+        }
+    };
+
+    /**
+     * Allows user to view item. Passes intent to ItemInfoActivity
+     *
+     * @See: ItemInfoActivity
+     */
+    public void viewItemInfo(String itemName, String ownerName){
+        Intent intent = new Intent(this, ItemInfoActivity.class);
+        intent.putExtra("itemName", itemName);
+        intent.putExtra("ownerName", ownerName);
+        intent.putExtra("myUsername", myUsername);
+        startActivityForResult(intent, CHANGE_MADE);
+    }
 }
