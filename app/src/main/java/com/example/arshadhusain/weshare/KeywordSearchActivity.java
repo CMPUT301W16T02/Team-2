@@ -9,6 +9,13 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
+/**
+ * Key word search
+ *
+ * @Author: Arshad
+ * @Version: 1.0
+ **/
+
 public class KeywordSearchActivity extends AppCompatActivity {
     private EditText searchKeyword;
     private ArrayList<Item> searchResults = new ArrayList<>();

@@ -9,6 +9,8 @@ import io.searchbox.annotations.JestId;
 /**
  * Model class for account. Defines setters and getters for 'account'
  *
+ * Now incorporated elastic search functionality
+ *
  * @Author: Arshad, Hanson
  * @Version: 1.0
  **/
@@ -66,7 +68,11 @@ public class Account {
         rateArray.add(rate);
     }
 
-
+    /**
+     * @Author Philip, Hasan
+     * @version 1.0
+     * @return Average rating of user
+     */
     public double showAverage() {
 
         if ((rateArray == null ) || (rateArray.size() == 0) ){

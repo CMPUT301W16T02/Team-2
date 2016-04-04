@@ -17,8 +17,10 @@ import java.util.concurrent.ExecutionException;
  *  Started from NavigationMainActivity
  *  Can start EditItemActivity
  *
+ *  Now incorporated elastic search
+ *
  *  @author Badran, Arshad, Christopher
- *  @version  2.0
+ *  @version  2.5
  */
 public class MyItemsActivity extends AppCompatActivity {
 

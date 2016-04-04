@@ -19,7 +19,9 @@ import java.util.concurrent.ExecutionException;
  * Started by NavigationMainActivity.
  * Returns to NavigationMainActivity on successful edit.
  *
- * @author Hanson, Christopher
+ * Now incorporated elastic search functionality
+ *
+ * @author Hanson, Christopher, Arshad
  * @version 2.0
  */
 public class EditProfileActivity extends AppCompatActivity {

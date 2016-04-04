@@ -15,8 +15,10 @@ import android.widget.Toast;
  * <p>AddItemActivity allows user to add an item. Passes intent of user and
  * provides user interface for input</p>
  *
- * @Author: Christopher
- * @Version: 2.0
+ * <p>Now incorporated camera  and elastic search functionality from lonelyTwitter</p>
+ *
+ * @Author: Christopher, Philip, Arshad
+ * @Version: 2.5
  */
 public class AddItemActivity extends AppCompatActivity {
 
@@ -63,7 +65,7 @@ public class AddItemActivity extends AppCompatActivity {
     }
 
     /**
-     * addItem method creates new item and appends to allItems
+     * addItem method creates new item and add it to elastic search server
      *
      * @see MainItemListActivity
      * @param view
@@ -95,6 +97,13 @@ public class AddItemActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Camera functionality
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){

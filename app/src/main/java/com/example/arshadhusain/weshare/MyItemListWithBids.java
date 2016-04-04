@@ -14,7 +14,12 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Created by arshadhusain on 16-03-14.
+ * Activity that shows all items belonging to user with bids
+ *
+ * Now incorporated elastic search functionality
+ *
+ * @author Arshad, Chris
+ * @version 1.0
  */
 public class MyItemListWithBids extends AppCompatActivity {
     public static ArrayList<Bid> myItemsWithBids = new ArrayList<>();

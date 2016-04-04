@@ -18,8 +18,10 @@ import java.util.concurrent.ExecutionException;
  *
  * Starts ViewProfileActivity when view bidder profile button is pressed.
  *
+ * Now including elastic search functionality
+ *
  * @author Hanson, Christopher
- * @version 2.0
+ * @version 2.5
  */
 public class BidAcceptActivity extends AppCompatActivity {
     private Bid bidToView;
@@ -103,6 +105,7 @@ public class BidAcceptActivity extends AppCompatActivity {
             }
         });
     }
+
 
     public void viewBidderProfile(){
         Intent intent = new Intent(this, ViewProfileActivity.class);
