@@ -1,7 +1,5 @@
 package com.example.arshadhusain.weshare;
 
-import android.widget.ArrayAdapter;
-
 import java.util.ArrayList;
 
 import io.searchbox.annotations.JestId;
@@ -110,6 +108,7 @@ public class Item {
     public String getOwner() {
         return owner;
     }
+
 
     @Override
     public String toString(){

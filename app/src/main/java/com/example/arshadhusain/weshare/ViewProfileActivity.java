@@ -3,6 +3,7 @@ package com.example.arshadhusain.weshare;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -23,9 +24,11 @@ public class ViewProfileActivity extends AppCompatActivity {
     ArrayList<Account> Accounts = new ArrayList<Account>();
     Account MyAccount;
     String MyUsername;
+    Float average;
     TextView username;
     TextView email;
     TextView city;
+    TextView rating;
 
     private static Button Submit_button;
     private static TextView starText_View;
@@ -38,7 +41,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
         listenerForRating();
-        //onButtonClickListener();
+        onButtonClickListener();
 
         Intent intent = getIntent();
 
@@ -94,6 +97,15 @@ public class ViewProfileActivity extends AppCompatActivity {
         city.setTextSize(TEXTSIZE);
         city.setText(dispAddress);
 
+        rating = (TextView) findViewById(R.id.ratingSys);
+        String dispRate = "User Rating: " + MyAccount.showAverage();
+        rating.setTextSize(TEXTSIZE);
+        rating.setText(dispRate);
+
+        //average = MyAccount
+
+
+
     }
 
     public void listenerForRating() {
@@ -111,20 +123,20 @@ public class ViewProfileActivity extends AppCompatActivity {
 
     }
 
- //   public void onButtonClickListener(){
-//        star_bar = (RatingBar) findViewById(R.id.ratingBar);
-//        Submit_button = (Button) findViewById(R.id.submitRateButton);
+    public void onButtonClickListener() {
+        star_bar = (RatingBar) findViewById(R.id.ratingBar);
+        Submit_button = (Button) findViewById(R.id.submitRateButton);
 
-//        Submit_button.setOnClickListener(
-//                new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Toast.makeText(ViewProfileActivity.this,
-//                                String.valueOf(star_bar.getRating()),
-//                                Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//        );
+        Submit_button.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MyAccount.addRate(star_bar.getRating());
 
- //   }
+                    }
+                }
+        );
+    }
+
+
 }
