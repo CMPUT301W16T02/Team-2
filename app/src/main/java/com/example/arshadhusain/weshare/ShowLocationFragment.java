@@ -1,6 +1,5 @@
 package com.example.arshadhusain.weshare;
 
-import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 
