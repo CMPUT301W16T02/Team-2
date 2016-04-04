@@ -33,6 +33,7 @@ package="com.example.arshadhusain.weshare">
     <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDfC-jZZ3YE6U0o_P1k0VcZaZKLgWTWsnQ" />
     <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
     <activity android:name=".ShowLocationActivity"></activity>
+    <activity android:name=".SetLocationActivity"></activity>
 
     <activity android:name=".KeywordSearchActivity" android:label="@string/title_activity_keyword_search"
         android:theme="@style/AppTheme.NoActionBar" />

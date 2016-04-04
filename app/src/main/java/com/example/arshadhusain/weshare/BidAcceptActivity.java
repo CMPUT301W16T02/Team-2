@@ -29,6 +29,7 @@ public class BidAcceptActivity extends AppCompatActivity {
     private ArrayList<Bid> allBids = new ArrayList<>();
 
     final static int TEXTSIZE = 18;
+    final static int GET_LOCATION = 4312;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,10 @@ public class BidAcceptActivity extends AppCompatActivity {
         acceptButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
+                Intent intent = new Intent(BidAcceptActivity.this, SetLocationActivity.class);
+                intent.putExtra("itemName", itemName);
+                intent.putExtra("itemOwner", itemOwner);
+                startActivity(intent);
                 acceptBid();
             }
         });

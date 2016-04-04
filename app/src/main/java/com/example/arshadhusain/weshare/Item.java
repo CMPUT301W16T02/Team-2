@@ -37,6 +37,9 @@ public class Item {
     private ArrayList<Bid> listBid = new ArrayList<Bid>();
     private String owner;
     private String borrower;
+    private String address = "No address given";
+    private Double latitude = 0.0;
+    private Double longitude = 0.0;
 
     public Item(String name, String description, String owner){
         this.name = name;
@@ -125,6 +128,30 @@ public class Item {
 
     public String getOwner() {
         return owner;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     @Override

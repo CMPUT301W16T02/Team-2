@@ -8,6 +8,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -22,6 +23,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Map fragment that allows the owner to set a location
@@ -146,11 +149,11 @@ public class SetLocationFragment extends MapFragment implements GoogleApiClient.
 
     @Override
     public void onMapLongClick(LatLng latLng) {
-        MarkerOptions options = new MarkerOptions().position( latLng );
+        MarkerOptions options = new MarkerOptions().position(latLng);
 
         options.title(getAddressFromLatLng(latLng));
         options.draggable(false);
-        options.icon( BitmapDescriptorFactory.defaultMarker() );
+        options.icon(BitmapDescriptorFactory.defaultMarker());
 
         getMap().addMarker( options ).showInfoWindow();
     }
@@ -170,6 +173,9 @@ public class SetLocationFragment extends MapFragment implements GoogleApiClient.
         final String address = marker.getTitle();
         final double latitude = marker.getPosition().latitude;
         final double longitude = marker.getPosition().longitude;
+        System.out.printf(address);
+        System.out.printf(" lat: " + latitude);
+        System.out.printf(" long: " + longitude);
 
         // code from http://www.askingbox.com/tip/android-programming-yes-no-dialog-box
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -186,6 +192,35 @@ public class SetLocationFragment extends MapFragment implements GoogleApiClient.
                 intent.putExtra("address", address);
                 intent.putExtra("latitude", latitude);
                 intent.putExtra("longitude", longitude);
+
+                String itemName = "item name";
+                String itemOwner = " item owner";
+                if(getActivity().getIntent().hasExtra("itemName")) {
+                    itemName = intent.getStringExtra("itemName");
+                }
+                if(getActivity().getIntent().hasExtra("itemOwner")) {
+                    itemOwner = intent.getStringExtra("itemOwner");
+                }
+                ElasticSearchAppController.GetMyItemsTask getMyItemsTask = new ElasticSearchAppController.GetMyItemsTask();
+                getMyItemsTask.execute("");
+                ArrayList<Item> allItems = new ArrayList<>();
+                try {
+                    allItems.addAll(getMyItemsTask.get());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+
+                for (Item item : allItems) {
+                    if (item.getName().equals(itemName) && item.getOwner().equals(itemOwner)) {
+                        item.setAddress(address);
+                        item.setLatitude(latitude);
+                        item.setLongitude(longitude);
+                        ElasticSearchAppController.EditItemTask editItemTask = new ElasticSearchAppController.EditItemTask();
+                        editItemTask.execute(item);
+                    }
+                }
 
                 getActivity().setResult(Activity.RESULT_OK, intent);
                 getActivity().finish();
