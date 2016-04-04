@@ -20,17 +20,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class ShowLocationActivity extends AppCompatActivity {
     private GoogleMap mMap;
     private String address = "test Sytring";
-    private Double latit = 45.8584;
-    private Double longit=2.9343;
-
-    private final int[] MAP_TYPES = {
-            GoogleMap.MAP_TYPE_SATELLITE,
-            GoogleMap.MAP_TYPE_NORMAL,
-            GoogleMap.MAP_TYPE_HYBRID,
-            GoogleMap.MAP_TYPE_TERRAIN,
-            GoogleMap.MAP_TYPE_NONE };
-
-    private int curMapTypeIndex = 1;
+    private Double latit = 48.8584;
+    private Double longit=2.2945;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +37,26 @@ public class ShowLocationActivity extends AppCompatActivity {
                         .icon(BitmapDescriptorFactory.defaultMarker())
         );
 
+        zoom(mMap, coordinates);
+    }
+
+    /**
+     * Method zooms into the given GoogleMap at the given cooridinates
+     * @param googleMap
+     * @param coordinates
+     */
+    // modified from http://code.tutsplus.com/tutorials/getting-started-with-google-maps-for-android-basics--cms-24635
+    private void zoom(GoogleMap googleMap, LatLng coordinates) {
+
+        final int[] MAP_TYPES = {
+                GoogleMap.MAP_TYPE_SATELLITE,
+                GoogleMap.MAP_TYPE_NORMAL,
+                GoogleMap.MAP_TYPE_HYBRID,
+                GoogleMap.MAP_TYPE_TERRAIN,
+                GoogleMap.MAP_TYPE_NONE };
+
+        int curMapTypeIndex = 1;
+
         CameraPosition position = CameraPosition.builder()
                 .target(coordinates)
                 .zoom(16f)
@@ -53,12 +64,12 @@ public class ShowLocationActivity extends AppCompatActivity {
                 .tilt(0.0f)
                 .build();
 
-        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), null);
-        mMap.setMapType(MAP_TYPES[curMapTypeIndex]);
-        mMap.setTrafficEnabled(true);
+        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), null);
+        googleMap.setMapType(MAP_TYPES[curMapTypeIndex]);
+        googleMap.setTrafficEnabled(true);
 
-        mMap.getUiSettings().setZoomControlsEnabled(true);
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
 
-
+        return;
     }
 }
