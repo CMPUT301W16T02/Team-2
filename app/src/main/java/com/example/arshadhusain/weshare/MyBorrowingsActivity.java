@@ -28,8 +28,8 @@ public class MyBorrowingsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        if (intent.hasExtra("activeUser")) {
-            myUsername = intent.getStringExtra("activeUser");
+        if (intent.hasExtra("myUsername")) {
+            myUsername = intent.getStringExtra("myUsername");
         }
         myBorrowingsList = (ListView) findViewById(R.id.myBorrowings);
 

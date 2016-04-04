@@ -28,8 +28,8 @@ public class MyItemListWithBids extends AppCompatActivity {
         Intent intent = getIntent();
 
 
-        if(intent.hasExtra("activeUser")) {
-            MyUsername = intent.getStringExtra("activeUser");
+        if(intent.hasExtra("myUsername")) {
+            MyUsername = intent.getStringExtra("myUsername");
         }
 
         MyItemsWithBidsList = (ListView) findViewById(R.id.MyItemsBids);

@@ -108,20 +108,22 @@ public class BidAcceptActivity extends AppCompatActivity {
     public void acceptBid(){
         // Set the item's status to borrowed
         ElasticSearchAppController.GetMyItemsTask getMyItemsTask = new ElasticSearchAppController.GetMyItemsTask();
-        getMyItemsTask.execute(itemOwner);
-        ArrayList<Item> myItems = new ArrayList<>();
+        getMyItemsTask.execute("");
+        ArrayList<Item> allItems = new ArrayList<>();
         try {
-            myItems.addAll(getMyItemsTask.get());
+            allItems.addAll(getMyItemsTask.get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
 
-        for (Item item : myItems) {
+        for (Item item : allItems) {
             if (item.getName().equals(itemName) && item.getOwner().equals(itemOwner)) {
                 item.setStatus(2);
                 item.setBorrower(itemBidder);
+                ElasticSearchAppController.EditItemTask editItemTask = new ElasticSearchAppController.EditItemTask();
+                editItemTask.execute(item);
             }
         }
 

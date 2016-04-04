@@ -111,7 +111,6 @@ public class ItemInfoActivity extends AppCompatActivity {
                 setResult(RESULT_OK);
             }
         });
-
     }
 
     /**

@@ -20,7 +20,6 @@ public class MyBorrowedItemsActivity extends AppCompatActivity {
 
     private ListView myBorrowedItemsList;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +27,8 @@ public class MyBorrowedItemsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        if (intent.hasExtra("activeUser")) {
-            myUsername = intent.getStringExtra("activeUser");
+        if (intent.hasExtra("myUsername")) {
+            myUsername = intent.getStringExtra("myUsername");
         }
         myBorrowedItemsList = (ListView) findViewById(R.id.myBorrowedItems);
 

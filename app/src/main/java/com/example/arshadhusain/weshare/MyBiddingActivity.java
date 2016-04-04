@@ -22,11 +22,9 @@ import java.util.concurrent.ExecutionException;
  */
 public class MyBiddingActivity extends AppCompatActivity {
 
-    public static ArrayList<Bid> myBids = new ArrayList<Bid>();
+    public static ArrayList<Bid> myBids = new ArrayList<>();
     public ArrayAdapter<Bid> adapter;
-    private String MyUsername;
-
-    private ListView allBidsList;
+    private String myUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,81 +34,48 @@ public class MyBiddingActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
 
-        if(intent.hasExtra("activeUser")) {
-            MyUsername = intent.getStringExtra("activeUser");
+        if(intent.hasExtra("myUsername")) {
+            myUsername = intent.getStringExtra("myUsername");
         }
 
-        allBidsList = (ListView) findViewById(R.id.listView);
+        ListView allBidsList = (ListView) findViewById(R.id.listView);
 
-        //allBidsList.setOnItemClickListener(onItemClickListener);
-
-
-
-        //ArrayList<Bid> ItemBids = new ArrayList<Bid>();
-        NavigationMainActivity.allBids.clear();
+        ArrayList<Bid> allBids = new ArrayList<>();
 
         ElasticSearchAppController.GetBidsTask getBidsTask = new ElasticSearchAppController.GetBidsTask();
         getBidsTask.execute();
 
         try {
-            NavigationMainActivity.allBids.addAll(getBidsTask.get());
-
+            allBids.addAll(getBidsTask.get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        System.out.println("NUMBER OF FOUND BIDS FOR THIS USER");
 
+        System.out.println("NUMBER OF FOUND BIDS FOR THIS USER");
         System.out.printf("%d\n", NavigationMainActivity.allBids.size());
 
         myBids.clear();
-        for (int x=0; x<NavigationMainActivity.allBids.size(); x++) {
-            //System.out.println(NavigationMainActivity.allBids.get(x).getItem());
-            //System.out.printf("%s\n", NavigationMainActivity.allBids.get(x).getItem());
-            System.out.printf("%s\n", NavigationMainActivity.allBids.get(x).getBidder());
-            System.out.printf("%s\n", MyUsername);
 
+        for (Bid bid : allBids) {
+            System.out.printf("%s\n", bid.getBidder());
+            System.out.printf("%s\n", myUsername);
 
-            if((NavigationMainActivity.allBids.get(x).getBidder()).equals(MyUsername))
-            {
-
-                Bid bidToCopy = NavigationMainActivity.allBids.get(x);
-                System.out.printf("%s\n", bidToCopy.getItem());
-                myBids.add(bidToCopy);
+            if((bid.getBidder()).equals(myUsername)) {
+                System.out.printf("%s\n", bid.getItem());
+                myBids.add(bid);
             }
-
         }
-        System.out.println("NUMBER OF FOUND BIDS FOR THIS USER");
 
+        System.out.println("NUMBER OF FOUND BIDS FOR THIS USER");
         System.out.printf("%d\n", myBids.size());
 
         for (int x=0; x<myBids.size(); x++) {
             System.out.println(myBids.get(x).getItem());
-
-
         }
-
-        adapter = new ArrayAdapter<Bid>(this,
+        adapter = new ArrayAdapter<>(this,
                 R.layout.list_item, myBids);
         allBidsList.setAdapter(adapter);
-
-
-
-        //Array coontaining all of user's bids
-        //Bid[] bidArray = {};
-
-        //http://www.i-programmer.info/programming/android/7849-android-adventures-listview-and-adapters.html 2016-03-12
-        /*ArrayAdapter<Bid> bidAdapter = new
-                ArrayAdapter<Bid>(
-                this,
-                android.R.layout.activity_list_item,
-                bidArray);
-        ListView myList = (ListView)
-                findViewById(R.id.listView);
-        myList.setAdapter(bidAdapter); */
-
-
-
     }
 }
