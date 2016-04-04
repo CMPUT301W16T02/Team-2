@@ -126,6 +126,8 @@ public class ItemInfoActivity extends AppCompatActivity {
     public void addBid() {
 
         //Item newItem = new Item(itemName, itemDesc, owner);
+        System.out.println("****INSIDE ADD BID****");
+
         String ItemName = name.getText().toString();
         String ItemOwner = owner.getText().toString();
         String ItemDescription = description.getText().toString();
@@ -134,6 +136,14 @@ public class ItemInfoActivity extends AppCompatActivity {
         if(ItemStatus == 2){
             Toast.makeText(getApplicationContext(), "Item is being borrowed. Cannot place bid!", Toast.LENGTH_LONG).show();
         } else {
+            System.out.println(ItemName);
+            System.out.println(ItemOwner);
+            System.out.println(ItemDescription);
+
+
+
+
+
             Bid newBid = new Bid(UserName, doubleUserName, ItemName, ItemOwner, ItemDescription);
             //NavigationMainActivity.allItems.add(newItem);
             /*NavigationMainActivity.allBids.add(newBid);
@@ -143,8 +153,14 @@ public class ItemInfoActivity extends AppCompatActivity {
             addBidTask.execute(newBid);
 
             itemToView.setStatus(1);
+            status.setText("Item Status: " + itemToView.statusToString());
 
             //NavigationMainActivity.saveInFile(context2);
+
+            //PUT REQUEST
+
+            ElasticSearchAppController.EditItemTask editItemTask = new ElasticSearchAppController.EditItemTask();
+            editItemTask.execute(itemToView);
 
 
             Toast.makeText(getApplicationContext(), "Bid added!", Toast.LENGTH_LONG).show();

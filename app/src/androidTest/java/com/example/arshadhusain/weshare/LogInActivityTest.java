@@ -3,12 +3,11 @@ package com.example.arshadhusain.weshare;
 import android.test.ActivityInstrumentationTestCase2;
 
 /**
- * Created by arshadhusain on 16-03-14.
+ * Created by hasan on 2016-03-12.
  */
-public class SearchResultsActivityTest extends ActivityInstrumentationTestCase2 {
-
-    public SearchResultsActivityTest() {
-        super(SearchResultsActivityTest.class);
+public class LogInActivityTest extends ActivityInstrumentationTestCase2 {
+    public LogInActivityTest() {
+        super(WelcomeActivity.class);
     }
 
     @Override
@@ -17,13 +16,13 @@ public class SearchResultsActivityTest extends ActivityInstrumentationTestCase2 
     }
 
     public void testActivityExists() {
-        SearchResultsActivity activity = (SearchResultsActivity) getActivity();
+        WelcomeActivity activity = (WelcomeActivity) getActivity();
         assertNotNull(activity);
     }
 
-    public void testSearchResultsActivity() throws Exception {
-        //test
 
+    public void testSignInActivity() throws Exception {
+        //test
     }
 
     @Override

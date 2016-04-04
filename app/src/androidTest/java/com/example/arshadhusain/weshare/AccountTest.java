@@ -1,7 +1,6 @@
 package com.example.arshadhusain.weshare;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.EditText;
 
 /**
  * Created by hasan on 2016-03-13.
@@ -30,5 +29,10 @@ public class AccountTest extends ActivityInstrumentationTestCase2 {
         assertTrue(account.getUsername().equals("HasanBadran"));
         assertTrue(account.getCity().equals("Edmonton"));
         assertTrue(account.getEmail().equals("badran@gmail.com"));
+    }
+
+    @Override
+    public void tearDown() throws Exception {
+        super.tearDown();
     }
 }

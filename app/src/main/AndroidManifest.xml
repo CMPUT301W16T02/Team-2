@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.arshadhusain.weshare">
 
+
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -9,6 +10,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature android:name="android.hardware.camera" android:required="true" /> <!-- New! -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
 
     <application
         android:allowBackup="true"
@@ -38,11 +41,21 @@
         <activity android:name=".MyItemListWithBids" />
         <activity android:name=".ItemInfoActivity" />
         <activity android:name=".SearchResultsActivity" />
-        <activity android:name=".BidAcceptActivity"></activity>
+        <activity android:name=".BidAcceptActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDv0TMGnPv4LAl2Fx2xEO-xbIkys1cpFo4"/>
+            android:value="AIzaSyDv0TMGnPv4LAl2Fx2xEO-xbIkys1cpFo4" />
+
+        <activity
+            android:name=".KeywordSearchActivity"
+            android:label="@string/title_activity_keyword_search"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MyBorrowedItemsActivity"
+            android:label="@string/title_activity_my_borrowed_items"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MyBorrowingsActivity"></activity>
     </application>
 
 </manifest>

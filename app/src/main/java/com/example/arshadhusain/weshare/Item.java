@@ -1,12 +1,12 @@
 package com.example.arshadhusain.weshare;
 
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Base64;
-import android.widget.ArrayAdapter;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 import io.searchbox.annotations.JestId;
 
@@ -126,6 +126,7 @@ public class Item {
     public String getOwner() {
         return owner;
     }
+
 
     @Override
     public String toString(){

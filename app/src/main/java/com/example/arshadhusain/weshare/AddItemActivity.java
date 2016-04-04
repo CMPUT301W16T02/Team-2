@@ -1,17 +1,16 @@
 package com.example.arshadhusain.weshare;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -100,6 +99,7 @@ public class AddItemActivity extends AppCompatActivity {
         System.out.printf("%d\n", NavigationMainActivity.allItems.size());*/
         //NavigationMainActivity.addAndSaveToItems(newItem);
 
+
         ElasticSearchAppController.AddItemTask addItemTask = new ElasticSearchAppController.AddItemTask();
         addItemTask.execute(newItem);
 
@@ -107,6 +107,27 @@ public class AddItemActivity extends AppCompatActivity {
         thumbnail = null;
         setResult(RESULT_OK);
         finish();
+
+        if(itemName.isEmpty() && itemDesc.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Please enter your information into each field", Toast.LENGTH_LONG).show();
+
+
+        } else if(itemName.isEmpty())
+        {
+            Toast.makeText(getApplicationContext(), "Please enter an item name", Toast.LENGTH_LONG).show();
+
+        } else if (itemDesc.isEmpty())
+        {
+            Toast.makeText(getApplicationContext(), "Please enter an item description", Toast.LENGTH_LONG).show();
+
+        } else {
+
+            addItemTask = new ElasticSearchAppController.AddItemTask();
+            addItemTask.execute(newItem);
+            setResult(RESULT_OK);
+            finish();
+        }
+
     }
 
     /**

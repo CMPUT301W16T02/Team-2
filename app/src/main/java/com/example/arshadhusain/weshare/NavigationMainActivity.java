@@ -5,10 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -76,10 +73,9 @@ public class NavigationMainActivity extends AppCompatActivity {
         loadBidsFromFile(context1);
 
 
-
         Intent intent = getIntent();
 
-        if(intent.hasExtra("Username")) {
+        if (intent.hasExtra("Username")) {
             MyUsername = intent.getStringExtra("Username");
         }
 
@@ -101,20 +97,15 @@ public class NavigationMainActivity extends AppCompatActivity {
             //System.out.printf("%s\n", NavigationMainActivity.allBids.get(x).getItem());
             System.out.printf("%s\n", NavigationMainActivity.allBids.get(x).getBidder());
             System.out.printf("%s\n", MyUsername);
-
-
             if((allBids.get(x).getItemOwner()).equals(MyUsername))
             {
-
                 Bid bidToCopy = allBids.get(x);
                 System.out.printf("%s\n", bidToCopy.getItem());
                 bidNotify.add(bidToCopy);
             }
-
         }
         if(!bidNotify.isEmpty()) {
             Toast.makeText(getApplicationContext(), "You've got new bid requests!", Toast.LENGTH_LONG).show();
-
         }*/
     }
 
@@ -122,13 +113,13 @@ public class NavigationMainActivity extends AppCompatActivity {
      * Method connects to all the buttons and sets up their usage.
      */
     public void onCreateListeners() {
-        Button EditProfile = (Button)findViewById(R.id.EditProfile);
-        Button MyItems = (Button)findViewById(R.id.MyItems);
-        Button MyBorrows = (Button)findViewById(R.id.MyBorrows);
-        Button ItemMarketplace = (Button)findViewById(R.id.ShowAllItems);
-        Button MyBids = (Button)findViewById(R.id.MyBids);
-        Button MyItemsWithBids = (Button)findViewById(R.id.MyItemsWithBids);
-
+        Button EditProfile = (Button) findViewById(R.id.EditProfile);
+        Button MyItems = (Button) findViewById(R.id.MyItems);
+        Button ItemMarketplace = (Button) findViewById(R.id.ShowAllItems);
+        Button MyBids = (Button) findViewById(R.id.MyBids);
+        Button MyItemsWithBids = (Button) findViewById(R.id.MyItemsWithBids);
+        Button myBorrowings = (Button) findViewById(R.id.myBorrowingsButton);
+        Button myBorrowedItems = (Button) findViewById(R.id.myBorrowedItemsButton);
 
 
         EditProfile.setOnClickListener(new View.OnClickListener() {
@@ -183,30 +174,28 @@ public class NavigationMainActivity extends AppCompatActivity {
         });
 
 
-
-        MyBorrows.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setResult(RESULT_OK);
-                /*
-                Intent intent = new Intent(NavigationMainActivity.this, MainItemListActivity.class); //YOU NEED CHRIS' BORROWING FUNCTIONALITY
-                startActivity(intent);
-                */
-            }
-        });
-
-/*
-        MyBorrows.setOnClickListener(new View.OnClickListener() {
+        myBorrowings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setResult(RESULT_OK);
 
-                Intent intent = new Intent(NavigationMainActivity.this, MyBorrowsActivity.class); //YOU NEED CHRIS' BORROWING FUNCTIONALITY
+                Intent intent = new Intent(NavigationMainActivity.this, MyBorrowingsActivity.class);
+                intent.putExtra("activeUser", MyUsername);
                 startActivity(intent);
-
             }
         });
-        */
+
+
+        myBorrowedItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_OK);
+
+                Intent intent = new Intent(NavigationMainActivity.this, MyBorrowedItemsActivity.class);
+                intent.putExtra("activeUser", MyUsername);
+                startActivity(intent);
+            }
+        });
 
         ItemMarketplace.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,6 +219,7 @@ public class NavigationMainActivity extends AppCompatActivity {
 
     /**
      * Method loads the list of all items from the local save file.
+     *
      * @param context the context of the calling activity.
      */
     private void loadItemsFromFile(Context context) {
@@ -239,7 +229,8 @@ public class NavigationMainActivity extends AppCompatActivity {
             Gson gson = new Gson();
 
             // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html 01-19 2016
-            Type listType = new TypeToken<ArrayList<Item>>() {}.getType();
+            Type listType = new TypeToken<ArrayList<Item>>() {
+            }.getType();
             allItems = gson.fromJson(in, listType);
             System.out.printf("LOADING ITEMS FROM FILE\n");
 
@@ -256,6 +247,7 @@ public class NavigationMainActivity extends AppCompatActivity {
 
     /**
      * Method loads the list of all bids from the local save file.
+     *
      * @param context the context of the calling activity.
      */
     private void loadBidsFromFile(Context context) {
@@ -263,15 +255,11 @@ public class NavigationMainActivity extends AppCompatActivity {
             FileInputStream fis = context.openFileInput(FILENAME1);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             Gson gson = new Gson();
-
             // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html 01-19 2016
             Type listType = new TypeToken<ArrayList<Bid>>() {}.getType();
             allBids = gson.fromJson(in, listType);
-
             System.out.printf("LOADING BIDS FROM FILE\n");
-
             System.out.printf("%d\n", NavigationMainActivity.allBids.size());
-
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             allBids = new ArrayList<Bid>();
@@ -283,14 +271,13 @@ public class NavigationMainActivity extends AppCompatActivity {
 
         /*for (int x=0; x<allBids.size(); x++) {
             System.out.println(allBids.get(x).getItem());
-
-
         }*/
 
     }
 
     /**
      * saves the list of all items to the local save file.
+     *
      * @param context the context of the calling activity.
      */
     public static void saveInFile(Context context) {
@@ -315,21 +302,21 @@ public class NavigationMainActivity extends AppCompatActivity {
     /*public void addAndSaveToBid(Item newItem) {
         NavigationMainActivity.allItems.add(newItem); //WRONG NEEDS TO BE BID
         saveBidsToFile();
-
     }*/
 
     /**
      * Method adds an item to the list of all items and saves to the local
      * save file.
      *
-     * @deprecated
      * @param newItem the item to be added
+     * @deprecated
      */
     public static void addAndSaveToItems(Item newItem) {
         NavigationMainActivity.allItems.add(newItem);
         saveInFile(context);
 
     }
+
     public static void saveBidsToFile(Context context) {
         /*try {
             FileOutputStream fos = context.openFileOutput(FILENAME1,
@@ -359,4 +346,5 @@ public class NavigationMainActivity extends AppCompatActivity {
             saveInFile();
         }
     }*/
+
 }

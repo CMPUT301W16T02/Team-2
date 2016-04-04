@@ -33,7 +33,6 @@
             android:layout_height="wrap_content"
             android:text="View Owner Profile"
             android:id="@+id/viewOwnerButton"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true" />
 
 
@@ -93,14 +92,15 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Submit Bid"
-            android:id="@+id/submitBidButton"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
-
     </RelativeLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit Bid"
+        android:id="@+id/submitBidButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

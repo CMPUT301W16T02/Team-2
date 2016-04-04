@@ -1,5 +1,7 @@
 package com.example.arshadhusain.weshare;
 
+import java.util.ArrayList;
+
 import io.searchbox.annotations.JestId;
 
 /**
@@ -12,6 +14,8 @@ import io.searchbox.annotations.JestId;
 public class Account {
     @JestId
     protected String id;
+    private ArrayList<Float> rateArray = new ArrayList<>();
+
 
     public String getId() {
         return id;
@@ -58,6 +62,27 @@ public class Account {
 
     public String getCity() {
         return city;
+    }
+
+
+    public void addRate(float rate) {
+        rateArray.add(rate);
+    }
+
+
+    public double showAverage() {
+
+        if ((rateArray == null ) || (rateArray.size() == 0) ){
+            return 0.0;
+        }else{
+
+            float sum = 0;
+            for (Float rate: rateArray){
+                sum+= rate;
+            }
+            return sum/rateArray.size();
+        }
+
     }
 
 }

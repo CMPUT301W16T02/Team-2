@@ -1,12 +1,6 @@
 package com.example.arshadhusain.weshare;
 
-import android.app.Application;
-import android.content.Context;
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-
-import java.util.ArrayList;
 
 /**
  * Created by Overseer on 2016-03-14.
@@ -22,4 +16,17 @@ public class CreateProfileActivityTest extends ActivityInstrumentationTestCase2 
         super.setUp();
     }
 
+    public void testActivityExists() {
+        CreateProfileActivity activity = (CreateProfileActivity) getActivity();
+        assertNotNull(activity);
+    }
+
+    @Override
+    public void tearDown() throws Exception {
+        super.tearDown();
+    }
+
+    public void testCreateProfile() throws Exception {
+        //test
+    }
 }

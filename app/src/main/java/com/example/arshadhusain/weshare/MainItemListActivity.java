@@ -1,16 +1,17 @@
 package com.example.arshadhusain.weshare;
 
 import android.content.Context;
-import android.support.v4.util.SparseArrayCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -20,15 +21,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
-
-import android.widget.ArrayAdapter;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 /**
  * MainItemListActivity allows user to see all items.
@@ -73,6 +68,16 @@ public class MainItemListActivity extends AppCompatActivity {
         allItemsList.setOnItemClickListener(onItemClickListener);
 
         //searchKeyword = (EditText) findViewById(R.id.searchKeyword);
+
+        Button KeywordSearchButton = (Button)findViewById(R.id.KeywordSearchButton);
+
+        KeywordSearchButton.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                searchItemDescriptions();
+            }
+        });
+
 
         Button searchButton = (Button)findViewById(R.id.searchButton);
 
@@ -146,6 +151,17 @@ public class MainItemListActivity extends AppCompatActivity {
         startActivityForResult(intent, CHANGE_MADE);
     }
 
+    public void searchItemDescriptions(){
+        //String keyword = searchKeyword.getText().toString();
+
+        Intent intent = new Intent(this, KeywordSearchActivity.class);
+        intent.putExtra("activeUser", activeUser);
+
+        //intent.putExtra("keyword", keyword);
+
+        startActivity(intent);
+    }
+
     public void searchItems(){
         //String keyword = searchKeyword.getText().toString();
 
@@ -184,12 +200,12 @@ public class MainItemListActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+
         for(int i = 0; i < NavigationMainActivity.allItems.size(); i++)
         {
             if(NavigationMainActivity.allItems.get(i).getOwner().equals(activeUser))
             {
                 NavigationMainActivity.allItems.remove(i);
-
             }
         }
         int j = 0;

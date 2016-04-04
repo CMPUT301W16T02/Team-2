@@ -1,26 +1,15 @@
 package com.example.arshadhusain.weshare;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Activity that allows a user to edit his profile. The username cannot be
@@ -40,7 +29,9 @@ public class EditProfileActivity extends AppCompatActivity {
     EditText email;
     EditText city;
     Button SaveButton;
+    TextView rating;
     public static int TEXTSIZE = 18;
+    private ArrayList<Account> matchingAccounts = new ArrayList<Account>();
 
 
 
@@ -55,6 +46,23 @@ public class EditProfileActivity extends AppCompatActivity {
             MyUsername = intent.getStringExtra("Username");
         }
 
+        ElasticSearchAppController.GetAccountTask getAccountTask = new ElasticSearchAppController.GetAccountTask();
+        getAccountTask.execute(MyUsername);
+        try {
+            matchingAccounts.addAll(getAccountTask.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        for (Account account : matchingAccounts) {
+            if (account.getUsername().equals(MyUsername)) {
+                MyAccount = account;
+            }
+        }
+
+/*
         try {
             FileInputStream inputFile = openFileInput(MyUsername);
             BufferedReader input = new BufferedReader(new InputStreamReader(inputFile));
@@ -76,12 +84,16 @@ public class EditProfileActivity extends AppCompatActivity {
             if(account.getUsername().equals(MyUsername)){
                 MyAccount = account;
             }
-        }
+        }*/
 
         username = (TextView) findViewById(R.id.username);
         email = (EditText) findViewById(R.id.EditProfileEmail);
         city = (EditText) findViewById(R.id.EditProfileCity);
         SaveButton = (Button) findViewById(R.id.SaveButton);
+        rating = (TextView) findViewById(R.id.ratingSys);
+        String dispRate = "User Rating: " + MyAccount.showAverage();
+        rating.setTextSize(TEXTSIZE);
+        rating.setText(dispRate);
 
         username.setTextSize(TEXTSIZE);
         username.setText("Username: " + MyAccount.getUsername());
@@ -101,6 +113,11 @@ public class EditProfileActivity extends AppCompatActivity {
                 MyAccount.setEmail(newEmail);
                 MyAccount.setCity(newCity);
 
+                //PUT REQUEST
+
+                ElasticSearchAppController.EditAccountTask editAccountTask = new ElasticSearchAppController.EditAccountTask();
+                editAccountTask.execute(MyAccount);
+/*
                 try {
                     FileOutputStream fos = openFileOutput(MyUsername, 0);
                     BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
@@ -116,7 +133,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
-                }
+                }*/
                 finish();
             }
         });

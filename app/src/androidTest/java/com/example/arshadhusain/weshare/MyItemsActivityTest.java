@@ -22,6 +22,11 @@ public class MyItemsActivityTest extends ActivityInstrumentationTestCase2 {
         super(Item.class);
     }
 
+    public void testActivityExists() {
+        MyItemsActivity activity = (MyItemsActivity) getActivity();
+        assertNotNull(activity);
+    }
+
     // testing adding an item
     public void testAddItem(){
         Account testAccount = new Account(username, city, email);
