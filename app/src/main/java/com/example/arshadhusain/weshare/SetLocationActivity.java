@@ -1,30 +1,24 @@
 package com.example.arshadhusain.weshare;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
+import com.google.android.gms.maps.GoogleMap;
+
+/**
+ * This Activity is used to show the map where the owner
+ * chooses the location to meet the borrower
+ *
+ * @author Hanson
+ * @version 1.0
+ */
 public class SetLocationActivity extends AppCompatActivity {
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_location);
-
-        Button SetLocation = (Button) findViewById(R.id.SetLocation);
-
-        SetLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setResult(RESULT_OK);
-
-                Intent intent = new Intent(SetLocationActivity.this, MapActivity.class); //YOU NEED HANSON'S EDIT AND VIEW PROFILE FUCNTIONALITY
-                //intent.putExtra("Username", MyUsername);
-                startActivity(intent);
-
-            }
-        });
+        mMap = ((SetLocationFragment) getFragmentManager().findFragmentById(R.id.set_location_fragment)).getMap();
     }
 }

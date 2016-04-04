@@ -27,21 +27,19 @@ import java.io.IOException;
  * Map fragment that allows the owner to set a location
  * to meet the borrower.
  *
- * Appears in MapActivity.
+ * Appears in SetLocationActivity.
  *
  * @author Hanson
  * @version 1.0
  */
 // From http://code.tutsplus.com/tutorials/getting-started-with-google-maps-for-android-basics--cms-24635
-public class MyMapFragment extends MapFragment implements GoogleApiClient.ConnectionCallbacks,
+public class SetLocationFragment extends MapFragment implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         GoogleMap.OnInfoWindowClickListener,
         GoogleMap.OnMapLongClickListener,
         GoogleMap.OnMapClickListener,
         GoogleMap.OnMarkerClickListener {
 
-    private GoogleApiClient mGoogleApiClient;
-    private Location mCurrentLocation;
     private static final Double UALBERTA_LAT = Double.valueOf(53.5232);
     private static final Double UALBERTA_LONG = Double.valueOf(-113.5263);
 
@@ -53,6 +51,9 @@ public class MyMapFragment extends MapFragment implements GoogleApiClient.Connec
             GoogleMap.MAP_TYPE_NONE };
 
     private int curMapTypeIndex = 1;
+
+    private GoogleApiClient mGoogleApiClient;
+    private Location mCurrentLocation;
 
     @Override
     public void onStart() {
@@ -157,7 +158,7 @@ public class MyMapFragment extends MapFragment implements GoogleApiClient.Connec
     /**
      * Method that runs when map marker is clicked. Asks the
      * user whether to use the map marker location or not.
-     * If yes, the MapActivity(and map fragment) finishes and
+     * If yes, the SetLocationActivity(and map fragment) finishes and
      * returns.
      *
      * @param marker the clicked map marker.
