@@ -15,4 +15,15 @@ public class EditProfileActivityTest extends ActivityInstrumentationTestCase2 {
     public void setUp() throws Exception {
         super.setUp();
     }
+
+    public void testUpdateName() {
+        String myName = "Jimmy";
+        String myCity = "Edmonton";
+        String myEmail = "boygenius@hotmail.com";
+
+        Account fakeaccount = new Account(myName, myEmail, myCity);
+        assertEquals(fakeaccount.getUsername(), myName);
+        assertEquals(fakeaccount.getEmail(), myEmail);
+        assertEquals(fakeaccount.getCity(), myCity);
+    }
 }
