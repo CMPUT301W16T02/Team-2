@@ -5,6 +5,13 @@ import android.os.Bundle;
 
 import com.google.android.gms.maps.GoogleMap;
 
+/**
+ * This Activity is used to show the map where the owner
+ * chooses the location to meet the borrower
+ *
+ * @author Hanson
+ * @version 1.0
+ */
 public class MapActivity extends AppCompatActivity {
     private GoogleMap mMap;
 

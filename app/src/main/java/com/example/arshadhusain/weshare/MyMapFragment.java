@@ -24,8 +24,15 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 
 /**
- * Created by Hanson on 2016-04-03.
+ * Map fragment that allows the owner to set a location
+ * to meet the borrower.
+ *
+ * Appears in MapActivity.
+ *
+ * @author Hanson
+ * @version 1.0
  */
+// From http://code.tutsplus.com/tutorials/getting-started-with-google-maps-for-android-basics--cms-24635
 public class MyMapFragment extends MapFragment implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         GoogleMap.OnInfoWindowClickListener,
@@ -47,20 +54,35 @@ public class MyMapFragment extends MapFragment implements GoogleApiClient.Connec
 
     private int curMapTypeIndex = 1;
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
 
     @Override
-    public void onConnectionSuspended(int i) {
+    public void onStop() {
+        super.onStop();
+        if( mGoogleApiClient != null && mGoogleApiClient.isConnected() ) {
+            mGoogleApiClient.disconnect();
+        }
+    }
 
+    @Override
+    public void onConnected(Bundle bundle) {
+        initCamera(mCurrentLocation);
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
+    }
 
+    @Override
+    public void onConnectionSuspended(int i) {
     }
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-
     }
 
     @Override
@@ -78,34 +100,26 @@ public class MyMapFragment extends MapFragment implements GoogleApiClient.Connec
         initListeners();
     }
 
+    /**
+     * Method sets the interaction of the map fragment.
+     */
     private void initListeners() {
         getMap().setOnMarkerClickListener(this);
         getMap().setOnMapLongClickListener(this);
         getMap().setOnInfoWindowClickListener(this);
         getMap().setOnMapClickListener(this);
     }
-    @Override
-    public void onStart() {
-        super.onStart();
-        mGoogleApiClient.connect();
-    }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if( mGoogleApiClient != null && mGoogleApiClient.isConnected() ) {
-            mGoogleApiClient.disconnect();
-        }
-    }
-
-    @Override
-    public void onConnected(Bundle bundle) {
-            initCamera(mCurrentLocation);
-    }
-
-
+    /**
+     * Method zooms and centers the map to the given location parameter.
+     * @param location the starting location that the map zooms to.
+     */
     private void initCamera( Location location ) {
+
+        // For the emulation, the default location is hardcoded, since
+        // gps doesn't work for the emulator
         LatLng defaultLocation = new LatLng(UALBERTA_LAT,UALBERTA_LONG);
+
         CameraPosition position = CameraPosition.builder()
                 .target(defaultLocation)
                 .zoom(16f)
@@ -114,12 +128,14 @@ public class MyMapFragment extends MapFragment implements GoogleApiClient.Connec
                 .build();
 
         getMap().animateCamera(CameraUpdateFactory.newCameraPosition(position), null);
-
         getMap().setMapType(MAP_TYPES[curMapTypeIndex]);
         getMap().setTrafficEnabled(true);
+
         try{
             getMap().setMyLocationEnabled(true);
-        } catch (SecurityException ex) {}
+        } catch (SecurityException ex) {
+        }
+
         getMap().getUiSettings().setZoomControlsEnabled(true);
     }
 
@@ -138,21 +154,15 @@ public class MyMapFragment extends MapFragment implements GoogleApiClient.Connec
         getMap().addMarker( options ).showInfoWindow();
     }
 
-
-    private String getAddressFromLatLng( LatLng latLng ) {
-        Geocoder geocoder = new Geocoder( getActivity() );
-
-        String address = "";
-        try {
-            address = geocoder
-                    .getFromLocation( latLng.latitude, latLng.longitude, 1 )
-                    .get( 0 ).getAddressLine( 0 );
-        } catch (IOException e ) {
-        }
-
-        return address;
-    }
-
+    /**
+     * Method that runs when map marker is clicked. Asks the
+     * user whether to use the map marker location or not.
+     * If yes, the MapActivity(and map fragment) finishes and
+     * returns.
+     *
+     * @param marker the clicked map marker.
+     * @return returns boolean true on success.
+     */
     @Override
     public boolean onMarkerClick(Marker marker) {
 
@@ -160,6 +170,7 @@ public class MyMapFragment extends MapFragment implements GoogleApiClient.Connec
         final double latitude = marker.getPosition().latitude;
         final double longitude = marker.getPosition().longitude;
 
+        // code from http://www.askingbox.com/tip/android-programming-yes-no-dialog-box
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         builder.setTitle(address);
@@ -170,18 +181,18 @@ public class MyMapFragment extends MapFragment implements GoogleApiClient.Connec
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent();
+
                 intent.putExtra("address", address);
                 intent.putExtra("latitude", latitude);
                 intent.putExtra("longitude", longitude);
+
                 getActivity().setResult(Activity.RESULT_OK, intent);
                 getActivity().finish();
-                // Code that is executed when clicking YES
 
                 dialog.dismiss();
             }
 
         });
-
 
         builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
 
@@ -198,7 +209,24 @@ public class MyMapFragment extends MapFragment implements GoogleApiClient.Connec
         return true;
     }
 
+    /**
+     * method finds the address name of a location given the
+     * locations latitude and longitude values
+     * @param latLng LatLng object that contains the latitude and longitude
+     *               of the location
+     * @return the address of the location in String format
+     */
+    private String getAddressFromLatLng( LatLng latLng ) {
+        Geocoder geocoder = new Geocoder( getActivity() );
 
+        String address = "";
+        try {
+            address = geocoder
+                    .getFromLocation( latLng.latitude, latLng.longitude, 1 )
+                    .get( 0 ).getAddressLine( 0 );
+        } catch (IOException e ) {
+        }
 
-
+        return address;
+    }
 }
