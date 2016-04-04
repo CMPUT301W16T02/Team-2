@@ -9,6 +9,7 @@ package="com.example.arshadhusain.weshare">
 
 <application android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:label="@string/app_name"
     android:supportsRtl="true" android:theme="@style/AppTheme">
+
     <activity android:name=".WelcomeActivity" android:label="@string/app_name" android:theme="@style/AppTheme.NoActionBar">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -16,30 +17,46 @@ package="com.example.arshadhusain.weshare">
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
     </activity>
-    <activity android:name=".CreateProfileActivity" />
-    <activity android:name=".MainItemListActivity" />
-    <activity android:name=".AddItemActivity" />
-    <activity android:name=".EditItemActivity" />
-    <activity android:name=".MyItemsActivity" />
-    <activity android:name=".NavigationMainActivity" />
-    <activity android:name=".EditProfileActivity" />
-    <activity android:name=".ViewProfileActivity" />
-    <activity android:name=".MyBiddingActivity" />
-    <activity android:name=".MyItemListWithBids" />
-    <activity android:name=".ItemInfoActivity" />
-    <activity android:name=".SearchResultsActivity" />
-    <activity android:name=".BidAcceptActivity" />
+    <activity android:name=".CreateProfileActivity"
+        android:label="@string/title_activity_create_profile" />
+    <activity android:name=".MainItemListActivity"
+        android:label="@string/title_activity_main_item_list" />
+    <activity android:name=".AddItemActivity"
+        android:label="@string/title_activity_add_item" />
+    <activity android:name=".EditItemActivity"
+        android:label="@string/title_activity_edit_item" />
+    <activity android:name=".MyItemsActivity"
+        android:label="@string/title_activity_my_items" />
+    <activity android:name=".NavigationMainActivity"
+        android:label="@string/title_activity_navigation_main" />
+    <activity android:name=".EditProfileActivity"
+        android:label="@string/title_activity_edit_profile" />
+    <activity android:name=".ViewProfileActivity"
+        android:label="@string/title_activity_view_profile" />
+    <activity android:name=".MyBiddingActivity"
+        android:label="@string/title_activity_my_bidding" />
+    <activity android:name=".MyItemListWithBids"
+        android:label="@string/title_activity_my_item_list_with_bids" />
+    <activity android:name=".ItemInfoActivity"
+        android:label="@string/title_activity_item_info" />
+    <activity android:name=".SearchResultsActivity"
+        android:label="@string/title_activity_search_results" />
+    <activity android:name=".BidAcceptActivity"
+        android:label="@string/title_activity_bid_accept" />
+     <activity android:name=".ShowLocationActivity"
+        android:label="@string/title_activity_show_location" />
+    <activity android:name=".SetLocationActivity"
+        android:label="@string/title_activity_set_location" />
+    <activity android:name=".KeywordSearchActivity"
+        android:label="@string/title_activity_keyword_search" />
+    <activity android:name=".MyBorrowedItemsActivity"
+        android:label="@string/title_activity_my_borrowed_items" />
+    <activity android:name=".MyBorrowingsActivity"
+        android:label="@string/title_activity_my_borrowings" />
 
     <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDfC-jZZ3YE6U0o_P1k0VcZaZKLgWTWsnQ" />
     <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
-    <activity android:name=".ShowLocationActivity"></activity>
-    <activity android:name=".SetLocationActivity"></activity>
 
-    <activity android:name=".KeywordSearchActivity" android:label="@string/title_activity_keyword_search"
-        android:theme="@style/AppTheme.NoActionBar" />
-    <activity android:name=".MyBorrowedItemsActivity" android:label="@string/title_activity_my_borrowed_items"
-        android:theme="@style/AppTheme.NoActionBar" />
-    <activity android:name=".MyBorrowingsActivity"></activity>
 </application>
 
 </manifest>

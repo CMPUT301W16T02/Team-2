@@ -173,9 +173,6 @@ public class SetLocationFragment extends MapFragment implements GoogleApiClient.
         final String address = marker.getTitle();
         final double latitude = marker.getPosition().latitude;
         final double longitude = marker.getPosition().longitude;
-        System.out.printf(address);
-        System.out.printf(" lat: " + latitude);
-        System.out.printf(" long: " + longitude);
 
         // code from http://www.askingbox.com/tip/android-programming-yes-no-dialog-box
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

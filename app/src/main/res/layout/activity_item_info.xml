@@ -91,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bidAmountField"
-            android:hint="Enter offer amount (dollars/hour)"
+            android:hint="Enter Offer (dollars/hour)"
             android:inputType="numberDecimal"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true" />
