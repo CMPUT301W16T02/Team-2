@@ -91,7 +91,7 @@ public class EditProfileActivity extends AppCompatActivity {
         city = (EditText) findViewById(R.id.EditProfileCity);
         SaveButton = (Button) findViewById(R.id.SaveButton);
         rating = (TextView) findViewById(R.id.ratingSys);
-        String dispRate = "User Rating: " + MyAccount.showAverage();
+        String dispRate = "Rating: " + MyAccount.showAverage();
         rating.setTextSize(TEXTSIZE);
         rating.setText(dispRate);
 

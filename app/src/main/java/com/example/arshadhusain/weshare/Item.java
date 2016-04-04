@@ -139,7 +139,7 @@ public class Item {
             thumbnail = newThumbnail;
 
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            newThumbnail.compress(Bitmap.CompressFormat.PNG, 65536, byteArrayOutputStream);
+            newThumbnail.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
 
             byte[] b = byteArrayOutputStream.toByteArray();
             thumbnailBase64 = Base64.encodeToString(b, Base64.DEFAULT);

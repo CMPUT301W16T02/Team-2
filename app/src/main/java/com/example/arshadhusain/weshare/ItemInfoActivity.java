@@ -1,23 +1,15 @@
 package com.example.arshadhusain.weshare;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-
-import java.util.ArrayList;
 
 /**
  * Shows the information regarding specific item.
@@ -74,11 +66,11 @@ public class ItemInfoActivity extends AppCompatActivity {
         itemToView = NavigationMainActivity.allItems.get(itemPos);
 
         name = (TextView) findViewById(R.id.itemName);
-        name.setText(itemToView.getName());
+        name.setText("Item Name: " + itemToView.getName());
         owner = (TextView) findViewById(R.id.itemOwner);
-        owner.setText(itemToView.getOwner());
+        owner.setText("Item Owner: " + itemToView.getOwner());
         description = (TextView) findViewById(R.id.itemDesc);
-        description.setText(itemToView.getDescription());
+        description.setText("Item Description: " + itemToView.getDescription());
         ImageView itemImage = (ImageView) findViewById(R.id.itemImage);
         itemImage.setImageBitmap(itemToView.getThumbnail());
         status = (TextView) findViewById(R.id.itemStatus);

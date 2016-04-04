@@ -102,10 +102,6 @@ public class ViewProfileActivity extends AppCompatActivity {
         rating.setTextSize(TEXTSIZE);
         rating.setText(dispRate);
 
-        //average = MyAccount
-
-
-
     }
 
     public void listenerForRating() {

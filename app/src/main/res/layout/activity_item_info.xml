@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <TextView
         android:id="@+id/itemName"
@@ -13,70 +14,55 @@
         android:hint="Item Name"
         android:text="Item Name" />
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/itemOwner"
         android:layout_width="match_parent"
-        android:layout_height="43dp">
-
-        <TextView
-            android:id="@+id/itemOwner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scrollbars="horizontal"
-            android:inputType="text"
-            android:hint="Item Name"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:text="Item Owner" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="View Owner Profile"
-            android:id="@+id/viewOwnerButton"
-            android:layout_alignParentEnd="true" />
-
-
-    </RelativeLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Item Description:"
-        android:id="@+id/itemDescTitle"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:id="@+id/itemDesc"
-        android:layout_width="fill_parent"
-        android:layout_height="200dp"
-        android:scrollbars="horizontal"
-        android:inputType="text"
-        android:hint="Item Description"
-        android:text="Item Description" />
-
-    <ImageView
-        android:id="@+id/itemImage"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:src="@drawable/we_share" />
-    <TextView
-        android:id="@+id/itemStatus"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scrollbars="horizontal"
         android:inputType="text"
         android:hint="Item Name"
-        android:text="Item Status" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:text="Item Owner" />
+
+    <TextView
+        android:id="@+id/itemDesc"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="horizontal"
+        android:inputType="text"
+        android:hint="Item Description"
+        android:text="Item Description"
+        android:layout_below="@+id/itemOwner"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/itemStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="horizontal"
+        android:inputType="text"
+        android:hint="Item Name"
+        android:text="Item Status"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:id="@+id/itemImage"
+        android:layout_width="match_parent"
+        android:layout_height="99dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/we_share"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.59" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Make a bid"
+        android:text="Make a bid:"
         android:id="@+id/bitTitle" />
 
     <RelativeLayout
@@ -90,7 +76,8 @@
             android:hint="Enter offer amount (dollars/hour)"
             android:inputType="numberDecimal"
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
 
@@ -99,8 +86,15 @@
         android:layout_height="wrap_content"
         android:text="Submit Bid"
         android:id="@+id/submitBidButton"
-        android:layout_alignParentTop="true"
+        android:gravity="center" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Owner Profile"
+        android:id="@+id/viewOwnerButton"
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_gravity="center_horizontal" />
+        android:layout_alignParentTop="true" />
 
 </LinearLayout>

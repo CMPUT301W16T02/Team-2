@@ -25,7 +25,7 @@ public class AddItemActivity extends AppCompatActivity {
 
     private EditText name;
     private EditText description;
-    private String owner = "Username";
+    private String owner;// = "Username";
     public Context context1;
     private ArrayList<Item> items = new ArrayList<Item>();
     private ImageButton pictureButton;
@@ -110,7 +110,6 @@ public class AddItemActivity extends AppCompatActivity {
 
         if(itemName.isEmpty() && itemDesc.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Please enter your information into each field", Toast.LENGTH_LONG).show();
-
 
         } else if(itemName.isEmpty())
         {
