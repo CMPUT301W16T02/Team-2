@@ -9,6 +9,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.arshadhusain.weshare.ShowLocationActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/show_address"
+        android:inputType="text"
+        android:hint="Address"
+        android:text="Address"/>
+
     <fragment
         android:id="@+id/show_location_fragment"
         android:name="com.example.arshadhusain.weshare.ShowLocationFragment"

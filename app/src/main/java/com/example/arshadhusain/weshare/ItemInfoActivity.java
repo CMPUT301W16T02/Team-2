@@ -33,6 +33,8 @@ public class ItemInfoActivity extends AppCompatActivity {
     private EditText bidAmount;
 
     private Button viewOwner;
+    private Button showLocation;
+
     TextView nameText;
     TextView ownerText;
     TextView descriptionText;
@@ -115,6 +117,24 @@ public class ItemInfoActivity extends AppCompatActivity {
                 doubleUserName = Double.parseDouble(BidAmount);
                 addBid();
                 setResult(RESULT_OK);
+            }
+        });
+
+        showLocation = (Button) findViewById(R.id.showLocationButton);
+
+        showLocation.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String address = itemToView.getAddress();
+                Double latitude = itemToView.getLatitude();
+                Double longitude = itemToView.getLongitude();
+
+                Intent intent = new Intent(ItemInfoActivity.this, ShowLocationActivity.class);
+
+                intent.putExtra("address", address);
+                intent.putExtra("latitude", latitude);
+                intent.putExtra("longitude", longitude);
+
+                startActivity(intent);
             }
         });
     }

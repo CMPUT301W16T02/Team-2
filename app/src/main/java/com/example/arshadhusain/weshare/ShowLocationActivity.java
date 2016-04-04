@@ -1,7 +1,9 @@
 package com.example.arshadhusain.weshare;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -19,25 +21,46 @@ import com.google.android.gms.maps.model.MarkerOptions;
  */
 public class ShowLocationActivity extends AppCompatActivity {
     private GoogleMap mMap;
-    private String address = "test Sytring";
-    private Double latit = 48.8584;
-    private Double longit=2.2945;
+    private TextView addressText;
+
+    private String address;
+    private Double latit;
+    private Double longit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_location);
+
+        Intent intent = getIntent();
+
+        if(intent.hasExtra("address")) {
+            address = intent.getStringExtra("address");
+        }
+        if(intent.hasExtra("latitude")) {
+            latit = intent.getDoubleExtra("latitude", 0);
+        }
+        if(intent.hasExtra("longitude")) {
+            longit = intent.getDoubleExtra("longitude", 0);
+        }
+
+        addressText = (TextView) findViewById(R.id.show_address);
+
+        addressText.setTextSize(20);
+        addressText.setText("alkfjajfl");
+
         mMap = ((ShowLocationFragment) getFragmentManager().findFragmentById(R.id.show_location_fragment)).getMap();
 
         LatLng coordinates = new  LatLng(latit, longit);
+
+        zoom(mMap, coordinates);
 
         mMap.addMarker(new MarkerOptions()
                         .position(coordinates)
                         .title(address)
                         .icon(BitmapDescriptorFactory.defaultMarker())
-        );
 
-        zoom(mMap, coordinates);
+        );
     }
 
     /**

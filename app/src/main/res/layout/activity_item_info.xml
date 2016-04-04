@@ -7,7 +7,7 @@
     <TextView
         android:id="@+id/itemNameText"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="43dp"
         android:scrollbars="horizontal"
         android:inputType="text"
         android:hint="Item Name"
@@ -36,6 +36,19 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true" />
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="43dp" >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show Map Location"
+            android:id="@+id/showLocationButton"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
 
