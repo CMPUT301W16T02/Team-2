@@ -1,19 +1,16 @@
 package com.example.arshadhusain.weshare;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Shows the information regarding specific item.
@@ -32,19 +29,19 @@ public class ItemInfoActivity extends AppCompatActivity {
         return viewOwner;
     }
 
-    private TextView name;
-    private TextView owner;
-    private TextView status;
-    private TextView description;
-
     private EditText bidAmount;
 
     private Button viewOwner;
+    TextView nameText;
+    TextView ownerText;
+    TextView descriptionText;
+    TextView statusText;
 
     private Item itemToView;
     double doubleUserName;
 
     String myUsername;
+    String ownerName;
     String itemName;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,37 +50,53 @@ public class ItemInfoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        if (intent.hasExtra("itemName")) {
+        if(intent.hasExtra("itemName")) {
             itemName = intent.getStringExtra("itemName");
+        }
+        if(intent.hasExtra("ownerName")) {
+            ownerName = intent.getStringExtra("ownerName");
         }
         if(intent.hasExtra("myUsername")) {
             myUsername = intent.getStringExtra("myUsername");
         }
 
+        ElasticSearchAppController.GetMyItemsTask getMyItemsTask = new ElasticSearchAppController.GetMyItemsTask();
+        getMyItemsTask.execute("");
+        ArrayList<Item> myItems = new ArrayList<>();
+        try {
+            myItems.addAll(getMyItemsTask.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
+        for (Item item : myItems) {
+            if (item.getName().equals(itemName) && item.getOwner().equals(ownerName)) {
+                itemToView = item;
+            }
+        }
 
-        itemToView = NavigationMainActivity.allItems.get(itemPos);
+        nameText = (TextView) findViewById(R.id.itemNameText);
+        nameText.setText(itemToView.getName());
+        ownerText = (TextView) findViewById(R.id.itemOwnerText);
+        ownerText.setText(itemToView.getOwner());
+        descriptionText = (TextView) findViewById(R.id.itemDescText);
+        descriptionText.setText(itemToView.getDescription());
+        statusText = (TextView) findViewById(R.id.itemStatusText);
+        String statusString = "Item Status: " + itemToView.statusToString();
+        statusText.setText(statusString);
 
-        name = (TextView) findViewById(R.id.itemName);
-        name.setText(itemToView.getName());
-        owner = (TextView) findViewById(R.id.itemOwner);
-        owner.setText(itemToView.getOwner());
-        description = (TextView) findViewById(R.id.itemDesc);
-        description.setText(itemToView.getDescription());
-        status = (TextView) findViewById(R.id.itemStatus);
-        status.setText("Item Status: " + itemToView.statusToString());
-
-        bidAmount = (EditText) findViewById(R.id.bidAmount);
+        bidAmount = (EditText) findViewById(R.id.bidAmountField);
 
         viewOwner = (Button) findViewById(R.id.viewOwnerButton);
 
         viewOwner.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View v) {
                 Intent intent = new Intent(ItemInfoActivity.this, ViewProfileActivity.class);
-                String UserName = owner.getText().toString();
-                System.out.println(UserName);
-                intent.putExtra("Username", UserName);
+                String ownerName = itemToView.getOwner();
+                System.out.println(ownerName);
+                intent.putExtra("username", ownerName);
                 startActivity(intent);
             }
         });
@@ -91,15 +104,13 @@ public class ItemInfoActivity extends AppCompatActivity {
         Button submitBid = (Button) findViewById(R.id.submitBidButton);
 
         submitBid.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View v) {
                 String BidAmount = bidAmount.getText().toString();
                 doubleUserName = Double.parseDouble(BidAmount);
-
                 addBid();
+                setResult(RESULT_OK);
             }
         });
-
 
     }
 
@@ -111,40 +122,27 @@ public class ItemInfoActivity extends AppCompatActivity {
      * @see NavigationMainActivity
      */
     public void addBid() {
-
-        //Item newItem = new Item(itemName, itemDesc, owner);
         System.out.println("****INSIDE ADD BID****");
-
-        String ItemName = name.getText().toString();
-        String ItemOwner = owner.getText().toString();
-        String ItemDescription = description.getText().toString();
+        String itemName = nameText.getText().toString();
+        String itemOwner = ownerText.getText().toString();
+        String itemDescription = descriptionText.getText().toString();
         int ItemStatus = itemToView.getStatus();
 
         if(ItemStatus == 2){
             Toast.makeText(getApplicationContext(), "Item is being borrowed. Cannot place bid!", Toast.LENGTH_LONG).show();
         } else {
-            System.out.println(ItemName);
-            System.out.println(ItemOwner);
-            System.out.println(ItemDescription);
+            System.out.println(itemName);
+            System.out.println(itemOwner);
+            System.out.println(itemDescription);
 
-
-
-
-
-            Bid newBid = new Bid(UserName, doubleUserName, ItemName, ItemOwner, ItemDescription);
-            //NavigationMainActivity.allItems.add(newItem);
-            /*NavigationMainActivity.allBids.add(newBid);
-            NavigationMainActivity.saveBidsToFile(context2);*/
+            Bid newBid = new Bid(myUsername, doubleUserName, itemName, itemOwner, itemDescription);
 
             ElasticSearchAppController.AddBidTask addBidTask = new ElasticSearchAppController.AddBidTask();
             addBidTask.execute(newBid);
 
             itemToView.setStatus(1);
-            status.setText("Item Status: " + itemToView.statusToString());
-
-            //NavigationMainActivity.saveInFile(context2);
-
-            //PUT REQUEST
+            String newStatusString = "Item Status: " + itemToView.statusToString();
+            statusText.setText(newStatusString);
 
             ElasticSearchAppController.EditItemTask editItemTask = new ElasticSearchAppController.EditItemTask();
             editItemTask.execute(itemToView);

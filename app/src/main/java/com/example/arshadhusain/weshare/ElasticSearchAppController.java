@@ -136,9 +136,6 @@ public class ElasticSearchAppController {
 
             }
 
-
-
-
             Search search = new Search.Builder(search_string).addIndex("team2").addType("items").build();
 
             System.out.println(search.toString());

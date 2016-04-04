@@ -148,7 +148,7 @@ public class EditItemActivity extends AppCompatActivity {
             ElasticSearchAppController.EditItemTask editItemTask = new ElasticSearchAppController.EditItemTask();
             editItemTask.execute(itemToEdit);
 
-            setResult(CHANGE_MADE);
+            setResult(RESULT_OK);
             finish();
         }
     }
@@ -162,7 +162,7 @@ public class EditItemActivity extends AppCompatActivity {
         ElasticSearchAppController.DeleteItemTask deleteItemTask = new ElasticSearchAppController.DeleteItemTask();
         deleteItemTask.execute(itemToEdit);
 
-        setResult(CHANGE_MADE);
+        setResult(RESULT_OK);
         finish();
     }
 
