@@ -10,7 +10,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -18,7 +18,7 @@ import com.google.android.gms.maps.model.Marker;
 /**
  * Created by Hanson on 2016-04-03.
  */
-public class MapFragment extends SupportMapFragment implements GoogleApiClient.ConnectionCallbacks,
+public class MyMapFragment extends MapFragment implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         GoogleMap.OnInfoWindowClickListener,
         GoogleMap.OnMapLongClickListener,
@@ -27,6 +27,7 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
 
     private GoogleApiClient mGoogleApiClient;
     private Location mCurrentLocation;
+    private static Double
 
     private final int[] MAP_TYPES = { GoogleMap.MAP_TYPE_SATELLITE,
             GoogleMap.MAP_TYPE_NORMAL,
@@ -103,16 +104,12 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
 
     @Override
     public void onConnected(Bundle bundle) {
-        try {
-            mCurrentLocation = LocationServices
-                    .FusedLocationApi
-                    .getLastLocation(mGoogleApiClient);
-
             initCamera(mCurrentLocation);
-        } catch (SecurityException ex) {
-            Toast.makeText(this.getContext(), "in on connect", Toast.LENGTH_LONG).show();
-        }
+
+
     }
+
+
     private void initCamera( Location location ) {
         CameraPosition position = CameraPosition.builder()
                 .target(new LatLng(location.getLatitude(),
@@ -134,6 +131,7 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
         }
         getMap().getUiSettings().setZoomControlsEnabled(true);
     }
+
 
 
 }
