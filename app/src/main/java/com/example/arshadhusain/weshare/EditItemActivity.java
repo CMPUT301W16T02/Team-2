@@ -229,6 +229,9 @@ public class EditItemActivity extends AppCompatActivity {
         if (itemToEdit.getStatus() == 2) {
             itemToEdit.setStatus(0);
             itemToEdit.setBorrower("");
+            itemToEdit.setAddress("No address given");
+            itemToEdit.setLatitude(0.0);
+            itemToEdit.setLongitude(0.0);
 
             ElasticSearchAppController.EditItemTask editItemTask = new ElasticSearchAppController.EditItemTask();
             editItemTask.execute(itemToEdit);

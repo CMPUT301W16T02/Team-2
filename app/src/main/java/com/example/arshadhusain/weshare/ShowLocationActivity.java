@@ -47,7 +47,7 @@ public class ShowLocationActivity extends AppCompatActivity {
         addressText = (TextView) findViewById(R.id.show_address);
 
         addressText.setTextSize(20);
-        addressText.setText("alkfjajfl");
+        addressText.setText(address);
 
         mMap = ((ShowLocationFragment) getFragmentManager().findFragmentById(R.id.show_location_fragment)).getMap();
 
@@ -59,8 +59,8 @@ public class ShowLocationActivity extends AppCompatActivity {
                         .position(coordinates)
                         .title(address)
                         .icon(BitmapDescriptorFactory.defaultMarker())
-
         );
+
     }
 
     /**
