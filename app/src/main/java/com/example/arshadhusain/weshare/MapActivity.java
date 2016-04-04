@@ -12,6 +12,6 @@ public class MapActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        mMap = ((MyMapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+        mMap = ((MyMapFragment) getFragmentManager().findFragmentById(R.id.map_fragment)).getMap();
     }
 }
