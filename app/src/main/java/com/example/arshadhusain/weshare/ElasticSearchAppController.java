@@ -18,14 +18,23 @@ import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
 /**
- * Created by arshadhusain on 16-03-23.
- */
+ * Elastic Search app controller class
+ *
+ * @Author: Arshad
+ * @Version: 1.0
+ **/
 public class ElasticSearchAppController {
     private static JestDroidClient client;
     public static class GetAccountTask extends AsyncTask<String,Void,ArrayList<Account>> {
 
         public List<Account> foundUsername;
 
+        /**
+         * Search for user
+         *
+         * @param params
+         * @return accounts
+         */
         @Override
         protected ArrayList<Account> doInBackground(String... params) {
             verifyConfig();
@@ -66,6 +75,9 @@ public class ElasticSearchAppController {
         }
     }
 
+    /**
+     * Add account to elastic search server
+     */
     public static class AddAccountTask extends AsyncTask<Account,Void,Void> {
 
         @Override
@@ -91,6 +103,9 @@ public class ElasticSearchAppController {
         }
     }
 
+    /**
+     * Edit account in Elastic search server
+     */
     public static class EditAccountTask extends AsyncTask<Account,Void,Void> {
 
         @Override
@@ -117,6 +132,9 @@ public class ElasticSearchAppController {
     }
 
 
+    /**
+     * Search for item in server
+     */
     public static class GetMyItemsTask extends AsyncTask<String,Void,ArrayList<Item>> {
 
         public List<Item> foundItems;
@@ -165,9 +183,9 @@ public class ElasticSearchAppController {
     }
 
 
-
-
-
+    /**
+     * Add item to elastic search server
+     */
     public static class AddItemTask extends AsyncTask<Item,Void,Void> {
 
         @Override
@@ -193,6 +211,9 @@ public class ElasticSearchAppController {
         }
     }
 
+    /**
+     * Edit item in elastic search server
+     */
     public static class EditItemTask extends AsyncTask<Item,Void,Void> {
 
         @Override
@@ -219,6 +240,9 @@ public class ElasticSearchAppController {
     }
 
 
+    /**
+     * remove item in elastic search server
+     */
     public static class DeleteItemTask extends AsyncTask<Item,Void,Void> {
 
         @Override
@@ -246,6 +270,9 @@ public class ElasticSearchAppController {
         }
     }
 
+    /**
+     * Add bid to elastic search server
+     */
     public static class AddBidTask extends AsyncTask<Bid,Void,Void> {
 
         @Override
@@ -273,6 +300,9 @@ public class ElasticSearchAppController {
         }
     }
 
+    /**
+     * Remove bid from elastic search server
+     */
     public static class DeleteBidTask extends AsyncTask<Bid,Void,Void> {
 
         @Override
@@ -300,6 +330,10 @@ public class ElasticSearchAppController {
         }
     }
 
+    /**
+     * Search bid in elastic search server
+     * @return bids
+     */
     public static class GetBidsTask extends AsyncTask<Bid,Void,ArrayList<Bid>> {
 
         public List<Bid> foundBids;
@@ -350,6 +384,9 @@ public class ElasticSearchAppController {
         }
     }
 
+    /**
+     * configurate server
+     */
     public static void verifyConfig() {
         if(client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");

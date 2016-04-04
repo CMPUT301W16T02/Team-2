@@ -6,6 +6,7 @@ import io.searchbox.annotations.JestId;
 /**
  * Bid Model class defines setters and getters for the "bid" item
  *
+ *
  * @author: Hanson, Philip, Arshad
  * @version: 1.0
  */

@@ -14,6 +14,15 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Activity that shows all items that active user is borrowing on.
+ *
+ * Started from NavigationMainActivity.
+ * Doesn't start any new activities(for now).
+ *
+ * @author Arshad
+ * @version 1.0
+ */
 public class MyBorrowingsActivity extends AppCompatActivity {
     public static ArrayList<Item> myBorrowingItems = new ArrayList<Item>();
     public ArrayAdapter<Item> adapter;

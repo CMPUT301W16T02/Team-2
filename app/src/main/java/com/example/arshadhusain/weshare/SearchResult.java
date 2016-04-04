@@ -1,7 +1,10 @@
 package com.example.arshadhusain.weshare;
 
 /**
- * Created by Chris on 3/14/2016.
+ *  Search result
+ *
+ *  @author Arshad
+ *  @version  1.0
  */
 public class SearchResult {
 

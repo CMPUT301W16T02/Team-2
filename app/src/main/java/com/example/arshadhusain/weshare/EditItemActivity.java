@@ -19,8 +19,10 @@ import java.util.concurrent.ExecutionException;
  * Allows user to edit item name and description.
  * Passes intent of item to edit.
  *
- * @author: Christopher, Arshad
- * @version: 2.0
+ * Now incorporated elastic search and photo removal functionality
+ *
+ * @author: Christopher, Arshad, Philip
+ * @version: 2.5
  */
 
 public class EditItemActivity extends AppCompatActivity {

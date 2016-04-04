@@ -16,8 +16,11 @@ import java.util.concurrent.ExecutionException;
 /**
  * Shows the information regarding specific item.
  * Passes intent user and item.
- * @Author: Christopher, Arshad
- * @Version: 2.0
+ *
+ * Now incorporated elastic search and photo functionality
+ *
+ * @Author: Christopher, Arshad, Philip
+ * @Version: 2.5
  */
 
 public class ItemInfoActivity extends AppCompatActivity {
@@ -46,8 +49,6 @@ public class ItemInfoActivity extends AppCompatActivity {
     String myUsername;
     String ownerName;
     String itemName;
-
-    static final int REQUEST_IMAGE_CAPTURE = 1234;
 
 
     protected void onCreate(Bundle savedInstanceState) {

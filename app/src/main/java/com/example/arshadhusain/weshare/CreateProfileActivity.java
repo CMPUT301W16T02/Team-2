@@ -18,8 +18,10 @@ import java.util.concurrent.ExecutionException;
  * Started by WelcomeActivity.
  * Returns to WelcomeActivity with successful account creation.
  *
+ * Now incorporated elastic search functionality
+ *
  * @author Badran, Arshad, Christopher
- * @version 2.0
+ * @version 2.5
  */
 public class CreateProfileActivity extends Activity{
     private EditText usernameInput;

@@ -16,8 +16,10 @@ import android.widget.Toast;
 /**
  * MainItemListActivity allows user to see all items.
  *
+ * Now incorporating elastic search functionality
+ *
  * @Author: Christopher, Arshad
- * @Version: 2.0
+ * @Version: 2.5
  *
  */
 public class MainItemListActivity extends AppCompatActivity {
