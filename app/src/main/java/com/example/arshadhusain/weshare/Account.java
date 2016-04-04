@@ -1,5 +1,7 @@
 package com.example.arshadhusain.weshare;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import io.searchbox.annotations.JestId;
@@ -76,7 +78,9 @@ public class Account {
             for (Float rate: rateArray){
                 sum+= rate;
             }
-            return sum/rateArray.size();
+            float avgRate = sum/rateArray.size();
+            DecimalFormat f = new DecimalFormat("##.10");
+            return Double.parseDouble(f.format(avgRate));
         }
 
     }
