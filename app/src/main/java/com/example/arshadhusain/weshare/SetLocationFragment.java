@@ -187,20 +187,10 @@ public class SetLocationFragment extends MapFragment implements GoogleApiClient.
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent();
 
-                intent.putExtra("address", address);
-                intent.putExtra("latitude", latitude);
-                intent.putExtra("longitude", longitude);
+                // http://stackoverflow.com/questions/9343241/passing-data-between-a-fragment-and-its-container-activity
+                SetLocationActivity parent = (SetLocationActivity)getActivity();
 
-                String itemName = "item name";
-                String itemOwner = " item owner";
-                if(getActivity().getIntent().hasExtra("itemName")) {
-                    itemName = intent.getStringExtra("itemName");
-                }
-                if(getActivity().getIntent().hasExtra("itemOwner")) {
-                    itemOwner = intent.getStringExtra("itemOwner");
-                }
                 ElasticSearchAppController.GetMyItemsTask getMyItemsTask = new ElasticSearchAppController.GetMyItemsTask();
                 getMyItemsTask.execute("");
                 ArrayList<Item> allItems = new ArrayList<>();
@@ -213,7 +203,7 @@ public class SetLocationFragment extends MapFragment implements GoogleApiClient.
                 }
 
                 for (Item item : allItems) {
-                    if (item.getName().equals(itemName) && item.getOwner().equals(itemOwner)) {
+                    if (item.getName().equals(parent.itemName) && item.getOwner().equals(parent.ownerName)) {
                         item.setAddress(address);
                         item.setLatitude(latitude);
                         item.setLongitude(longitude);
@@ -222,7 +212,7 @@ public class SetLocationFragment extends MapFragment implements GoogleApiClient.
                     }
                 }
 
-                getActivity().setResult(Activity.RESULT_OK, intent);
+                getActivity().setResult(Activity.RESULT_OK, getActivity().getIntent());
                 getActivity().finish();
 
                 dialog.dismiss();
