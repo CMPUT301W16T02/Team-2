@@ -16,31 +16,15 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="241dp" />
-<!--
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/searchKeyword"
-            android:layout_centerVertical="true"
-            android:layout_alignParentStart="true"
-            android:hint="Enter keyword..."
-            android:layout_toStartOf="@+id/searchButton" />
-           -->
+
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Keyword Search"
+            android:text="Search"
             android:id="@+id/keywordSearchButton"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Filter unborrowed items"
-            android:id="@+id/searchButton"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
     <TextView
